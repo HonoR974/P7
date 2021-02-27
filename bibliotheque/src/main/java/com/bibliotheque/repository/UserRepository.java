@@ -1,11 +1,10 @@
 package com.bibliotheque.repository;
 
-import com.bibliotheque.model.Bibliotheque;
+import com.bibliotheque.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BibliothequeRepository extends JpaRepository<Bibliotheque,Long> {
-
-    Bibliotheque findById(long id);
+public interface UserRepository  extends JpaRepository <User,Long> {
+    User findByUsername(String username);
 }

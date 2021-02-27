@@ -6,11 +6,9 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
-    @NotNull
-    private String firstName;
 
     @NotNull
-    private String lastName;
+    private String username;
 
     @NotNull
     private String password;

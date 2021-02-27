@@ -1,6 +1,5 @@
 package com.bibliotheque.model;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,11 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
-    private String firstName;
-
-
-    private String lastName;
+    private String username;
 
     private String password;
     private String matchingPassword;
