@@ -1,11 +1,13 @@
 package com.bibliotheque.web.controller;
 
+import com.bibliotheque.configuration.JwtRequestFilter;
 import com.bibliotheque.configuration.JwtTokenUtil;
 import com.bibliotheque.dto.UserDTO;
 import com.bibliotheque.model.JwtRequest;
 import com.bibliotheque.model.JwtResponse;
 import com.bibliotheque.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -29,6 +31,7 @@ public class JwtAuthenticationController {
 
     @Autowired
     private JwtUserDetailsService userDetailsService;
+
 
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
@@ -59,10 +62,23 @@ public class JwtAuthenticationController {
         }
     }
 
-    /*
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ResponseEntity<?> getUserByToken(@Requ)
 
-     */
-    
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public HttpStatus getUserByToken(@RequestBody JwtResponse token)
+    {
+
+        System.out.println("\n \n test \n " + token);
+
+        try {
+
+        } catch (Exception e )
+        {
+            System.out.println("\n error \n " );
+        }
+
+        return HttpStatus.ACCEPTED;
+    }
+
+
+
 }
