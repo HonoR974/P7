@@ -1,5 +1,6 @@
 package com.bibliotheque.service;
 
+import com.bibliotheque.configuration.JwtUserDetailsService;
 import com.bibliotheque.model.User;
 import com.bibliotheque.repository.UserRepository;
 import org.slf4j.Logger;
@@ -13,9 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SecurityServiceImpl implements SecurityService{
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtUserDetailsService userDetailsService;

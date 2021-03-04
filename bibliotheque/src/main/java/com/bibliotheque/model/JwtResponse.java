@@ -1,17 +1,71 @@
 package com.bibliotheque.model;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 
-public class JwtResponse implements Serializable {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class JwtResponse {
+    private String message;
+    private Status status;
+    private String exceptionType;
+    private String jwt;
+    private Jws<Claims> jws;
 
-    private static final long serialVersionUID = -8091879091924046844L;
-    private final String jwttoken;
-
-    public JwtResponse(String jwttoken) {
-        this.jwttoken = jwttoken;
+    public enum Status {
+        SUCCESS, ERROR
     }
 
-    public String getToken() {
-        return this.jwttoken;
+    public JwtResponse() {
+    }
+
+    public JwtResponse(String jwt) {
+        this.jwt = jwt;
+        this.status = Status.SUCCESS;
+    }
+
+    public JwtResponse(Jws<Claims> jws) {
+        this.jws = jws;
+        this.status = Status.SUCCESS;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getExceptionType() {
+        return exceptionType;
+    }
+
+    public void setExceptionType(String exceptionType) {
+        this.exceptionType = exceptionType;
+    }
+
+    public String getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
+    }
+
+    public Jws<Claims> getJws() {
+        return jws;
+    }
+
+    public void setJws(Jws<Claims> jws) {
+        this.jws = jws;
     }
 }
