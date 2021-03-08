@@ -6,4 +6,6 @@ import com.bibliotheque.model.User;
 public interface UserService {
 
     User save(UserDTO userDTO);
+
+User findByUsername(String username);
 }

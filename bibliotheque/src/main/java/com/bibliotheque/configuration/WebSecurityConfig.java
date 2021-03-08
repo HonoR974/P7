@@ -10,9 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -48,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     // ordered so we can use binary search below
-    private String[] ignoreCsrfAntMatchers = { "/dynamic-builder-compress", "/dynamic-builder-general", "/dynamic-builder-specific", "/set-secrets" };
+   private String[] ignoreCsrfAntMatchers = { "/dynamic-builder-compress", "/dynamic-builder-general", "/dynamic-builder-specific", "/set-secrets" };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -83,7 +81,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable().cors().disable().authorizeRequests().antMatchers("/authenticate", "/register").permitAll();
 
+        /*
+        http.csrf().disable()
+                .authorizeRequests()
+                .and()
+                .formLogin()
+                .loginPage("/security/login")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
 
+         */
 
     }
 
