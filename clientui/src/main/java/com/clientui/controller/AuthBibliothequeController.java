@@ -1,18 +1,18 @@
 package com.clientui.controller;
 
 import com.clientui.beans.LivreBean;
+import com.clientui.beans.UserBean;
 import com.clientui.dto.UserDTO;
 import com.clientui.service.AuthBiblioService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 
 @Controller
@@ -53,25 +53,63 @@ public class AuthBibliothequeController {
 
     @PostMapping("/authenticate")
     public String authenticate (@ModelAttribute(value = "user")UserDTO userDTO,
-                                Model model)  {
+                                Model model) throws JsonProcessingException {
+
         System.out.println("\n \n post mapping " +
                 "\n username : " + userDTO.getUsername() +
-                "\n password: " + userDTO.getPassword() );
+                "\n password: " + userDTO.getPassword() +  "\n " );
 
+        String jwtBrut;
         String jwt = null;
+        String username = "vide";
         try {
-            jwt = authBiblioService.authenticate(userDTO);
+            jwtBrut = authBiblioService.authenticate(userDTO);
+            jwt = authBiblioService.parseJwt(jwtBrut);
+           username = authBiblioService.getUserNameByToken(jwt);
+
         } catch (IOException e) {
             System.out.println("\n ca ne marche pas " );
         } catch (InterruptedException e) {
             System.out.println("\n ca ne fonctionne pas " );
+        } catch (URISyntaxException e) {
+            System.out.println("\n Mauvaise URI " );
         }
 
-
+        model.addAttribute("username", username);
         model.addAttribute("jwt", jwt);
         return "log/presentation";
     }
 
+    @GetMapping("/token")
+    public String tokenForUser(@RequestParam String jwt,
+                               Model model) throws IOException, InterruptedException {
+
+        UserDTO user = authBiblioService.getUserDTOByToken(jwt);
+
+        model.addAttribute("user", user);
+        return "log/Espace";
+    }
 
 
+    @GetMapping("/register")
+    public String inscriptionPage(Model model)
+    {
+        model.addAttribute("user", new UserDTO());
+
+        return "log/inscription";
+    }
+
+    @PostMapping("/register")
+    public String inscription(@ModelAttribute(value = "user")UserDTO userDTO,
+                              Model model) throws IOException, InterruptedException {
+        UserDTO user =  authBiblioService.save(userDTO);
+
+        String jwtBrut = authBiblioService.authenticate(user);
+        String jwt = authBiblioService.parseJwt(jwtBrut);
+
+        model.addAttribute("jwt",jwt);
+        model.addAttribute("user", user);
+
+        return "log/presentation";
+    }
 }

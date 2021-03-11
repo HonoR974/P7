@@ -6,20 +6,25 @@
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
 
     <meta charset="UTF-8">
-    <title>Presentation </title>
+    <title>Espace </title>
 </head>
 <body>
-<h1>LE JWT : </h1>
-<h1 th:text="${jwt}"></h1>
 
-<div style="padding-top: 50px">
-    <h1>L'user </h1>
-    <h1 th:text="${username}"></h1>
-</div>
 
-<button>
-    <a th:href="@{/token(jwt=${jwt})}">espace </a>
-</button>
+<table >
+    <tr>
+        <th>id</th>
+        <th>username</th>
+    </tr>
+   <tr>
+       <td>
+           <p th:utext="${user.id}"></p>
+       </td>
+       <td>
+           <p th:utext="${user.username}"></p>
+       </td>
+   </tr>
+</table>
 
 <script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
 

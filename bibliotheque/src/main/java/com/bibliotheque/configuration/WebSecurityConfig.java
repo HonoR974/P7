@@ -100,7 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-            // NOTE: A real implementation should have a nonce cache so the token cannot be reused
+
 
             CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 

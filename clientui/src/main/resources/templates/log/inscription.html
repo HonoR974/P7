@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inscription </title>
+
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+
+</head>
+<body>
+
+
+<div class="container">
+    <form action="#" class="form-signin" method="post" th:action="@{/register}" th:object="${user}">
+        <h2 class="form-heading">Log in</h2>
+
+        <div class="form-group">
+
+            <input name="username" type="text" class="form-control" placeholder="Username"
+                   autofocus="true" th:field="${user.username}"/>
+
+            <input name="password" type="password" class="form-control" placeholder="Password"
+                   th:field="${user.password}"/>
+
+            <input name="matchingPassword" type="matchingPassword" class="form-control" placeholder="Password"
+                   th:field="${user.matchingPassword}"/>
+
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

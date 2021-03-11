@@ -6,6 +6,7 @@ import com.bibliotheque.dto.UserDTO;
 import com.bibliotheque.model.JwtRequest;
 import com.bibliotheque.model.JwtResponse;
 import com.bibliotheque.configuration.JwtUserDetailsService;
+import com.bibliotheque.model.User;
 import com.bibliotheque.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.Map;
 
 
 @RestController
@@ -71,19 +72,20 @@ public class JwtAuthenticationController {
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
         System.out.println("\n \n Hello \n "  );
 
-        return ResponseEntity.ok(userService.save(user));
+        return new ResponseEntity<User>(userService.save(user), HttpStatus.ACCEPTED);
     }
 
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ResponseEntity<?> getUserByToken(@RequestParam String jwt)
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    public ResponseEntity<?> getUserNameByToken(@RequestBody Map<String,String> jwt)
     {
 
-        System.out.println("\n \n test \n " + jwt);
-        String username = "0" ;
+        JwtResponse response = new JwtResponse(jwt.get("jwt"));
+        System.out.println("\n \n test \n le jwt : " + jwt + "\n jwt en string :" + response.getJwt());
+        String username = null ;
         try {
-            username = jwtTokenUtil.getUsernameFromToken(jwt);
-            System.out.println("\n "+ username  +" \n " );
+            username = jwtTokenUtil.getUsernameFromToken(response.getJwt());
+            System.out.println("\n from biblio -> username : "+ username  +" \n " );
 
         } catch (Exception e )
         {
@@ -93,12 +95,20 @@ public class JwtAuthenticationController {
         return new ResponseEntity<String>(username,HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<?> test()
+
+    @RequestMapping(value = "/token/{jwt}", method = RequestMethod.GET)
+    public ResponseEntity<?> getUserByToken( @PathVariable String jwt)
     {
-        String test = "test";
-        return new ResponseEntity<String>(test, HttpStatus.ACCEPTED);
+
+        String username= jwtTokenUtil.getUsernameFromToken(jwt);
+
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+        User user = userService.findByUsername(userDetails.getUsername());
+
+        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
+
 
 
 }
