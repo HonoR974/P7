@@ -80,6 +80,15 @@ public class AuthBibliothequeController {
         return "log/presentation";
     }
 
+    /**
+     * Recois un jeton jwt
+     * return un user
+     * @param jwt
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @GetMapping("/token")
     public String tokenForUser(@RequestParam String jwt,
                                Model model) throws IOException, InterruptedException {
@@ -91,6 +100,11 @@ public class AuthBibliothequeController {
     }
 
 
+    /**
+     * Page Register
+     * @param model
+     * @return
+     */
     @GetMapping("/register")
     public String inscriptionPage(Model model)
     {
@@ -99,12 +113,25 @@ public class AuthBibliothequeController {
         return "log/inscription";
     }
 
+    /**
+     * Recois un user
+     *
+     * @param userDTO
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @PostMapping("/register")
     public String inscription(@ModelAttribute(value = "user")UserDTO userDTO,
                               Model model) throws IOException, InterruptedException {
         UserDTO user =  authBiblioService.save(userDTO);
 
         String jwtBrut = authBiblioService.authenticate(user);
+
+        System.out.println("\n jwtBrut : " + jwtBrut );
+
+
         String jwt = authBiblioService.parseJwt(jwtBrut);
 
         model.addAttribute("jwt",jwt);

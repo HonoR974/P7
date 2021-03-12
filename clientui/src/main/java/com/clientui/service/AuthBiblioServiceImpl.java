@@ -1,21 +1,11 @@
 package com.clientui.service;
 
 
-import com.clientui.beans.UserBean;
 import com.clientui.dto.UserDTO;
-
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
-
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriBuilder;
-
-
 import java.io.*;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -30,6 +20,7 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
 
     private int idUser ;
     private String username;
+    private String password;
 
     private final HttpClient client =  HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
@@ -112,16 +103,9 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
     @Override
     public String parseJwt(String jwtBrut ) throws JsonProcessingException
     {
-
         Map<String,Object> result =
                 new ObjectMapper().readValue(jwtBrut, HashMap.class);
-
-
-
         Object jwt = result.get("jwt");
-
-
-
         return jwt.toString();
     }
 
@@ -241,9 +225,14 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
 
         //attribué les valeurs a la classe
         username = (String) map.get("username");
+        password = userDTO.getPassword();
 
         idUser = Integer.parseInt(String.valueOf(map.get("id")));
 
-        return getUser();
+        UserDTO user = new UserDTO();
+        user.setUsername(username);
+        user.setPassword(password);
+
+        return user;
     }
 }
