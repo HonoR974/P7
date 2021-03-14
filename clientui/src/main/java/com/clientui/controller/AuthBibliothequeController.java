@@ -64,8 +64,11 @@ public class AuthBibliothequeController {
         String username = "vide";
         try {
             jwtBrut = authBiblioService.authenticate(userDTO);
+            System.out.println("\n jwtBrut : " + jwtBrut);
             jwt = authBiblioService.parseJwt(jwtBrut);
+            System.out.println("\n jwt : " + jwt);
            username = authBiblioService.getUserNameByToken(jwt);
+            System.out.println("\n username : " + username);
 
         } catch (IOException e) {
             System.out.println("\n ca ne marche pas " );
@@ -102,9 +105,13 @@ public class AuthBibliothequeController {
     @PostMapping("/register")
     public String inscription(@ModelAttribute(value = "user")UserDTO userDTO,
                               Model model) throws IOException, InterruptedException {
+
         UserDTO user =  authBiblioService.save(userDTO);
+        System.out.println("\n \n user : " + user.toString()  );
 
         String jwtBrut = authBiblioService.authenticate(user);
+
+        System.out.println("\n \n jwtBrut : " + jwtBrut  );
         String jwt = authBiblioService.parseJwt(jwtBrut);
 
         model.addAttribute("jwt",jwt);
