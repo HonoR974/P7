@@ -2,9 +2,13 @@ package com.clientui.service;
 
 
 import com.clientui.dto.UserDTO;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
+
+
+
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -103,10 +107,12 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
     @Override
     public String parseJwt(String jwtBrut ) throws JsonProcessingException
     {
+
         Map<String,Object> result =
                 new ObjectMapper().readValue(jwtBrut, HashMap.class);
         Object jwt = result.get("jwt");
         return jwt.toString();
+
     }
 
 
@@ -226,6 +232,7 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
         //attribué les valeurs a la classe
         username = (String) map.get("username");
         password = userDTO.getPassword();
+
 
         idUser = Integer.parseInt(String.valueOf(map.get("id")));
 
