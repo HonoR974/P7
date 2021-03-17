@@ -44,9 +44,10 @@ public class BibliothequeController {
         return new ResponseEntity<BibliothequeDTO>(bibliothequeResponse, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<BibliothequeDTO> getBiBliothequeById(@PathVariable(name = "id")Long id)
+    @GetMapping("/detail")
+    public ResponseEntity<BibliothequeDTO> getBiBliothequeById(@RequestParam(name = "id")Long id)
     {
+
         Bibliotheque bibliotheque = bibliothequeService.getBibliothequeById(id);
 
         BibliothequeDTO bibliothequeResponse = modelMapper.map(bibliotheque, BibliothequeDTO.class);
@@ -74,8 +75,8 @@ public class BibliothequeController {
         return HttpStatus.ACCEPTED;
     }
 
-    @GetMapping("/{id}/livres")
-    public List<LivreDTO> getAllLivresByIdBiblio(@PathVariable(name = "id")Long id)
+    @GetMapping("/Livres")
+    public List<LivreDTO> getAllLivresByIdBiblio(@RequestParam(name = "id")Long id)
     {
         List<Livre> livreList= bibliothequeService.getAllLibreByIdBiblio(id);
 

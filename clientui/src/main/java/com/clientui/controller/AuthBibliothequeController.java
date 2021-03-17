@@ -18,29 +18,9 @@ import java.net.URISyntaxException;
 @Controller
 public class AuthBibliothequeController {
 
+
     @Autowired
     private AuthBiblioService authBiblioService;
-
-
-    /**
-     * methode pour s'authentifier
-     *
-     * on envoie  la methode avec HttpClient
-     * pour recevoir le jeton
-     *
-     * ------------
-     * Verification des attributs de User
-     *  Envoyer la requete Http a API Biblio
-     *  on recoit
-     *
-     */
-
-    @GetMapping("/test")
-    public void test(@RequestBody LivreBean livreBean,
-            Model model) throws IOException, InterruptedException {
-        authBiblioService.test();
-
-    }
 
     @GetMapping("/login")
     public String loggin(Model model)
@@ -55,20 +35,14 @@ public class AuthBibliothequeController {
     public String authenticate (@ModelAttribute(value = "user")UserDTO userDTO,
                                 Model model) throws JsonProcessingException {
 
-        System.out.println("\n \n post mapping " +
-                "\n username : " + userDTO.getUsername() +
-                "\n password: " + userDTO.getPassword() +  "\n " );
-
         String jwtBrut;
         String jwt = null;
         String username = "vide";
         try {
             jwtBrut = authBiblioService.authenticate(userDTO);
-            System.out.println("\n jwtBrut : " + jwtBrut);
+
             jwt = authBiblioService.parseJwt(jwtBrut);
-            System.out.println("\n jwt : " + jwt);
            username = authBiblioService.getUserNameByToken(jwt);
-            System.out.println("\n username : " + username);
 
         } catch (IOException e) {
             System.out.println("\n ca ne marche pas " );
@@ -83,24 +57,6 @@ public class AuthBibliothequeController {
         return "log/presentation";
     }
 
-    /**
-     * Recois un jeton jwt
-     * return un user
-     * @param jwt
-     * @param model
-     * @return
-     * @throws IOException
-     * @throws InterruptedException
-     */
-    @GetMapping("/token")
-    public String tokenForUser(@RequestParam String jwt,
-                               Model model) throws IOException, InterruptedException {
-
-        UserDTO user = authBiblioService.getUserDTOByToken(jwt);
-
-        model.addAttribute("user", user);
-        return "log/Espace";
-    }
 
 
     /**
@@ -130,7 +86,6 @@ public class AuthBibliothequeController {
                               Model model) throws IOException, InterruptedException {
 
         UserDTO user =  authBiblioService.save(userDTO);
-        System.out.println("\n \n user : " + user.toString()  );
 
         String jwtBrut = authBiblioService.authenticate(user);
 
@@ -141,4 +96,8 @@ public class AuthBibliothequeController {
 
         return "log/presentation";
     }
+
+
+
+
 }

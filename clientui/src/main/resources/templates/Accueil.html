@@ -14,15 +14,6 @@
     <h1>Application Mcommerce</h1>
 
     <div class="row">
-        <div th:each="livre : ${livres}" class="col-md-4 my-1">
-            <p th:text= "${livre.id}">Titre </p>
-            <p th:text= "${livre.titre}">Titre </p>
-            <p th:text= "${livre.auteur}">Titre </p>
-            </a>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="col">
             <button class="btn btn-outline-primary">
                 <a th:href="@{/login}"> login </a>
@@ -33,6 +24,12 @@
             <button>
                 <a th:href="@{/register}">Inscription </a>
             </button>
+        </div>
+
+        <div class="col">
+            <form method="post" th:action="@{/jwt-csrf-form}">
+            <input type="submit" class="btn btn-primary" value="Click Me!"/>
+        </form>
         </div>
     </div>
 

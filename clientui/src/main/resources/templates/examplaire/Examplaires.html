@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Examplaires </title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+
+</head>
+<body>
+
+<div class="row">
+    <h1>Le livre </h1>
+        <h1 th:utext="${livre.titre}"></h1>
+        <h1 th:utext="${livre.auteur}"></h1>
+</div>
+
+<div class="row">
+    <h1>Les examplaires </h1>
+    <div th:each="examplaire : ${list}" class="col-md-4 my-1">
+        <p th:text= "${examplaire.id}">Titre </p>
+        <p th:text= "${examplaire.edition}">Titre </p>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

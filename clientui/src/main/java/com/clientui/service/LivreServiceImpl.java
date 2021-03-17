@@ -1,8 +1,10 @@
 package com.clientui.service;
 
+import com.clientui.beans.ExamplaireBean;
 import com.clientui.beans.LivreBean;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -18,13 +20,21 @@ public class LivreServiceImpl implements  LivreService{
             .version(HttpClient.Version.HTTP_2)
             .build();
 
+    private String jwt;
+
+    private BibliothequeService bibliothequeService;
+
+    public LivreServiceImpl(BibliothequeService bibliothequeService) {
+        this.bibliothequeService = bibliothequeService;
+    }
+
     @Override
     public List<LivreBean> getAll() throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("http://localhost:9001/api/livre"))
-                .header("Accept","application/json")
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .build();
 
 
@@ -39,5 +49,54 @@ public class LivreServiceImpl implements  LivreService{
         return list;
     }
 
+    @Override
+    public List<ExamplaireBean> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException {
+        this.jwt = bibliothequeService.getJwt();
 
+        System.out.println("\n jwt : " + jwt );
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/api/livre/examplaires?id=" + id))
+                .GET()
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+
+        String reponse = response.body();
+
+        ObjectMapper mapper= new ObjectMapper();
+
+        List<ExamplaireBean> list = mapper.readValue(response.body().toString(),
+                new TypeReference<List<ExamplaireBean>>() {});
+        return list;
+    }
+
+    @Override
+    public LivreBean getLivreByIdLivre(Long id) throws IOException, InterruptedException {
+
+        this.jwt = bibliothequeService.getJwt();
+        System.out.println("\n jwt " + jwt);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/api/livre/detail?id=" + id))
+                .GET()
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+
+
+        String reponse = response.body();
+
+        System.out.println("\n response : " + response + "\n reponse : " + reponse.toString());
+        ObjectMapper mapper= new ObjectMapper();
+
+        LivreBean livreBean = mapper.readValue(response.body().toString(),
+                new TypeReference<LivreBean>() {});
+
+        return livreBean;
+    }
 }

@@ -65,44 +65,7 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
         return jwt;
     }
 
-    @Override
-    public void test ()
-    {
-        HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .uri(URI.create("http://localhost:9001/test"))
-                .build();
 
-        try {
-            HttpResponse httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("\n \n" + httpResponse.body().toString() + "\n \n ");
-        }catch (IOException io )
-        {
-            System.out.println("\n \n ca ne marche pas \n ");
-        }catch (InterruptedException in)
-        {
-            System.out.println("\n \n on a etait interrompu \n ");
-        }
-
-
-
-
-
-        /**
-         *  CloseableHttpClient client = HttpClients.createDefault();
-         *     HttpPost httpPost = new HttpPost("http://www.example.com");
-         *
-         *     List<NameValuePair> params = new ArrayList<NameValuePair>();
-         *     params.add(new BasicNameValuePair("username", "John"));
-         *     params.add(new BasicNameValuePair("password", "pass"));
-         *     httpPost.setEntity(new UrlEncodedFormEntity(params));
-         *
-         *     CloseableHttpResponse response = client.execute(httpPost);
-         *     assertThat(response.getStatusLine().getStatusCode(), equalTo(200));
-         *     client.close();
-         */
-
-    }
 
     @Override
     public String parseJwt(String jwtBrut ) throws JsonProcessingException
@@ -156,37 +119,6 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
 
 
         return response.body();
-    }
-
-    @Override
-    public UserDTO getUserDTOByToken(String jwt) throws IOException, InterruptedException {
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:9001/token/" + jwt))
-                .setHeader("Content-Type", "application/json")
-                .GET().build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        System.out.println("\n \n response " + response.body() + "\n ");
-
-        //reponse en string
-        String reponse = response.body();
-
-        //mapper la reponse
-        ObjectMapper mapper = new ObjectMapper();
-
-        Map<String, ?> map = mapper.readValue(reponse, Map.class);
-           System.out.println("\n \n map " + map + "\n ");
-
-
-        //attribué les valeurs a la classe
-        username = (String) map.get("username");
-
-        idUser = Integer.parseInt(String.valueOf(map.get("id")));
-
-
-        return getUser();
     }
 
     private UserDTO getUser()

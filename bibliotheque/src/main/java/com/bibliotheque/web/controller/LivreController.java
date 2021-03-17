@@ -49,8 +49,8 @@ public class LivreController {
         return new ResponseEntity<LivreDTO>(livreResponse, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<LivreDTO> getLivreById(@PathVariable(name = "id") Long id)
+    @GetMapping("/detail")
+    public ResponseEntity<LivreDTO> getLivreById(@RequestParam(name = "id") Long id)
     {
         Livre livre = livreService.getLivreById(id);
 
@@ -59,7 +59,7 @@ public class LivreController {
 
         LivreDTO  livreResponse = modelMapper.map(livre, LivreDTO.class);
 
-        return ResponseEntity.ok().body(livreResponse);
+        return new ResponseEntity<LivreDTO>(livreResponse, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}")
@@ -86,8 +86,8 @@ public class LivreController {
         return HttpStatus.ACCEPTED;
     }
 
-    @GetMapping("/{id}/examplaires")
-    public List<ExamplaireDTO>  getAllExamplaireByIdLivre(@PathVariable(name = "id")long id)
+    @GetMapping("/examplaires")
+    public List<ExamplaireDTO>  getAllExamplaireByIdLivre(@RequestParam(name = "id")long id)
     {
         List<Examplaire> examplaires = livreService.getAllExamplaireByIdLivre(id);
 
