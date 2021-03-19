@@ -53,7 +53,6 @@ public class LivreServiceImpl implements  LivreService{
     public List<ExamplaireBean> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException {
         this.jwt = bibliothequeService.getJwt();
 
-        System.out.println("\n jwt : " + jwt );
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:9001/api/livre/examplaires?id=" + id))
@@ -77,7 +76,7 @@ public class LivreServiceImpl implements  LivreService{
     public LivreBean getLivreByIdLivre(Long id) throws IOException, InterruptedException {
 
         this.jwt = bibliothequeService.getJwt();
-        System.out.println("\n jwt " + jwt);
+
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:9001/api/livre/detail?id=" + id))
@@ -91,12 +90,16 @@ public class LivreServiceImpl implements  LivreService{
 
         String reponse = response.body();
 
-        System.out.println("\n response : " + response + "\n reponse : " + reponse.toString());
         ObjectMapper mapper= new ObjectMapper();
 
         LivreBean livreBean = mapper.readValue(response.body().toString(),
                 new TypeReference<LivreBean>() {});
 
         return livreBean;
+    }
+
+    @Override
+    public String getJwt() {
+        return jwt;
     }
 }

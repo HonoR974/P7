@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Examplaire </title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+
+</head>
+<body>
+    <div class="container">
+
+        <div class="row">
+            <h1 th:utext="${livre.titre}"></h1>
+            <br>
+            <h1 th:utext="${livre.auteur}"></h1>
+        </div>
+
+        <div class="row">
+            <div style="height: 200px;width: 100%">
+            </div>
+        </div>
+
+        <div class="row">
+            <h1 th:utext="${examplaire.id}"></h1>
+            <br>
+            <h1 th:utext="${examplaire.edition}"></h1>
+        </div>
+
+        <div class="row">
+            <div style="height: 200px;width: 100%">
+            </div>
+        </div>
+
+        <div class="row">
+            <button class="btn btn-outline-dark">
+                <a th:href="@{/pret(id=${examplaire.id})}">Demander un pret pour cette examplaire </a>
+            </button>
+        </div>
+
+        <!--
+            <td>
+             <p th:utext="${#dates.format(topo.date_creation, 'dd-MM-yyyy')}">Date</p>
+          </td>
+        -->
+
+    </div>
+    <script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

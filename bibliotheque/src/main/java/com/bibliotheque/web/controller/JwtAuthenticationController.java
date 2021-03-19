@@ -1,6 +1,5 @@
 package com.bibliotheque.web.controller;
 
-
 import com.bibliotheque.configuration.JwtTokenUtil;
 import com.bibliotheque.dto.UserDTO;
 import com.bibliotheque.model.JwtRequest;
@@ -40,9 +39,8 @@ public class JwtAuthenticationController {
 
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-
-        System.out.println("\n \n test  \n "  );
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception
+    {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 

@@ -19,7 +19,7 @@
     <h1>Les examplaires </h1>
     <div th:each="examplaire : ${list}" class="col-md-4 my-1">
         <p th:text= "${examplaire.id}">Titre </p>
-        <p th:text= "${examplaire.edition}">Titre </p>
+        <a th:text= "${examplaire.edition}" th:href="@{/examplaire(id=${examplaire.id})}">Titre </a>
 
     </div>
 </div>

@@ -1,6 +1,7 @@
 package com.bibliotheque.service;
 
 import com.bibliotheque.model.Examplaire;
+import com.bibliotheque.model.Livre;
 import com.bibliotheque.repository.ExamplaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,12 @@ public class ExamplaireServiceImpl implements ExamplaireService{
     @Override
     public Examplaire getExamplaireById(long id) {
         return examplaireRepository.findById(id);
+    }
+
+    @Override
+    public Livre getLivreById(long id) {
+        Examplaire examplaire = examplaireRepository.findById(id);
+
+        return examplaire.getLivre();
     }
 }

@@ -9,4 +9,6 @@ public interface SecurityService {
 
     User getUser();
 
+    String getUsername();
+
 }

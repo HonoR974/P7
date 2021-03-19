@@ -13,4 +13,6 @@ public interface LivreService {
     List<ExamplaireBean> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException;
 
     LivreBean getLivreByIdLivre(Long id) throws IOException, InterruptedException;
+
+    String getJwt();
 }

@@ -36,9 +36,22 @@ public class SecurityServiceImpl implements SecurityService{
     @Override
     public User getUser()
     {
+
+        System.out.println("\n getUser" );
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return null;
+        System.out.println("\n username " + authentication.getName() );
+
+        String username = authentication.getName();
+        return userRepository.findByUsername(username);
     }
+
+    @Override
+    public String getUsername()
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
+    }
+
 
 
 }

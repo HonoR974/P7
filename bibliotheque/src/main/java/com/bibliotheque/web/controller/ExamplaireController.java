@@ -1,7 +1,9 @@
 package com.bibliotheque.web.controller;
 
 import com.bibliotheque.dto.ExamplaireDTO;
+import com.bibliotheque.dto.LivreDTO;
 import com.bibliotheque.model.Examplaire;
+import com.bibliotheque.model.Livre;
 import com.bibliotheque.service.ExamplaireService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,6 @@ public class ExamplaireController {
                 examplaire -> modelMapper.map(examplaire, ExamplaireDTO.class))
                 .collect(Collectors.toList());
     }
-
 
     @PostMapping
     public ResponseEntity<ExamplaireDTO> createExamplaire(@RequestBody ExamplaireDTO examplaireDTO)
@@ -72,4 +73,17 @@ public class ExamplaireController {
         examplaireService.deleteExamplaire(id);
         return HttpStatus.ACCEPTED;
     }
+
+    @GetMapping("/livre/{id}")
+    public ResponseEntity<LivreDTO> getLivreByIdExamplaire(@PathVariable(name = "id")Long id)
+    {
+
+        Livre livre = examplaireService.getLivreById(id);
+        LivreDTO livreDTO = modelMapper.map(livre,LivreDTO.class);
+
+        return new ResponseEntity<LivreDTO>(livreDTO,HttpStatus.ACCEPTED);
+
+    }
+
+
 }

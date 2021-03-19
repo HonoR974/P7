@@ -94,12 +94,10 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
         Map<String,String> parameters = new HashMap<>();
         parameters.put("jwt",jwt);
 
-        System.out.println("\n les parameters : " + parameters + "\n ");
 
         var objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(parameters);
 
-        System.out.println("\n la requestBody  : " + requestBody + "\n ");
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:9001/user"  ))
@@ -113,9 +111,6 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
         //username
         HttpResponse<String> response = client.send(request,
                 HttpResponse.BodyHandlers.ofString());
-
-
-        System.out.println("\n la responseBody  : " + response.body() + "\n ");
 
 
         return response.body();
