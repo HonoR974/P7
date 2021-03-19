@@ -1,5 +1,7 @@
 package com.clientui.controller;
 
+import com.clientui.beans.PretBean;
+import com.clientui.dto.PretDTO;
 import com.clientui.service.PretService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,13 +18,15 @@ public class PretController
     @Autowired
     private PretService pretService;
 
-
     @GetMapping("/pret")
     public String createPret(@RequestParam(value = "id")Long id_examplaire,
                              Model model) throws IOException, InterruptedException
     {
+        PretDTO pretDTO = pretService.createPret(id_examplaire);
 
-        model.addAttribute("pret", pretService.createPret(id_examplaire));
+        PretBean pretBean = pretService.givePretBean(pretDTO);
+
+        model.addAttribute("pret", pretBean);
 
         return "pret/Creation";
     }

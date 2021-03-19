@@ -12,6 +12,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDate;
 
 @Service
 public class PretServiceImpl implements PretService
@@ -49,8 +50,24 @@ public class PretServiceImpl implements PretService
 
         ObjectMapper mapper = new ObjectMapper();
 
-        PretDTO pretDTO = mapper.readValue(response.body().toString(), new TypeReference<PretDTO>() {});
+        return mapper.readValue(response.body().toString(), new TypeReference<PretDTO>() {});
+    }
 
-        return pretDTO;
+    @Override
+    public PretBean givePretBean(PretDTO pretDTO)
+    {
+        LocalDate date_debut = LocalDate.parse(pretDTO.getDate_debut());
+        LocalDate date_fin = LocalDate.parse(pretDTO.getDate_fin());
+
+        PretBean pretBean = new PretBean();
+
+        pretBean.setId(pretDTO.getId());
+        pretBean.setDate_debut(date_debut);
+        pretBean.setDate_fin(date_fin);
+        pretBean.setUsername(pretDTO.getUsername());
+        pretBean.setId_examplare(pretDTO.getId_examplaire());
+        pretBean.setStatut(pretDTO.getStatut());
+
+        return pretBean;
     }
 }

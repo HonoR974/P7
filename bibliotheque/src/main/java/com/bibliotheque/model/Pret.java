@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -18,8 +19,8 @@ public class Pret
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date date_debut;
-    private Date date_fin;
+    private LocalDate date_debut;
+    private LocalDate date_fin;
 
     private Boolean prolonger;
 
@@ -43,19 +44,19 @@ public class Pret
         this.id = id;
     }
 
-    public Date getDate_debut() {
+    public LocalDate getDate_debut() {
         return date_debut;
     }
 
-    public void setDate_debut(Date date_debut) {
+    public void setDate_debut(LocalDate date_debut) {
         this.date_debut = date_debut;
     }
 
-    public Date getDate_fin() {
+    public LocalDate getDate_fin() {
         return date_fin;
     }
 
-    public void setDate_fin(Date date_fin) {
+    public void setDate_fin(LocalDate date_fin) {
         this.date_fin = date_fin;
     }
 

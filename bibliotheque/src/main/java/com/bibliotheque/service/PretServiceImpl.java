@@ -10,6 +10,9 @@ import com.bibliotheque.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Service
 public class PretServiceImpl implements PretService
 {
@@ -39,24 +42,25 @@ public class PretServiceImpl implements PretService
     @Override
     public Pret createPret(Long id_examplaire) {
 
-        System.out.println("\n createPret service" );
 
         String username = securityService.getUsername();
 
-        System.out.println("\n user : " + username );
-
         User user = userRepository.findByUsername(username);
 
-        System.out.println("\n user : " + user.toString() );
+        Statut statut = statutRepository.findByNom("En Creation");
 
+        LocalDate localDate = LocalDate.now();
+        LocalDate lastDate = localDate.plusDays(28);
         Pret pret = new Pret();
+
 
         pret.setUser(user);
         pret.setExamplaire(examplaireService.getExamplaireById(id_examplaire));
 
-        Statut statut = statutRepository.findByNom("En Creation");
-        pret.setStatut(statut);
 
+        pret.setStatut(statut);
+        pret.setDate_debut(localDate);
+        pret.setDate_fin(lastDate);
         pretRepository.save(pret);
         return pret;
     }
@@ -66,14 +70,17 @@ public class PretServiceImpl implements PretService
     {
         PretDTO pretDTO = new PretDTO();
 
+        String date_debut = pret.getDate_debut().toString();
+        String date_fin = pret.getDate_fin().toString();
+
         pretDTO.setId(pret.getId());
 
 
         pretDTO.setId_examplaire(pret.getExamplaire().getId());
-        pretDTO.setId_user(pret.getUser().getId());
+        pretDTO.setUsername(pret.getUser().getUsername());
 
-        pretDTO.setDate_debut(pret.getDate_debut());
-        pretDTO.setDate_fin(pret.getDate_fin());
+        pretDTO.setDate_debut(date_debut);
+        pretDTO.setDate_fin(date_fin);
 
         pretDTO.setStatut(pret.getStatut().getNom());
 

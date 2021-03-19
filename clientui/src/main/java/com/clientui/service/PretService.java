@@ -10,4 +10,5 @@ public interface PretService
 
     PretDTO createPret(Long id_examplaire) throws IOException, InterruptedException;
 
+    PretBean givePretBean(PretDTO pretDTO);
 }

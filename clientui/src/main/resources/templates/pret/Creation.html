@@ -20,9 +20,10 @@
         <tr style="width: 100%">
             <th>id</th>
             <th>date_debut</th>
-            <th>date_fin</th>
+            <th>A rendre  </th>
             <th>utilisateur</th>
             <th>examplaire</th>
+            <th>statut</th>
         </tr>
         </thead>
         <tbody>
@@ -30,13 +31,18 @@
             <td th:utext="${pret.id}"></td>
             <td th:utext="${pret.date_debut}"></td>
             <td th:utext="${pret.date_fin}"></td>
-            <td th:utext="${pret.id_user}"></td>
-            <td th:utext="${pret.id_examplaire}"></td>
+            <td th:utext="${pret.username}"></td>
+            <td th:utext="${pret.id_examplare}"></td>
             <td th:utext="${pret.statut}"></td>
         </tr>
         </tbody>
     </table>
 
+    <!--
+           <td>
+            <p th:utext="${#dates.format(topo.date_creation, 'dd-MM-yyyy')}">Date</p>
+         </td>
+       -->
 <script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
 
 </body>
