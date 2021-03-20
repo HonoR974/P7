@@ -70,4 +70,26 @@ public class PretServiceImpl implements PretService
 
         return pretBean;
     }
+
+    @Override
+    public PretDTO validePret(Long id_pret) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/api/pret/validate/" + id_pret))
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer "+jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String reponse = response.body();
+
+        System.out.println("\n response : " + response + "\n reponse : " + reponse);
+
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.readValue(response.body().toString(), new TypeReference<PretDTO>() {});
+
+    }
 }

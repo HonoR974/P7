@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class PretServiceImpl implements PretService
@@ -87,5 +88,24 @@ public class PretServiceImpl implements PretService
         System.out.println("\n pretDTO : " + pretDTO.toString());
 
         return pretDTO;
+    }
+
+    /**
+     * Valide le pret
+     * @param id_pret
+     * @return
+     */
+    @Override
+    public Pret validePret(long id_pret)
+    {
+
+        Statut statut = statutRepository.findByNom("Valider");
+
+        Pret pret = pretRepository.findById(id_pret);
+
+        pret.setStatut(statut);
+
+        pretRepository.save(pret);
+        return pret;
     }
 }

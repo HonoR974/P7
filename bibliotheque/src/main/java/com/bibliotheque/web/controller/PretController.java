@@ -8,10 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/pret")
@@ -34,13 +31,22 @@ public class PretController {
     @GetMapping("/create/{id}")
     public ResponseEntity<PretDTO> createPret(@PathVariable(name = "id")Long id_examplaire)
     {
-        System.out.println("\n createPret ");
 
         Pret pret = pretService.createPret(id_examplaire);
 
         PretDTO pretDTO = pretService.givePretDTO(pret);
 
-        return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.CREATED);
+        return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.ACCEPTED);
 
+    }
+
+    @PostMapping("/validate/{id}")
+    public ResponseEntity<PretDTO> validePret(@PathVariable(name = "id")Long id_pret)
+    {
+        Pret pret = pretService.validePret(id_pret);
+
+        PretDTO pretDTO = pretService.givePretDTO(pret);
+
+        return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.CREATED);
     }
 }

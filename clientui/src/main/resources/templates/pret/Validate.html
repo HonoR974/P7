@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns="http://www.w3.org/1999/html">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validation d'un Pret </title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+
+</head>
+<body>
+
+<h1>Votre Pret a été valider ! </h1>
+
+<div style="height: 200px;width: 100%;">
+</div>
+
+<h1>Compte rendu du pret </h1>
+
+<table>
+    <thead>
+    <tr style="width: 100%">
+        <th>id</th>
+        <th>date_debut</th>
+        <th>A rendre  </th>
+        <th>utilisateur</th>
+        <th>examplaire</th>
+        <th>statut</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="width: 100%">
+        <td th:utext="${pret.id}"></td>
+        <td th:utext="${pret.date_debut}"></td>
+        <td th:utext="${pret.date_fin}"></td>
+        <td th:utext="${pret.username}"></td>
+        <td th:utext="${pret.id_examplare}"></td>
+        <td th:utext="${pret.statut}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col">
+        <button class="btn btn-outline-primary">
+            <a>Retour a la liste de livre </a>
+        </button>
+    </div>
+    <div class="col">
+        <button class="btn btn-outline-primary">
+            <a>Ma liste de Pret </a>
+        </button>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

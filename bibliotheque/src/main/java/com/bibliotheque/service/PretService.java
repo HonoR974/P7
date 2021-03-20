@@ -8,4 +8,6 @@ public interface PretService {
     Pret createPret(Long id_examplaire);
 
     PretDTO givePretDTO(Pret pret);
+
+    Pret validePret(long id_pret);
 }
