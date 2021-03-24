@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
+    private Long id;
 
     @NotNull
     private String username;
@@ -16,4 +17,6 @@ public class UserDTO {
 
     @NotNull
     private String email;
+
+    private boolean enabled;
 }

@@ -25,5 +25,8 @@ public interface AuthBiblioService {
 
      UserDTO save(UserDTO userDTO) throws IOException, InterruptedException;
 
+    UserDTO getUserDTOByJwt(String jwt) throws IOException, InterruptedException;
 
+
+     String getJwt();
 }

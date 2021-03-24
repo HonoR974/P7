@@ -14,5 +14,11 @@ public interface PretService
 
     PretBean givePretBean(PretDTO pretDTO);
 
+    PretDTO getPretDTOById(Long id_pret) throws IOException, InterruptedException;
+
+    void finishPret(Long id_pret) throws IOException, InterruptedException;
+
+    PretDTO prolongPret(Long id_pret) throws IOException, InterruptedException;
+
 
 }

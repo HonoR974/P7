@@ -2,6 +2,7 @@ package com.clientui.service;
 
 import com.clientui.beans.PretBean;
 import com.clientui.dto.PretDTO;
+import com.clientui.dto.UserDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
@@ -23,16 +24,16 @@ public class PretServiceImpl implements PretService
 
     private String jwt;
 
-    private ExamplaireService examplaireService;
+    private AuthBiblioService authBiblioService;
 
-    public PretServiceImpl(ExamplaireServiceImpl service)
+    public PretServiceImpl(AuthBiblioService service)
     {
-        this.examplaireService = service;
+        this.authBiblioService = service;
     }
 
     @Override
     public PretDTO createPret(Long id_examplaire) throws IOException, InterruptedException {
-        this.jwt = examplaireService.getJwt();
+        this.jwt = authBiblioService.getJwt();
         System.out.println("\n jwt : " + jwt );
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -65,7 +66,7 @@ public class PretServiceImpl implements PretService
         pretBean.setDate_debut(date_debut);
         pretBean.setDate_fin(date_fin);
         pretBean.setUsername(pretDTO.getUsername());
-        pretBean.setId_examplare(pretDTO.getId_examplaire());
+        pretBean.setTitre(pretDTO.getTitre());
         pretBean.setStatut(pretDTO.getStatut());
 
         return pretBean;
@@ -92,4 +93,78 @@ public class PretServiceImpl implements PretService
         return mapper.readValue(response.body().toString(), new TypeReference<PretDTO>() {});
 
     }
+
+    @Override
+    public PretDTO getPretDTOById(Long id_pret) throws IOException, InterruptedException {
+
+
+        this.jwt = authBiblioService.getJwt();
+
+
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/api/pret/" + id_pret))
+                .GET()
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String reponse = response.body();
+
+        System.out.println("\n response : " + response + "\n reponse : " + reponse);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        return  mapper.readValue(response.body().toString(), new TypeReference<PretDTO>() {});
+
+    }
+
+    @Override
+    public void finishPret(Long id_pret) throws IOException, InterruptedException {
+        this.jwt = authBiblioService.getJwt();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/api/pret/finish/" + id_pret))
+                .GET()
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String reponse = response.body();
+
+        System.out.println("\n response : " + response + "\n reponse : " + reponse);
+
+    }
+
+
+    @Override
+    public PretDTO prolongPret(Long id_pret) throws IOException, InterruptedException {
+
+        this.jwt = authBiblioService.getJwt();
+
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/api/pret/prolong/" + id_pret))
+                .GET()
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String reponse = response.body();
+
+        System.out.println("\n response : " + response + "\n reponse : " + reponse);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        return  mapper.readValue(response.body().toString(), new TypeReference<PretDTO>() {});
+
+    }
+
+
 }

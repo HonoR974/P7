@@ -2,6 +2,9 @@ package com.clientui.controller;
 
 import com.clientui.beans.PretBean;
 import com.clientui.dto.PretDTO;
+import com.clientui.dto.UserDTO;
+import com.clientui.service.AuthBiblioService;
+import com.clientui.service.EspaceService;
 import com.clientui.service.PretService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,12 @@ public class PretController
 
     @Autowired
     private PretService pretService;
+
+    @Autowired
+    private AuthBiblioService authBiblioService;
+
+    @Autowired
+    private EspaceService espaceService;
 
     /**
      * Creer le pret
@@ -52,7 +61,49 @@ public class PretController
 
         PretDTO pretDTO = pretService.validePret(id_pret);
         PretBean pretBean = pretService.givePretBean(pretDTO);
+
         model.addAttribute("pret", pretBean);
+
+        UserDTO userDTO = authBiblioService.getUserDTOByJwt(authBiblioService.getJwt());
+       model.addAttribute("user", userDTO);
+
         return "pret/Validate";
+    }
+
+    @GetMapping("/finish")
+    public String rendreProjet (@RequestParam(value = "id")Long id_pret,
+                                Model model) throws IOException, InterruptedException {
+
+        PretDTO pretDTO = pretService.getPretDTOById(id_pret);
+
+
+        model.addAttribute("pret", pretService.givePretBean(pretDTO));
+
+        return "pret/Finish";
+    }
+
+    @GetMapping("/validate/finish")
+    public String finishPret(@RequestParam(value = "id")Long id,
+                             Model model) throws IOException, InterruptedException {
+
+        pretService.finishPret(id);
+
+        UserDTO userDTO = authBiblioService.getUserDTOByJwt(authBiblioService.getJwt());
+        model.addAttribute("liste",espaceService.getListePretByIdUser(userDTO.getId()));
+
+        return "espace/ListePret";
+    }
+
+
+    @GetMapping("/prolong")
+    public String prolongPret(@RequestParam(value = "id")Long id,
+                              Model model) throws IOException, InterruptedException {
+        PretDTO pretDTO= pretService.prolongPret(id);
+
+        UserDTO userDTO = authBiblioService.getUserDTOByJwt(authBiblioService.getJwt());
+
+        model.addAttribute("pret",pretDTO);
+        model.addAttribute("user", userDTO);
+        return "pret/Prolonger";
     }
 }

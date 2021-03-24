@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1>Votre Pret a été renouvellé </h1>
+
+    <!-- le pret -->
+    <div class="row">
+        <table  border="1">
+            <tr>
+                <th>Id</th>
+                <th>Statut</th>
+                <th>Username</th>
+                <th>Livre</th>
+            </tr>
+
+            <tr>
+                <td>
+                    <p th:utext="${pret.id}"></p>
+                </td>
+
+                <td>
+                    <a th:utext="${pret.statut}" ></a>
+                </td>
+                <td>
+                    <a th:utext="${pret.username}"></a>
+                </td>
+
+                <td>
+                    <p th:utext="${pret.titre}"></p>
+                </td>
+
+
+            </tr>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-outline-primary">
+                <a th:href="@{/espace/prets(id=${user.id})}">Retour a la liste </a>
+            </button>
+        </div>
+    </div>
+
+<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,10 +60,10 @@ public class PretServiceImpl implements PretService
         pret.setUser(user);
         pret.setExamplaire(examplaireService.getExamplaireById(id_examplaire));
 
-
         pret.setStatut(statut);
         pret.setDate_debut(localDate);
         pret.setDate_fin(lastDate);
+        pret.setProlonger(false);
         pretRepository.save(pret);
         return pret;
     }
@@ -73,17 +75,19 @@ public class PretServiceImpl implements PretService
 
         String date_debut = pret.getDate_debut().toString();
         String date_fin = pret.getDate_fin().toString();
+        String titre = pret.getExamplaire().getLivre().getTitre();
 
         pretDTO.setId(pret.getId());
-
-
-        pretDTO.setId_examplaire(pret.getExamplaire().getId());
-        pretDTO.setUsername(pret.getUser().getUsername());
 
         pretDTO.setDate_debut(date_debut);
         pretDTO.setDate_fin(date_fin);
 
+        pretDTO.setUsername(pret.getUser().getUsername());
+
+        //pretDTO.setId_examplaire(pret.getExamplaire().getId());
         pretDTO.setStatut(pret.getStatut().getNom());
+        pretDTO.setEnabled(pret.getProlonger());
+        pretDTO.setTitre(titre);
 
         System.out.println("\n pretDTO : " + pretDTO.toString());
 
@@ -104,6 +108,35 @@ public class PretServiceImpl implements PretService
         Pret pret = pretRepository.findById(id_pret);
 
         pret.setStatut(statut);
+
+        pretRepository.save(pret);
+        return pret;
+    }
+
+    @Override
+    public Pret getPretById(long id_pret) {
+        return pretRepository.findById(id_pret);
+    }
+
+    @Override
+    public void finishPret(long id_pret)
+    {
+        Pret pret = pretRepository.findById(id_pret);
+
+        Statut statut = statutRepository.findByNom("Fini");
+        pret.setStatut(statut);
+
+        pretRepository.save(pret);
+    }
+
+    @Override
+    public Pret prolongPret(long id_pret)
+    {
+        Pret pret = pretRepository.findById(id_pret);
+        pret.setProlonger(true);
+
+        LocalDate lastDate = pret.getDate_fin().plusDays(30);
+        pret.setDate_fin(lastDate);
 
         pretRepository.save(pret);
         return pret;

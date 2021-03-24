@@ -1,10 +1,13 @@
 package com.clientui.service;
 
 
+import com.clientui.dto.PretDTO;
 import com.clientui.dto.UserDTO;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 
@@ -25,6 +28,8 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
     private int idUser ;
     private String username;
     private String password;
+
+    private String jwt;
 
     private final HttpClient client =  HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
@@ -73,8 +78,10 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
 
         Map<String,Object> result =
                 new ObjectMapper().readValue(jwtBrut, HashMap.class);
-        Object jwt = result.get("jwt");
-        return jwt.toString();
+        Object jwtObject = result.get("jwt");
+
+        this.jwt = jwtObject.toString();
+        return jwtObject.toString();
 
     }
 
@@ -116,15 +123,6 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
         return response.body();
     }
 
-    private UserDTO getUser()
-    {
-        UserDTO user = new UserDTO();
-
-        user.setUsername(username);
-
-
-        return user;
-    }
 
 
     @Override
@@ -168,5 +166,33 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
         user.setPassword(password);
 
         return user;
+    }
+
+
+    @Override
+    public UserDTO getUserDTOByJwt(String jwt) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/token/" + jwt))
+                .GET()
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String reponse = response.body();
+
+        System.out.println("\n response : " +  response + "\n reponse : " + reponse);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.readValue(response.body().toString(), new TypeReference<UserDTO>() {});
+
+    }
+
+    @Override
+    public String getJwt()
+    {
+        return jwt;
     }
 }

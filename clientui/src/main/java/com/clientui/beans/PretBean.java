@@ -9,8 +9,9 @@ public class PretBean
 
     private LocalDate date_debut;
     private LocalDate date_fin;
+
     private String username;
-    private Long  id_examplare;
+    private String  titre;
     private String statut;
 
     public PretBean()
@@ -44,16 +45,16 @@ public class PretBean
         return username;
     }
 
-    public void setUsername(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Long getId_examplare() {
-        return id_examplare;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setId_examplare(Long id_examplare) {
-        this.id_examplare = id_examplare;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public String getStatut() {
@@ -62,17 +63,5 @@ public class PretBean
 
     public void setStatut(String statut) {
         this.statut = statut;
-    }
-
-    @Override
-    public String toString() {
-        return "PretBean{" +
-                "id=" + id +
-                ", date_debut=" + date_debut +
-                ", date_fin=" + date_fin +
-                ", userBean='" + username + '\'' +
-                ", id_examplare=" + id_examplare +
-                ", statut='" + statut + '\'' +
-                '}';
     }
 }

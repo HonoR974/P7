@@ -24,7 +24,7 @@
         <th>date_debut</th>
         <th>A rendre  </th>
         <th>utilisateur</th>
-        <th>examplaire</th>
+        <th>titre</th>
         <th>statut</th>
     </tr>
     </thead>
@@ -34,7 +34,7 @@
         <td th:utext="${pret.date_debut}"></td>
         <td th:utext="${pret.date_fin}"></td>
         <td th:utext="${pret.username}"></td>
-        <td th:utext="${pret.id_examplare}"></td>
+        <td th:utext="${pret.titre}"></td>
         <td th:utext="${pret.statut}"></td>
     </tr>
     </tbody>
@@ -43,12 +43,12 @@
 <div class="row">
     <div class="col">
         <button class="btn btn-outline-primary">
-            <a>Retour a la liste de livre </a>
+            <a>Retour a la liste de livre (pas fini) </a>
         </button>
     </div>
     <div class="col">
         <button class="btn btn-outline-primary">
-            <a>Ma liste de Pret </a>
+            <a  th:href="@{/espace/prets(id=${user.id})}" >Ma liste de Pret </a>
         </button>
     </div>
 

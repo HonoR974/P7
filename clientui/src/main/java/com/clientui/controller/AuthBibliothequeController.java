@@ -33,7 +33,7 @@ public class AuthBibliothequeController {
 
     @PostMapping("/authenticate")
     public String authenticate (@ModelAttribute(value = "user")UserDTO userDTO,
-                                Model model) throws JsonProcessingException {
+                                Model model) throws IOException, InterruptedException {
 
         String jwtBrut;
         String jwt = null;
@@ -42,7 +42,8 @@ public class AuthBibliothequeController {
             jwtBrut = authBiblioService.authenticate(userDTO);
 
             jwt = authBiblioService.parseJwt(jwtBrut);
-           username = authBiblioService.getUserNameByToken(jwt);
+            username = authBiblioService.getUserNameByToken(jwt);
+
 
         } catch (IOException e) {
             System.out.println("\n ca ne marche pas " );
@@ -52,8 +53,12 @@ public class AuthBibliothequeController {
             System.out.println("\n Mauvaise URI " );
         }
 
+
+        UserDTO user = authBiblioService.getUserDTOByJwt(jwt);
+
         model.addAttribute("username", username);
         model.addAttribute("jwt", jwt);
+        model.addAttribute("user",user);
         return "log/presentation";
     }
 

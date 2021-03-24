@@ -10,4 +10,10 @@ public interface PretService {
     PretDTO givePretDTO(Pret pret);
 
     Pret validePret(long id_pret);
+
+    Pret getPretById(long id_pret);
+
+    void finishPret (long id_pret);
+
+    Pret prolongPret(long id_pret);
 }

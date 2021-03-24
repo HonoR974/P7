@@ -49,4 +49,31 @@ public class PretController {
 
         return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.CREATED);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PretDTO> getPretById(@PathVariable(name = "id")Long id)
+    {
+        Pret pret = pretService.getPretById(id);
+
+        PretDTO pretDTO = pretService.givePretDTO(pret);
+
+        return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping ("/finish/{id}")
+    public HttpStatus finishProjet(@PathVariable(value = "id")Long id)
+    {
+        pretService.finishPret(id);
+        return HttpStatus.ACCEPTED;
+    }
+
+    @GetMapping("/prolong/{id}")
+    public ResponseEntity<PretDTO> prolongPret(@PathVariable (value = "id")Long id)
+    {
+        Pret pret = pretService.prolongPret(id);
+
+        PretDTO pretDTO = pretService.givePretDTO(pret);
+
+        return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.ACCEPTED);
+    }
 }

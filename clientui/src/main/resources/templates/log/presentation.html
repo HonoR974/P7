@@ -15,10 +15,15 @@
 <div style="padding-top: 50px">
     <h1>L'user </h1>
     <h1 th:text="${user.username}"></h1>
+    <h1 th:text="${user.password}"></h1>
 </div>
 
-<button>
+<button class="btn btn-outline-primary">
     <a th:href="@{/bibliotheques(jwt=${jwt})}">Bibliotheques  </a>
+</button>
+
+<button class="btn btn-outline-primary">
+    <a th:href="@{/espace(id=${user.id})}">Espace</a>
 </button>
 
 <script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>

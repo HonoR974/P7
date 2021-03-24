@@ -1,6 +1,7 @@
 package com.bibliotheque.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class User {
 
     private boolean enabled;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Pret> listeDePret;
 

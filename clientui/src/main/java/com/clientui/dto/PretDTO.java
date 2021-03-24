@@ -15,5 +15,6 @@ public class PretDTO {
 
     private String statut;
     private String  username;
-    private Long  id_examplaire;
+    private String  titre;
+    private boolean enabled;
 }

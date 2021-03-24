@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- Les topos de l'utilisateur -->
+<div class="row">
+        <table  border="1">
+            <tr>
+                <th>Id</th>
+                <th>Statut</th>
+                <th>Username</th>
+                <th>Livre</th>
+                <th>Date debut </th>
+                <th>Date fin </th>
+            </tr>
+
+            <!-- pour chaque pret   -->
+            <tr th:each ="pret : ${liste}">
+
+
+
+                <td>
+                    <p th:utext="${pret.id}"></p>
+                </td>
+
+                <td>
+                    <a th:utext="${pret.statut}" ></a>
+                </td>
+                <td>
+                    <a th:utext="${pret.username}" th:href="@{/espace/pret(id=${pret.id})}"></a>
+                </td>
+
+                <td>
+                    <p th:utext="${pret.titre}"></p>
+                </td>
+
+                <td>
+                    <p th:utext="${pret.date_debut}"></p>
+                </td>
+
+                <td>
+                    <p th:utext="${pret.date_fin}"></p>
+                </td>
+
+
+            </tr>
+        </table>
+</div>
+
+<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
