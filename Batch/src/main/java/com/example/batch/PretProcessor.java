@@ -2,8 +2,7 @@ package com.example.batch;
 
 import com.example.model.PretDTO;
 
-import com.example.sengrid.EmailService;
-import com.example.service.PretService;
+
 import com.sendgrid.*;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;

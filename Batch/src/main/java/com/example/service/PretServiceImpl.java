@@ -71,7 +71,7 @@ public class PretServiceImpl implements PretService{
     }
 
     @Override
-    public List<PretDTO> sendMailRetard()
+    public void sendMailRetard()
     {
         System.out.println("\n la liste des pret : " + listPretRetard);
 
@@ -82,8 +82,7 @@ public class PretServiceImpl implements PretService{
         for(int i = 0; i<= listPretRetard.size() -1 ; i++)
 
         {
-           // System.out.println("\n mail par index " + listPretRetard.get(i).getEmail() );
-            //pretDTO.getEmail()
+
             Email to = new Email(listPretRetard.get(i).getEmail());
             Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>" );
 
@@ -111,8 +110,6 @@ public class PretServiceImpl implements PretService{
             }
 
         }
-
-        return null;
     }
 
 
