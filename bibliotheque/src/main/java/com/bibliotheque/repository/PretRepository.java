@@ -14,4 +14,6 @@ public interface PretRepository extends JpaRepository<Pret,Long> {
     Pret findById(long id);
 
     List<Pret> findByUserAndStatutOrStatut(User user, Statut statut,Statut statut2);
+
+    List<Pret> findByStatut(Statut statut);
 }

@@ -7,11 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Batch" />
         <module name="bibliotheque" />
         <module name="clientui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Batch" target="11" />
       <module name="bibliotheque" target="1.8" />
       <module name="clientui" target="11" />
       <module name="jwt" target="1.8" />
@@ -19,6 +21,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Batch" options="-parameters" />
       <module name="bibliotheque" options="-parameters" />
       <module name="clientui" options="-parameters" />
       <module name="jwt" options="-parameters" />

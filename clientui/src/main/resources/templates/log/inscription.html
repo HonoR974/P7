@@ -21,9 +21,11 @@
             <input name="password" type="password" class="form-control" placeholder="Password"
                    th:field="${user.password}"/>
 
-            <input name="matchingPassword" type="matchingPassword" class="form-control" placeholder="Password"
+            <input name="matchingPassword" type="password" class="form-control" placeholder="Password"
                    th:field="${user.matchingPassword}"/>
 
+            <input name="mail" type="email" class="form-control" placeholder="email"
+                   th:field="${user.email}"/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
         </div>

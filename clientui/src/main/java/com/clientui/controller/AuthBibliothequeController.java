@@ -7,10 +7,13 @@ import com.clientui.service.AuthBiblioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -21,6 +24,9 @@ public class AuthBibliothequeController {
 
     @Autowired
     private AuthBiblioService authBiblioService;
+
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
 
     @GetMapping("/login")
     public String loggin(Model model)
@@ -90,14 +96,16 @@ public class AuthBibliothequeController {
     public String inscription(@ModelAttribute(value = "user")UserDTO userDTO,
                               Model model) throws IOException, InterruptedException {
 
+
         UserDTO user =  authBiblioService.save(userDTO);
 
         String jwtBrut = authBiblioService.authenticate(user);
-
         String jwt = authBiblioService.parseJwt(jwtBrut);
 
         model.addAttribute("jwt",jwt);
         model.addAttribute("user", user);
+
+
 
         return "log/presentation";
     }

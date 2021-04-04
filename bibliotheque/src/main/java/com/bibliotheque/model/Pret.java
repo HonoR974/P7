@@ -9,9 +9,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
-
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Pret
 {
@@ -91,4 +88,5 @@ public class Pret
     public void setExamplaire(Examplaire examplaire) {
         this.examplaire = examplaire;
     }
+
 }

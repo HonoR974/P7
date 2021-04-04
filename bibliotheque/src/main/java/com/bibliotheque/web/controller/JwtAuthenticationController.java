@@ -8,6 +8,7 @@ import com.bibliotheque.configuration.JwtUserDetailsService;
 import com.bibliotheque.model.User;
 import com.bibliotheque.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,8 +16,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 
@@ -36,6 +39,8 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
 
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
@@ -66,10 +71,14 @@ public class JwtAuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-        System.out.println("\n \n Hello \n "  );
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO user,
+                                      HttpServletRequest request,
+                                      Errors errors) throws Exception
+    {
 
-        return new ResponseEntity<User>(userService.save(user), HttpStatus.ACCEPTED);
+        User registered = userService.save(user);
+
+        return new ResponseEntity<User>(registered, HttpStatus.ACCEPTED);
     }
 
 
