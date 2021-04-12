@@ -1,8 +1,6 @@
 package com.clientui.service;
 
 
-import com.clientui.beans.BibliothequeBean;
-import com.clientui.beans.UserBean;
 import com.clientui.dto.UserDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 

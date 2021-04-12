@@ -1,10 +1,10 @@
-package com.clientui.beans;
+package com.clientui.dto;
 
-public class ExamplaireBean {
+public class ExamplaireDTO {
     private Long id;
     private String edition;
 
-    public ExamplaireBean()
+    public ExamplaireDTO()
     {}
 
     public Long getId() {

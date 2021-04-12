@@ -50,4 +50,6 @@ public class BibliothequeServiceImpl implements BibliothequeService {
         Bibliotheque bibliotheque = bibliothequeRepository.findById(id);
         return bibliotheque.getLivres();
     }
+
+
 }

@@ -1,7 +1,7 @@
 package com.clientui.service;
 
-import com.clientui.beans.BibliothequeBean;
-import com.clientui.beans.LivreBean;
+import com.clientui.dto.BibliothequeDTO;
+import com.clientui.dto.LivreDTO;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.List;
 public interface BibliothequeService {
 
 
-    List<BibliothequeBean> getAllBibliotheque(String jwt) throws IOException, InterruptedException;
+    List<BibliothequeDTO> getAllBibliotheque(String jwt) throws IOException, InterruptedException;
 
-    BibliothequeBean getBibliothequeById(Long id) throws IOException, InterruptedException;
+    BibliothequeDTO getBibliothequeById(Long id) throws IOException, InterruptedException;
 
-    List<LivreBean> getAllLivreByIdBiblio(Long id) throws IOException, InterruptedException;
+    List<LivreDTO> getAllLivreByIdBiblio(Long id) throws IOException, InterruptedException;
 
     String getJwt();
 }

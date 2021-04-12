@@ -14,8 +14,10 @@ public class Scheduler {
     @Autowired
     private BatchLauncher batchLauncher;
 
-    //
-    @Scheduled(cron = "*/10 32 13 06 04 ? ")
+    //tout les min a 18 h le 07/04
+    @Scheduled(cron = " 0 */1 18 09 04 ? ")
+    //toutes les 8 sec
+   // @Scheduled(fixedDelay = 8000)
     public void perform() throws Exception {
         batchLauncher.run();
     }

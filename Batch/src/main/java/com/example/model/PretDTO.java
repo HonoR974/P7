@@ -11,8 +11,9 @@ public class PretDTO
     private String date_fin;
 
     private String statut;
-    private String  username;
+    private String username;
     private String email;
-    private String  titre;
+    private String titre;
+    private Boolean envoieEmail;
 
 }

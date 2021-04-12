@@ -28,7 +28,7 @@ public class ExamplaireController {
 
         model.addAttribute("examplaire", examplaireService.getExamplaire(id));
         model.addAttribute("livre", examplaireService.getLivreByIdExamplaire(id));
-        model.addAttribute("jwt", examplaireService.getJwt());
+      //  model.addAttribute("jwt", examplaireService.getJwt());
         return "examplaire/Detail";
     }
 }

@@ -1,7 +1,7 @@
 package com.clientui.service;
 
-import com.clientui.beans.ExamplaireBean;
-import com.clientui.beans.LivreBean;
+import com.clientui.dto.ExamplaireDTO;
+import com.clientui.dto.LivreDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +29,7 @@ public class LivreServiceImpl implements  LivreService{
     }
 
     @Override
-    public List<LivreBean> getAll() throws IOException, InterruptedException {
+    public List<LivreDTO> getAll() throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -43,14 +43,14 @@ public class LivreServiceImpl implements  LivreService{
        HttpResponse httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 
-        List<LivreBean> list = mapper.readValue(httpResponse.body().toString(), new TypeReference<List<LivreBean>>(){});
+        List<LivreDTO> list = mapper.readValue(httpResponse.body().toString(), new TypeReference<List<LivreDTO>>(){});
 
 
         return list;
     }
 
     @Override
-    public List<ExamplaireBean> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException {
+    public List<ExamplaireDTO> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException {
         this.jwt = bibliothequeService.getJwt();
 
 
@@ -67,19 +67,19 @@ public class LivreServiceImpl implements  LivreService{
 
         ObjectMapper mapper= new ObjectMapper();
 
-        List<ExamplaireBean> list = mapper.readValue(response.body().toString(),
-                new TypeReference<List<ExamplaireBean>>() {});
+        List<ExamplaireDTO> list = mapper.readValue(response.body().toString(),
+                new TypeReference<List<ExamplaireDTO>>() {});
         return list;
     }
 
     @Override
-    public LivreBean getLivreByIdLivre(Long id) throws IOException, InterruptedException {
+    public LivreDTO getLivreByIdLivre(Long id) throws IOException, InterruptedException {
 
         this.jwt = bibliothequeService.getJwt();
 
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:9001/api/livre/detail?id=" + id))
+                .uri(URI.create("http://localhost:9001/api/livre/detail/" + id))
                 .GET()
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
@@ -87,15 +87,16 @@ public class LivreServiceImpl implements  LivreService{
 
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
 
-
         String reponse = response.body();
+
+        System.out.println("\n response " +response + "\n reponse " + reponse);
 
         ObjectMapper mapper= new ObjectMapper();
 
-        LivreBean livreBean = mapper.readValue(response.body().toString(),
-                new TypeReference<LivreBean>() {});
+        LivreDTO livreDTO = mapper.readValue(response.body().toString(),
+                new TypeReference<LivreDTO>() {});
 
-        return livreBean;
+        return livreDTO;
     }
 
     @Override

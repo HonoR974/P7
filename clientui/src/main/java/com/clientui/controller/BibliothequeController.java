@@ -1,12 +1,11 @@
 package com.clientui.controller;
 
-import com.clientui.beans.BibliothequeBean;
+import com.clientui.dto.BibliothequeDTO;
 import com.clientui.service.BibliothequeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
@@ -32,18 +31,18 @@ public class BibliothequeController {
     @GetMapping("/bibliotheques")
     public String getAll(@RequestParam String jwt,
                                Model model) throws IOException, InterruptedException {
-        List<BibliothequeBean> list = bibliothequeService.getAllBibliotheque(jwt);
+        List<BibliothequeDTO> list = bibliothequeService.getAllBibliotheque(jwt);
         model.addAttribute("list", list);
-        return "log/Espace";
+        return "bibliotheque/Accueil";
     }
 
     @GetMapping("/bibliotheque/detail")
     public String getBibliothequeById(@RequestParam(name = "id")Long id,
                                       Model model) throws IOException, InterruptedException {
 
-        BibliothequeBean bibliothequeBean = bibliothequeService.getBibliothequeById(id);
+        BibliothequeDTO bibliothequeDTO = bibliothequeService.getBibliothequeById(id);
 
-        model.addAttribute("biblio", bibliothequeBean);
+        model.addAttribute("biblio", bibliothequeDTO);
         return "bibliotheque/Bibliotheque";
     }
 

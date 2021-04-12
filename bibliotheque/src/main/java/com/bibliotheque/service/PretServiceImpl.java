@@ -64,6 +64,7 @@ public class PretServiceImpl implements PretService
         pret.setDate_debut(localDate);
         pret.setDate_fin(lastDate);
         pret.setProlonger(false);
+        pret.setEmail(false);
         pretRepository.save(pret);
         return pret;
     }
@@ -137,6 +138,8 @@ public class PretServiceImpl implements PretService
 
         LocalDate lastDate = pret.getDate_fin().plusDays(30);
         pret.setDate_fin(lastDate);
+
+        pret.setEmail(false);
 
         pretRepository.save(pret);
         return pret;

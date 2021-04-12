@@ -1,18 +1,18 @@
 package com.clientui.service;
 
-import com.clientui.beans.ExamplaireBean;
-import com.clientui.beans.LivreBean;
+import com.clientui.dto.ExamplaireDTO;
+import com.clientui.dto.LivreDTO;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface LivreService {
 
-    List<LivreBean> getAll() throws IOException, InterruptedException;
+    List<LivreDTO> getAll() throws IOException, InterruptedException;
 
-    List<ExamplaireBean> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException;
+    List<ExamplaireDTO> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException;
 
-    LivreBean getLivreByIdLivre(Long id) throws IOException, InterruptedException;
+    LivreDTO getLivreByIdLivre(Long id) throws IOException, InterruptedException;
 
     String getJwt();
 }

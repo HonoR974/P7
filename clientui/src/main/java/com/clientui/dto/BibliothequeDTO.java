@@ -1,12 +1,12 @@
-package com.clientui.beans;
+package com.clientui.dto;
 
-public class BibliothequeBean {
+public class BibliothequeDTO {
 
     private Long id;
     private  String  nom;
     private  String adresse;
 
-    public BibliothequeBean()
+    public BibliothequeDTO()
     {}
 
     public Long getId() {

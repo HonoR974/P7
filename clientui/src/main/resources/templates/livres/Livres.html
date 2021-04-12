@@ -9,11 +9,13 @@
 </head>
 <body>
 
-<div class="row">
+
+<div class="row" >
     <div th:each="livre : ${list}" class="col-md-4 my-1">
         <p th:text= "${livre.id}">Titre </p>
         <p th:text= "${livre.auteur}">Titre </p>
         <a th:text= "${livre.titre}" th:href="@{/livre/Examplaires(id=${livre.id})}">Titre </a>
+       <p th:text="${livre.examplaires}">Nombre d'examplaire</p>
         </a>
     </div>
 </div>

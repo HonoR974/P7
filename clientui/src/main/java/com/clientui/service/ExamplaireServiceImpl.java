@@ -1,7 +1,7 @@
 package com.clientui.service;
 
-import com.clientui.beans.ExamplaireBean;
-import com.clientui.beans.LivreBean;
+import com.clientui.dto.ExamplaireDTO;
+import com.clientui.dto.LivreDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
@@ -35,7 +35,7 @@ public class ExamplaireServiceImpl implements ExamplaireService
      * @return
      */
     @Override
-    public ExamplaireBean getExamplaire(Long id) throws IOException, InterruptedException {
+    public ExamplaireDTO getExamplaire(Long id) throws IOException, InterruptedException {
         this.jwt = livreService.getJwt();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -48,16 +48,20 @@ public class ExamplaireServiceImpl implements ExamplaireService
         HttpResponse<String> response = client.send(request,
                                     HttpResponse.BodyHandlers.ofString());
 
+        String reponse = response.body();
+
+        System.out.println("\n response " + response + "\n reponse " + reponse);
+
         ObjectMapper mapper= new ObjectMapper();
 
-       ExamplaireBean examplaireBean= mapper.readValue(response.body().toString(),
-                new TypeReference<ExamplaireBean>() {});
+       ExamplaireDTO examplaireDTO = mapper.readValue(response.body().toString(),
+                new TypeReference<ExamplaireDTO>() {});
 
-        return examplaireBean;
+        return examplaireDTO;
     }
 
     @Override
-    public LivreBean getLivreByIdExamplaire(Long id) throws IOException, InterruptedException {
+    public LivreDTO getLivreByIdExamplaire(Long id) throws IOException, InterruptedException {
         this.jwt = livreService.getJwt();
 
 
@@ -72,10 +76,10 @@ public class ExamplaireServiceImpl implements ExamplaireService
 
         ObjectMapper mapper= new ObjectMapper();
 
-       LivreBean livreBean = mapper.readValue(response.body().toString(),
-                new TypeReference<LivreBean>() {});
+       LivreDTO livreDTO = mapper.readValue(response.body().toString(),
+                new TypeReference<LivreDTO>() {});
 
-        return livreBean;
+        return livreDTO;
     }
 
     @Override

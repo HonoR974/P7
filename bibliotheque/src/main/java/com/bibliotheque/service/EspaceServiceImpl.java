@@ -39,13 +39,22 @@ public class EspaceServiceImpl implements EspaceService
      * @return
      */
     @Override
-    public List<Pret> getListPretByIdUser(long id_user) {
+    public List<Pret> getListPretByIdUser(long id_user)
+    {
 
         Statut statut = statutRepository.findByNom("Valider");
         Statut statut1 = statutRepository.findByNom("Prolonger");
+        Statut statut2 = statutRepository.findByNom("A Rendre");
+
         User user = userRepository.findById(id_user);
 
-        return pretRepository.findByUserAndStatutOrStatut(user,statut,statut1 );
+        List<Pret> list = pretRepository.findByUserAndStatut(user,statut);
+
+        list.addAll(pretRepository.findByUserAndStatut(user,statut1));
+        list.addAll(pretRepository.findByUserAndStatut(user,statut2));
+
+        return list;
+
     }
 
     @Override

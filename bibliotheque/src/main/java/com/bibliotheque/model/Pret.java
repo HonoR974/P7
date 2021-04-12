@@ -33,6 +33,8 @@ public class Pret
     @ManyToOne
     private Examplaire examplaire;
 
+    private Boolean email;
+
     public Long getId() {
         return id;
     }
@@ -89,4 +91,11 @@ public class Pret
         this.examplaire = examplaire;
     }
 
+    public Boolean getEmail() {
+        return email;
+    }
+
+    public void setEmail(Boolean email) {
+        this.email = email;
+    }
 }

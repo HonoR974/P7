@@ -1,6 +1,5 @@
 package com.clientui.service;
 
-import com.clientui.beans.ExamplaireBean;
 import com.clientui.dto.PretDTO;
 import com.clientui.dto.UserDTO;
 import com.fasterxml.jackson.core.type.TypeReference;

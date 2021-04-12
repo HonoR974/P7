@@ -1,7 +1,7 @@
 package com.clientui.service;
 
-import com.clientui.beans.BibliothequeBean;
-import com.clientui.beans.LivreBean;
+import com.clientui.dto.BibliothequeDTO;
+import com.clientui.dto.LivreDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +24,7 @@ public class BibliothequeServiceImpl implements BibliothequeService{
             .build();
 
     @Override
-    public List<BibliothequeBean> getAllBibliotheque(String jwtSend ) throws IOException, InterruptedException {
+    public List<BibliothequeDTO> getAllBibliotheque(String jwtSend ) throws IOException, InterruptedException {
         this.jwt = jwtSend;
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -41,14 +41,14 @@ public class BibliothequeServiceImpl implements BibliothequeService{
 
         ObjectMapper mapper = new ObjectMapper();
 
-        List<BibliothequeBean> list = mapper.readValue(response.body().toString(),
-                new TypeReference<List<BibliothequeBean>>(){});
+        List<BibliothequeDTO> list = mapper.readValue(response.body().toString(),
+                new TypeReference<List<BibliothequeDTO>>(){});
 
         return list;
     }
 
     @Override
-    public BibliothequeBean getBibliothequeById(Long id) throws IOException, InterruptedException {
+    public BibliothequeDTO getBibliothequeById(Long id) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:9001/api/bibliotheque/detail?id=" + id))
@@ -63,14 +63,14 @@ public class BibliothequeServiceImpl implements BibliothequeService{
 
         ObjectMapper mapper= new ObjectMapper();
 
-       BibliothequeBean bibliothequeBean= mapper.readValue(response.body().toString(),
-                new TypeReference<BibliothequeBean>(){});
+       BibliothequeDTO bibliothequeDTO = mapper.readValue(response.body().toString(),
+                new TypeReference<BibliothequeDTO>(){});
 
-        return bibliothequeBean;
+        return bibliothequeDTO;
     }
 
     @Override
-    public List<LivreBean> getAllLivreByIdBiblio(Long id) throws IOException, InterruptedException {
+    public List<LivreDTO> getAllLivreByIdBiblio(Long id) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                       .uri(URI.create("http://localhost:9001/api/bibliotheque/Livres?id=" + id))
@@ -83,10 +83,11 @@ public class BibliothequeServiceImpl implements BibliothequeService{
 
         String reponse = response.body();
 
+        System.out.println("\n response " + response + "\n reponse " + reponse);
         ObjectMapper mapper= new ObjectMapper();
 
-        List<LivreBean> list = mapper.readValue(response.body().toString(),
-                new TypeReference<List<LivreBean>>() {});
+        List<LivreDTO> list = mapper.readValue(response.body().toString(),
+                new TypeReference<List<LivreDTO>>() {});
 
         return list;
     }

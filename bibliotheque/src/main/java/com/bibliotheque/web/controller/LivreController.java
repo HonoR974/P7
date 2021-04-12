@@ -49,15 +49,15 @@ public class LivreController {
         return new ResponseEntity<LivreDTO>(livreResponse, HttpStatus.CREATED);
     }
 
-    @GetMapping("/detail")
-    public ResponseEntity<LivreDTO> getLivreById(@RequestParam(name = "id") Long id)
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<LivreDTO> getLivreById(@PathVariable(name = "id") Long id)
     {
         Livre livre = livreService.getLivreById(id);
 
         if(livre==null) throw new LivreIntrouvableException( "Le produit avec l'id "
                 + id + " est INTROUVABLE. Écran Bleu si je pouvais.");
 
-        LivreDTO  livreResponse = modelMapper.map(livre, LivreDTO.class);
+        LivreDTO  livreResponse = livreService.convertLivre(livre);
 
         return new ResponseEntity<LivreDTO>(livreResponse, HttpStatus.ACCEPTED);
     }

@@ -1,4 +1,4 @@
-package com.clientui.beans;
+package com.clientui.model;
 
 public class UserBean {
 

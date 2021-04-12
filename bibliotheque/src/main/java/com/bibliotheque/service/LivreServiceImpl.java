@@ -1,5 +1,6 @@
 package com.bibliotheque.service;
 
+import com.bibliotheque.dto.LivreDTO;
 import com.bibliotheque.model.Examplaire;
 import com.bibliotheque.model.Livre;
 import com.bibliotheque.repository.LivreRepository;
@@ -7,6 +8,7 @@ import com.bibliotheque.web.exception.LivreIntrouvableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,5 +57,59 @@ public class LivreServiceImpl implements LivreService{
     public List<Examplaire> getAllExamplaireByIdLivre(long id) {
         Livre livre = livreRepository.findById(id);
         return livre.getExamplaires();
+    }
+
+    @Override
+    public List<LivreDTO> convertListLivre(List<Livre> list)
+    {
+        List<LivreDTO> listFinal = new ArrayList<>();
+
+        List<Examplaire> listExamplaire = new ArrayList<>();
+
+
+        for (Livre livre : list)
+        {
+            LivreDTO livreDTO = new LivreDTO();
+            livreDTO.setId(livre.getId());
+            livreDTO.setAuteur(livre.getAuteur());
+            livreDTO.setTitre(livre.getTitre());
+
+            listExamplaire = livre.getExamplaires();
+            long countExamplaire = 0 ;
+            for (Examplaire examplaire : listExamplaire)
+            {
+                if (! examplaire.isEmprunt())
+                    countExamplaire++;
+            }
+
+            livreDTO.setExamplaires(countExamplaire);
+
+            listFinal.add(livreDTO);
+        }
+
+        return listFinal;
+    }
+
+    @Override
+    public LivreDTO convertLivre(Livre livre) {
+
+        LivreDTO livreDTO = new LivreDTO();
+        livreDTO.setId(livre.getId());
+        livreDTO.setAuteur(livre.getAuteur());
+        livreDTO.setTitre(livre.getTitre());
+
+        List<Examplaire> examplaires = livre.getExamplaires();
+
+        long count = 0 ;
+        for (Examplaire examplaire : examplaires)
+        {
+            if (!examplaire.isEmprunt())
+            {
+                count++;
+            }
+        }
+        livreDTO.setExamplaires(count);
+
+        return livreDTO;
     }
 }

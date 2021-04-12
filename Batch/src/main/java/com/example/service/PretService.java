@@ -12,5 +12,7 @@ public interface PretService {
 
     void sendMailRetard();
 
-    void write();
+    List<PretDTO> getPretEnCours() throws IOException, InterruptedException;
+
+    void sendPret() throws IOException, InterruptedException;
 }

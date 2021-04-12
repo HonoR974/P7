@@ -1,15 +1,10 @@
 package com.bibliotheque.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 public class Examplaire {
 
@@ -24,4 +19,46 @@ public class Examplaire {
 
     @OneToMany(mappedBy = "examplaire")
     private List<Pret> listeDePret;
+
+    private Boolean emprunt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEdition() {
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+
+    public Livre getLivre() {
+        return livre;
+    }
+
+    public void setLivre(Livre livre) {
+        this.livre = livre;
+    }
+
+    public List<Pret> getListeDePret() {
+        return listeDePret;
+    }
+
+    public void setListeDePret(List<Pret> listeDePret) {
+        this.listeDePret = listeDePret;
+    }
+
+    public boolean isEmprunt() {
+        return emprunt;
+    }
+
+    public void setEmprunt(boolean emprunt) {
+        this.emprunt = emprunt;
+    }
 }

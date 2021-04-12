@@ -1,15 +1,15 @@
 package com.clientui.service;
 
-import com.clientui.beans.ExamplaireBean;
-import com.clientui.beans.LivreBean;
+import com.clientui.dto.ExamplaireDTO;
+import com.clientui.dto.LivreDTO;
 
 import java.io.IOException;
 
 public interface ExamplaireService
 {
-    ExamplaireBean getExamplaire(Long id) throws IOException, InterruptedException;
+    ExamplaireDTO getExamplaire(Long id) throws IOException, InterruptedException;
 
-    LivreBean getLivreByIdExamplaire(Long id) throws IOException, InterruptedException;
+    LivreDTO getLivreByIdExamplaire(Long id) throws IOException, InterruptedException;
 
     String getJwt();
 }

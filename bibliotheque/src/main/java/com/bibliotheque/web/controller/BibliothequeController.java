@@ -5,6 +5,7 @@ import com.bibliotheque.dto.LivreDTO;
 import com.bibliotheque.model.Bibliotheque;
 import com.bibliotheque.model.Livre;
 import com.bibliotheque.service.BibliothequeService;
+import com.bibliotheque.service.LivreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,9 @@ public class BibliothequeController {
 
     @Autowired
     private BibliothequeService bibliothequeService;
+
+    @Autowired
+    private LivreService livreService;
 
     @GetMapping
     public List<BibliothequeDTO> getAllBiblio()
@@ -80,9 +84,8 @@ public class BibliothequeController {
     {
         List<Livre> livreList= bibliothequeService.getAllLibreByIdBiblio(id);
 
-        List<LivreDTO> livreDTOList = livreList.stream().map(livre -> modelMapper.map(livre, LivreDTO.class))
-                                        .collect(Collectors.toList());
+        List<LivreDTO> list = livreService.convertListLivre(livreList);
 
-        return livreDTOList;
+        return list;
     }
 }

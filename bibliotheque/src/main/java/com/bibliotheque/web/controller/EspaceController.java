@@ -38,7 +38,10 @@ public class EspaceController
     {
         List<Pret> list = espaceService.getListPretByIdUser(id);
 
+
         List<PretDTO> pretDTOList = espaceService.giveListDTO(list);
+
+        System.out.println("\n pretDTOlist " + pretDTOList);
         return new ResponseEntity<>(pretDTOList, HttpStatus.ACCEPTED);
     }
 

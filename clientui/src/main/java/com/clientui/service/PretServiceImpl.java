@@ -1,8 +1,7 @@
 package com.clientui.service;
 
-import com.clientui.beans.PretBean;
+import com.clientui.model.PretBean;
 import com.clientui.dto.PretDTO;
-import com.clientui.dto.UserDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;

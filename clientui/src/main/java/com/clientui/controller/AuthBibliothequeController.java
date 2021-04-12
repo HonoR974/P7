@@ -1,19 +1,13 @@
 package com.clientui.controller;
 
-import com.clientui.beans.LivreBean;
-import com.clientui.beans.UserBean;
 import com.clientui.dto.UserDTO;
 import com.clientui.service.AuthBiblioService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
 

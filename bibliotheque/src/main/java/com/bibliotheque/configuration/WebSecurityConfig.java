@@ -61,7 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     {
             http.csrf().disable()
             // dont authenticate this particular request
-             .authorizeRequests().antMatchers("/authenticate", "/register").permitAll().
+             .authorizeRequests().antMatchers("/authenticate",
+                    "/register","/resources/**","/static/**").permitAll().
             // all other requests need to be authenticated
             anyRequest().authenticated().
             and()

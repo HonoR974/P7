@@ -18,8 +18,10 @@ public class MailController {
     @Autowired
     private SendGrid sendGrid;
 
+    /**
     @Value("${templateId}")
     private String EMAIL_TEMPLATE_ID;
+    */
 
     @GetMapping("/sendgrid")
     public String sendEmailWithSendGrid() {
@@ -35,7 +37,7 @@ public class MailController {
 
         mail.setReplyTo(new Email("test.reply@gmail.com"));
         //mail.personalization.get(0).addSubstitution("-username-", "Some blog user");
-        mail.setTemplateId(EMAIL_TEMPLATE_ID);
+      //  mail.setTemplateId(EMAIL_TEMPLATE_ID);
 
         Request request = new Request();
         Response response = null;

@@ -1,7 +1,6 @@
-package com.clientui.beans;
+package com.clientui.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class PretBean
 {
