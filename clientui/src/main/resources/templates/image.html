@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Image </title>
+</head>
+<body>
+
+<td><p th:utext="${img.name}"></p></td>
+<td><img th:src="@{${'/image/display/'+ img.id}}"
+         class="card img-fluid" style="width:300px" alt=""/></td>
+
+
+</body>
+</html>

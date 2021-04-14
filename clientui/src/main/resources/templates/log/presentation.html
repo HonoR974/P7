@@ -9,22 +9,30 @@
     <title>Presentation </title>
 </head>
 <body>
-<h1>LE JWT : </h1>
-<h1 th:text="${jwt}"></h1>
+<div class="container">
+    <h1>LE JWT : </h1>
+    <h1 th:text="${jwt}"></h1>
 
-<div style="padding-top: 50px">
-    <h1>L'user </h1>
-    <h1 th:text="${user.username}"></h1>
-    <h1 th:text="${user.password}"></h1>
+    <div style="padding-top: 50px">
+        <h1>L'user </h1>
+        <h1 th:text="${user.username}"></h1>
+        <h1 th:text="${user.password}"></h1>
+    </div>
+
+    <button class="btn btn-outline-primary">
+        <a th:href="@{/bibliotheques(jwt=${jwt})}">Bibliotheques  </a>
+    </button>
+
+    <button class="btn btn-outline-primary">
+        <a th:href="@{/espace(id=${user.id})}">Espace</a>
+    </button>
+
+    <button class="btn btn-outline-primary">
+        <a th:href="@{/index}">Index</a>
+    </button>
+
 </div>
 
-<button class="btn btn-outline-primary">
-    <a th:href="@{/bibliotheques(jwt=${jwt})}">Bibliotheques  </a>
-</button>
-
-<button class="btn btn-outline-primary">
-    <a th:href="@{/espace(id=${user.id})}">Espace</a>
-</button>
 
 <script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
 
