@@ -3,6 +3,7 @@ package com.clientui.service;
 import com.clientui.model.ImageGallery;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 @Service
@@ -32,12 +34,16 @@ public class ImageGaleryServiceImpl implements ImageGalleryService {
 
         this.jwt = authBiblioService.getJwt();
 
+        System.out.println("\n image " + imageGallery.toString());
+
+        String image64 = Base64.encodeBase64String(imageGallery.getImage());
+
+        System.out.println("\n image64 " + image64 );
         //je récupère les valeurs de l'user
         var values = new HashMap<String, String>() {{
             put("id", String.valueOf(imageGallery.getId()));
             put("name", imageGallery.getName());
-            put("description", imageGallery.getDescription());
-            put("image", new String(imageGallery.getImage()));
+            put("image", image64);
         }};
 
 

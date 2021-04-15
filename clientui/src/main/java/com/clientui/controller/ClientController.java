@@ -1,6 +1,7 @@
 package com.clientui.controller;
 
 import com.clientui.model.ImageGallery;
+import com.clientui.service.FileUploadUtil;
 import com.clientui.service.ImageGalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -44,9 +46,7 @@ public class ClientController {
     }
 
     @PostMapping("/image/saveImageDetails")
-    public String createProduct(@RequestParam("name") String name,
-                                    @RequestParam("description") String description,
-                                    Model model,
+    public RedirectView createProduct(Model model,
                                      @RequestParam("image") MultipartFile file)
             throws IOException, InterruptedException {
 
@@ -57,30 +57,45 @@ public class ClientController {
             System.out.println("\n image vide ");
         }
 
-            String[] names = name.split(",");
-            String[] descriptions = description.split(",");
 
-            byte[] imageData = file.getBytes();
+
             ImageGallery imageGallery = new ImageGallery();
-            imageGallery.setName(names[0]);
-            imageGallery.setImage(imageData);
-            imageGallery.setDescription(descriptions[0]);
+            imageGallery.setName(file.getOriginalFilename());
+            imageGallery.setImage(file.getBytes());
+
+            ImageGallery imgLast  = imageGalleryService.saveImage(imageGallery);
 
 
-            model.addAttribute("img",   imageGalleryService.saveImage(imageGallery));
-            return "image";
+        return new RedirectView("/image/get/" + imgLast.getId() , true);
     }
 
-    @GetMapping("/image/display/{id}")
-    @ResponseBody
-    void showImage(@PathVariable("id") Long id, HttpServletResponse response, Optional<ImageGallery> imageGallery)
-            throws ServletException, IOException, InterruptedException {
 
-        ImageGallery image = imageGalleryService.getImageByID(id);
-        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-        response.getOutputStream().write(image.getImage());
-        response.getOutputStream().close();
+    @GetMapping("/image/get/{id}")
+    public String imageGetById(@PathVariable(name = "id")Long id,
+                               Model model) throws IOException, InterruptedException {
+        //je dois telecharger l'image dans un fichier
+        //si il le fichier existe ne pas faire de telechargement
+        //la page thymeleaf utilise le fichier telecharge
+        //<img th:src="@{'/uploads/' + ${someobject.someAttribute}}"/>
+
+        //l'ajoute de la classe
+        ImageGallery imageGallery = imageGalleryService.getImageByID(id);
+
+        String uploadDir = "image/" + imageGallery.getId();
+
+        System.out.println("\n uploadDir " + uploadDir );
+
+
+
+        //le telechargement
+        FileUploadUtil.saveFile(uploadDir, imageGallery.getName(), imageGallery.getImage());
+
+
+        model.addAttribute("img", imageGallery);
+        return "image";
+
     }
+
 
 
 }

@@ -1,20 +1,22 @@
 package com.clientui.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Arrays;
+
 public class ImageGallery {
 
     private Long id;
 
     private String name;
 
-    private String description;
 
     private byte[] image;
 
     public ImageGallery() {}
 
-    public ImageGallery(String name, String description, byte[] image) {
+    public ImageGallery(String name, byte[] image) {
         this.name = name;
-        this.description = description;
         this.image = image;
     }
 
@@ -34,16 +36,6 @@ public class ImageGallery {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-
     public byte[] getImage() {
         return image;
     }
@@ -52,4 +44,12 @@ public class ImageGallery {
         this.image = image;
     }
 
+    @Override
+    public String toString() {
+        return "ImageGallery{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image=" + image +
+                '}';
+    }
 }

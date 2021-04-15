@@ -8,6 +8,6 @@ public interface ImageService {
 
     ImageGallery saveImage(ImageGallery imageGallery);
 
-    Optional<ImageGallery> getImageByID(Long id);
+    ImageGallery getImageByID(long id);
 
 }

@@ -38,12 +38,9 @@ public class ImageController {
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getImageById(@PathVariable(name = "id")Long id)
     {
-        Optional<ImageGallery> image = imageService.getImageByID(id);
+        ImageGallery image = imageService.getImageByID(id);
 
-        if (! image.isPresent())
-        {
-            System.out.println("\n l'image n'existe pas ");
-        }
+        System.out.println("\n image " + image.toString());
 
         ImageGalleryDTO imageDTO = modelMapper.map(image, ImageGalleryDTO.class);
 

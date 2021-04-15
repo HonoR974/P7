@@ -20,7 +20,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Optional<ImageGallery> getImageByID(Long id) {
+    public ImageGallery getImageByID(long id) {
         return repository.findById(id);
     }
 }

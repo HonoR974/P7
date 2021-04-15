@@ -1,6 +1,7 @@
 package com.bibliotheque.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class ImageGalleryDTO {
@@ -9,7 +10,6 @@ public class ImageGalleryDTO {
 
     private String name;
 
-    private String description;
 
     private byte[] image;
 

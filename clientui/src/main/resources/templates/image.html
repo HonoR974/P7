@@ -8,8 +8,9 @@
 <body>
 
 <td><p th:utext="${img.name}"></p></td>
-<td><img th:src="@{${'/image/display/'+ img.id}}"
-         class="card img-fluid" style="width:300px" alt=""/></td>
+
+
+<img th:src="@{ ${img.name}}"/>
 
 
 </body>

@@ -5,50 +5,21 @@
 <head>
   <title>PixelTrice</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<br><br>
-<h1 class="text-center">Spring Boot Image Gallery Application</h1><br><br>
-<div class="contact py-sm-5 py-4">
-		<div class="container py-xl-4 py-lg-2">
+<form th:action="@{/image/saveImageDetails}"
+	  th:object="${img}" method="post"
+	  enctype="multipart/form-data">
 
+	<div>
 
-		<!-- form -->
-		<form id="form" th:object="${img}" method="post" th:action="@{/image/saveImageDetails}">
+		<label>Photos: </label>
+		<input type="file" name="image" th:field="${img.image}" accept="image/png, image/jpeg" />
 
-					<div class="row">
-						<div class="col">
-							<label class="col">Name</label>
-							<input type="text" class="form-control" placeholder="Product Name"
-								   id="name" name="name" th:field="${img.name}" required="required">
-							<p id="error_name"></p>
-						</div>
-
-						<div class="col">
-							<label class="col">Description</label>
-							<textarea class="form-control" placeholder="Product Description" th:field="${img.description}" id="description" rows="3" cols="45" name="description" required="required"></textarea>
-							<p id="error_description"></p>
-						</div>
-
-						<div class="col">
-							<label class="col">Image</label>
-							<input type="file" class="form-control" placeholder="" th:field="${img.image}" name="image" id="image" required="required">
-						</div>
-
-						<button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-					</div>
-
-		</form>
-		</div>
 	</div>
-<p class="text-center">
-  	<img src="/images/loader.gif" alt="loader" style="width: 150px;height: 120px;" id="loader">
-</p>
-	<script src="/js/product.js"></script>
+
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+</form>
+
 </body>
 </html>
