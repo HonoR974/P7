@@ -1,8 +1,10 @@
 package com.clientui.controller;
 
+import com.clientui.convert.BASE64DecodedMultipartFile;
 import com.clientui.model.ImageGallery;
 import com.clientui.service.FileUploadUtil;
 import com.clientui.service.ImageGalleryService;
+import jdk.jfr.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +17,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -30,6 +30,8 @@ public class ClientController {
 
     @Autowired
     private ImageGalleryService imageGalleryService;
+
+
 
     @GetMapping("/")
     public String accueil(Model model)
@@ -66,6 +68,13 @@ public class ClientController {
             ImageGallery imgLast  = imageGalleryService.saveImage(imageGallery);
 
 
+        String uploadDir = "image/" + imageGallery.getId();
+
+        System.out.println("\n uploadDir " + uploadDir );
+
+        //le telechargement
+        FileUploadUtil.saveFile(uploadDir, imageGallery.getName(), imageGallery.getImage());
+
         return new RedirectView("/image/get/" + imgLast.getId() , true);
     }
 
@@ -81,14 +90,18 @@ public class ClientController {
         //l'ajoute de la classe
         ImageGallery imageGallery = imageGalleryService.getImageByID(id);
 
-        String uploadDir = "image/" + imageGallery.getId();
+      // String uploadDir = "image/" + imageGallery.getId();
 
-        System.out.println("\n uploadDir " + uploadDir );
+       // System.out.println("\n uploadDir " + uploadDir );
 
 
+        //conversion
+        BASE64DecodedMultipartFile decode = new BASE64DecodedMultipartFile();
+        decode.setImage(imageGallery.getImage());
+        decode.setFileName(imageGallery.getName());
 
         //le telechargement
-        FileUploadUtil.saveFile(uploadDir, imageGallery.getName(), imageGallery.getImage());
+      // FileUploadUtil.saveFile(uploadDir, imageGallery.getName(), imageGallery.getImage());
 
 
         model.addAttribute("img", imageGallery);
@@ -97,5 +110,14 @@ public class ClientController {
     }
 
 
+    @GetMapping("/images")
+    public String getAllImage(Model model) throws IOException, InterruptedException {
+
+        List<ImageGallery> list = imageGalleryService.getAll();
+
+        model.addAttribute("liste" , list);
+        return "listeImage";
+
+    }
 
 }

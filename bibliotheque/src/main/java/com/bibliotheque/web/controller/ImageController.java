@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/image")
@@ -47,4 +49,15 @@ public class ImageController {
         return new ResponseEntity<ImageGalleryDTO>(imageDTO, HttpStatus.ACCEPTED);
     }
 
+
+    @GetMapping("/get/all")
+    public ResponseEntity<?> getAllImage()
+    {
+
+        List<ImageGalleryDTO> listDTO = imageService.getAll().stream().map(
+                imageGallery -> modelMapper.map(imageGallery,ImageGalleryDTO.class))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<List<ImageGalleryDTO>>(listDTO, HttpStatus.ACCEPTED);
+    }
 }

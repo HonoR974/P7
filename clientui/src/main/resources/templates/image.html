@@ -10,7 +10,14 @@
 <td><p th:utext="${img.name}"></p></td>
 
 
-<img th:src="@{ ${img.name}}"/>
+<img th:src="@{'resources/static/image/' +  ${img.name}}" alt="test1"/>
+
+<img th:src="@{'/image/' + ${img.name}}" alt="test2"/>
+
+<img th:src="@{/image/${img.name}}" alt="test3"/>
+
+<img src="/image/batman.png" />
+
 
 
 </body>

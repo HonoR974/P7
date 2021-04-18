@@ -1,5 +1,6 @@
 package com.clientui.service;
 
+import com.clientui.dto.LivreDTO;
 import com.clientui.model.ImageGallery;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,6 +8,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URI;
@@ -14,7 +16,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class ImageGaleryServiceImpl implements ImageGalleryService {
@@ -23,6 +29,8 @@ public class ImageGaleryServiceImpl implements ImageGalleryService {
     private AuthBiblioService authBiblioService;
 
     private String jwt;
+
+    private final Path root = Paths.get("clientui/uploads/");
 
     private final HttpClient client =  HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
@@ -92,5 +100,31 @@ public class ImageGaleryServiceImpl implements ImageGalleryService {
 
         return  mapper.readValue(response.body().toString(),
                 new TypeReference<ImageGallery>() {});
+    }
+
+    @Override
+    public List<ImageGallery> getAll() throws IOException, InterruptedException {
+
+        this.jwt = authBiblioService.getJwt();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/api/image/get/all"))
+                .GET()
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString() );
+
+        String reponse = response.body();
+
+        System.out.println("\n response " + response + "\n reponse " + reponse);
+        ObjectMapper mapper= new ObjectMapper();
+
+        List<ImageGallery> list = mapper.readValue(response.body().toString(),
+                new TypeReference<List<ImageGallery>>() {});
+
+
+        return list;
     }
 }
