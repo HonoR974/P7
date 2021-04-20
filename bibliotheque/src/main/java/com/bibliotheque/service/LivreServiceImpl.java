@@ -84,6 +84,7 @@ public class LivreServiceImpl implements LivreService{
 
             livreDTO.setExamplaires(countExamplaire);
 
+            livreDTO.setTitreImage(livre.getImage().getName());
             listFinal.add(livreDTO);
         }
 

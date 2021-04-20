@@ -1,40 +1,60 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Mcommerce</title>
 
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
-
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
 
+<div style="height: 75px;width: 100%">
+    Je suis le menu
+</div>
 
-<div class="container">
 
-    <h1>Application Mcommerce</h1>
+    <!-- Partie Image & Login -->
+    <div id="imageAccueil">
+        <div class="container">
 
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-outline-primary">
-                <a th:href="@{/login}"> login </a>
-            </button>
-        </div>
+            <!-- MSG -->
+            <div class="row">
+                <div class="imageTitle">
+                    <p>Bienvenue dans votre bibliothèque </p>
+                </div>
+            </div>
 
-        <div class="col">
-            <button>
-                <a th:href="@{/register}">Inscription </a>
-            </button>
-        </div>
+            <!-- BTNS -->
+            <div class="row" style="height: 500px;width: 100%">
 
-        <div class="col">
-            <form method="post" th:action="@{/jwt-csrf-form}">
-            <input type="submit" class="btn btn-primary" value="Click Me!"/>
-        </form>
+                <div class="imageCadreButton">
+
+                    <div class="imageButton">
+                        <button class="btn btn-outline-primary">
+                            <a th:href="@{/login}"> login </a>
+                        </button>
+                    </div>
+
+                    <div class="imageButton">
+                        <button class="btn btn-outline-dark">
+                            <a th:href="@{/register}">Inscription </a>
+                        </button>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
         </div>
     </div>
 
-
-</div>
 
 
 <script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>

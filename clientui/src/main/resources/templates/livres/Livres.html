@@ -4,20 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Les Livres </title>
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
-
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
 
 
-<div class="row" >
-    <div th:each="livre : ${list}" class="col-md-4 my-1">
-        <p th:text= "${livre.id}">Titre </p>
-        <p th:text= "${livre.auteur}">Titre </p>
-        <a th:text= "${livre.titre}" th:href="@{/livre/Examplaires(id=${livre.id})}">Titre </a>
-       <p th:text="${livre.examplaires}">Nombre d'examplaire</p>
-        </a>
+
+<div class="container" >
+
+    <div class="row">
+
+
+    <div th:each="livre : ${list}" >
+        <div class="col">
+            <div class="card">
+                <img th:src="@{'/image/' + ${livre.titreImage}}" th:alt="${livre.titreImage}"/>
+                <p class="cardTitle" th:text="${livre.titre}"></p>
+                <p th:text="${livre.auteur}"></p>
+                <p>Nombre d'exemplaire <i th:text="${livre.examplaires}"></i></p>
+                <p>
+                    <button class="btn btn-light">
+                        <a th:href="@{/livre/Examplaires(id=${livre.id})}">Selectionner</a>
+                    </button>
+                </p>
+            </div>
+        </div>
+
     </div>
+
+    </div>
+
 </div>
 <script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
 

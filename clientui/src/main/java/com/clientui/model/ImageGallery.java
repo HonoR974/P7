@@ -10,8 +10,9 @@ public class ImageGallery {
 
     private String name;
 
-
     private byte[] image;
+
+    private String titreLivre;
 
     public ImageGallery() {}
 
@@ -44,12 +45,21 @@ public class ImageGallery {
         this.image = image;
     }
 
+    public String getTitreLivre() {
+        return titreLivre;
+    }
+
+    public void setTitreLivre(String titreLivre) {
+        this.titreLivre = titreLivre;
+    }
+
     @Override
     public String toString() {
         return "ImageGallery{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", image=" + image +
+                ", image=" + Arrays.toString(image) +
+                ", titreLivre='" + titreLivre + '\'' +
                 '}';
     }
 }

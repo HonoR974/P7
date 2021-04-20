@@ -9,4 +9,5 @@ public class LivreDTO {
     private String auteur;
     private String titre;
     private long examplaires;
+    private String titreImage;
 }

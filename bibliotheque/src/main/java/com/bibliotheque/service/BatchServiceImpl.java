@@ -110,17 +110,6 @@ public class BatchServiceImpl implements BatchService{
     public List<PretBatchDTO> getPretEnCours() throws IOException {
 
 
-        Livre livre = livreRepository.findById(1);
-
-
-        File file = new File("/resources/static/EtSi.jpg");
-        byte[] picInBytes = new byte[(int) file.length()];
-        FileInputStream fileInputStream = new FileInputStream(file);
-        fileInputStream.read(picInBytes);
-        fileInputStream.close();
-        livre.setImage(picInBytes);
-
-        livreRepository.save(livre);
 
         Statut statut = statutRepository.findByNom("Valider");
         Statut statut1 = statutRepository.findByNom("Prolonger");

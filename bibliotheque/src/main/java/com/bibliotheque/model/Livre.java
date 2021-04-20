@@ -1,5 +1,6 @@
 package com.bibliotheque.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,9 +28,9 @@ public class Livre {
     @OneToMany(mappedBy = "livre")
     private List<Examplaire> examplaires;
 
-    @Lob
-    private byte[] image;
-
+    @JsonIgnore
+    @ManyToOne
+    private ImageGallery image;
 
     public Long getId() {
         return id;
@@ -71,11 +72,11 @@ public class Livre {
         this.examplaires = examplaires;
     }
 
-    public byte[] getImage() {
+    public ImageGallery getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(ImageGallery image) {
         this.image = image;
     }
 }

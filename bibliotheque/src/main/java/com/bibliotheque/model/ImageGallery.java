@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "image_gallery")
@@ -17,11 +18,12 @@ public class ImageGallery {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-
 	@Lob
     @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
 
+	@OneToMany(mappedBy = "image")
+	private List<Livre> livres;
 
 	public ImageGallery() {}
 
@@ -42,7 +44,6 @@ public class ImageGallery {
 	}
 
 
-
 	public byte[] getImage() {
 		return image;
 	}
@@ -51,8 +52,13 @@ public class ImageGallery {
 		this.image = image;
 	}
 
+	public List<Livre> getLivres() {
+		return livres;
+	}
 
-   
+	public void setLivres(List<Livre> livres) {
+		this.livres = livres;
+	}
 }
 
 
