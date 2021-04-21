@@ -58,8 +58,8 @@ button:hover, a:hover
 {
     width: 100%;
     font-family: Apple Chancery, cursive;
-    font-size: 30px;
     color: white;
+    font-size: 35px;
     text-align: center;
     margin-top: 100px;
     margin-bottom: 100px;
@@ -75,5 +75,6 @@ button:hover, a:hover
 
 .imageButton
 {
+    width: 100px;
 
 }
