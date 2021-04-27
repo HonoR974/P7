@@ -87,7 +87,6 @@ public class JwtAuthenticationController {
     {
 
         JwtResponse response = new JwtResponse(jwt.get("jwt"));
-        System.out.println("\n \n test \n le jwt : " + jwt + "\n jwt en string :" + response.getJwt());
         String username = null ;
         try {
             username = jwtTokenUtil.getUsernameFromToken(response.getJwt());

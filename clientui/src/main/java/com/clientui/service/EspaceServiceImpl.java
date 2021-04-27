@@ -102,4 +102,6 @@ public class EspaceServiceImpl implements EspaceService
         return  mapper.readValue(response.body().toString(),
                 new TypeReference<PretDTO>() {});
     }
+
+
 }

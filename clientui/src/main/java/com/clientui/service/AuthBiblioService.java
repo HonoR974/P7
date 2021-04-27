@@ -2,6 +2,7 @@ package com.clientui.service;
 
 
 import com.clientui.dto.UserDTO;
+import com.clientui.model.TesterUser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.io.IOException;
@@ -16,7 +17,6 @@ public interface AuthBiblioService {
      */
      String authenticate (UserDTO user) throws IOException, InterruptedException;
 
-
      String parseJwt(String jwt ) throws JsonProcessingException;
 
      String getUserNameByToken(String jwt) throws IOException, InterruptedException, URISyntaxException;
@@ -25,6 +25,7 @@ public interface AuthBiblioService {
 
     UserDTO getUserDTOByJwt(String jwt) throws IOException, InterruptedException;
 
-
      String getJwt();
+
+    TesterUser testConnection();
 }

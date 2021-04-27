@@ -4,6 +4,7 @@ package com.clientui.service;
 import com.clientui.dto.PretDTO;
 import com.clientui.dto.UserDTO;
 
+import com.clientui.model.TesterUser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,7 +68,11 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
 
         String jwt = response.body();
 
-        return jwt;
+        String jwtFinal = parseJwt(jwt);
+        this.jwt = jwtFinal;
+
+
+        return jwtFinal;
     }
 
 
@@ -194,5 +199,25 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
     public String getJwt()
     {
         return jwt;
+    }
+
+
+    @Override
+    public TesterUser testConnection() {
+
+         TesterUser user = new TesterUser();
+
+        user.setJwt(getJwt());
+
+        if ( user.getJwt() != null)
+        {
+            user.setConnected(true);
+        }
+        else
+        {
+            user.setConnected(false);
+        }
+
+        return user;
     }
 }

@@ -1,7 +1,9 @@
 package com.clientui.controller;
 
 import com.clientui.convert.BASE64DecodedMultipartFile;
+import com.clientui.dto.UserDTO;
 import com.clientui.model.ImageGallery;
+import com.clientui.service.AuthBiblioService;
 import com.clientui.service.FileUploadUtil;
 import com.clientui.service.ImageGalleryService;
 import jdk.jfr.ContentType;
@@ -32,10 +34,14 @@ public class ClientController {
     private ImageGalleryService imageGalleryService;
 
 
+    @Autowired
+    private AuthBiblioService authBiblioService;
+
 
     @GetMapping("/")
     public String accueil(Model model)
     {
+        model.addAttribute("user", authBiblioService.testConnection());
         return "Accueil";
     }
 

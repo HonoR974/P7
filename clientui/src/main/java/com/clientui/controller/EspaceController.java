@@ -23,18 +23,24 @@ public class EspaceController
     @Autowired
     private AuthBiblioService authBiblioService;
 
+
+
+
     /**
      * Accueil espace user
-     * @param id
+     * @param jwt
      * @return
      */
     @GetMapping()
-    public String espaceAccueil(@RequestParam(name = "id")Long id,
+    public String espaceAccueil(@RequestParam(name = "jwt")String jwt,
                                 Model model) throws IOException, InterruptedException
     {
-        model.addAttribute("user", espaceService.getUserDTOByID(id));
+        UserDTO user = authBiblioService.getUserDTOByJwt(jwt);
+        model.addAttribute("user", espaceService.getUserDTOByID(user.getId()));
         return "espace/Accueil";
     }
+
+
 
 
     @GetMapping("/prets")

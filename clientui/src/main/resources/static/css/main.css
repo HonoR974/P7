@@ -10,19 +10,6 @@ nav
     margin-left: 20px;
 }
 
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: auto;
-    text-align: center;
-    font-family: arial;
-}
-
-.card image {
-
-    height: 200px;
-    width: 300px;
-}
 
 .cardTitle
 {
@@ -106,4 +93,63 @@ button:hover, a:hover
 .affichage
 {
     background-color: black;
+}
+
+.cardLivre
+{
+    box-shadow: 0 4px 8px 0 rgb(0 0 0);
+    max-width: 350px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+}
+
+.cardLivre img
+{
+    height: 400px;
+    width: 300px;
+}
+
+
+
+/**---- Examplaire -----**/
+.rowExamplaire{
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.cardExamplaire {
+    /*float: left;*/
+    max-width: 33.333%;
+    padding: .75rem;
+    margin-bottom: 2rem;
+    border: 0;
+    flex-basis: 33.333%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.cardExamplaire > img {
+    margin-bottom: .75rem;
+}
+
+.card-textExamplaire {
+    font-size: 85%;
+}
+
+.cadreLivre
+{
+    height: 300px;
+    width: 100%;
+    text-align: center;
+    background-color: red;
+}
+
+.cadreLivre img
+{
+    height: 50%;
+    width: 200px;
 }

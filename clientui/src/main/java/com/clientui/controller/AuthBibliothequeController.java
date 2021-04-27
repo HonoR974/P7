@@ -50,9 +50,8 @@ public class AuthBibliothequeController {
         String jwt = null;
         String username = "vide";
         try {
-            jwtBrut = authBiblioService.authenticate(userDTO);
+            jwt = authBiblioService.authenticate(userDTO);
 
-            jwt = authBiblioService.parseJwt(jwtBrut);
             username = authBiblioService.getUserNameByToken(jwt);
 
 
@@ -65,13 +64,11 @@ public class AuthBibliothequeController {
         }
 
 
-        UserDTO user = authBiblioService.getUserDTOByJwt(jwt);
-
 
 
         model.addAttribute("username", username);
         model.addAttribute("jwt", jwt);
-        model.addAttribute("user",user);
+        model.addAttribute("user",authBiblioService.testConnection());
 
 
         List<LivreDTO> list = livreService.getAll();
@@ -111,12 +108,11 @@ public class AuthBibliothequeController {
 
         UserDTO user =  authBiblioService.save(userDTO);
 
-        String jwtBrut = authBiblioService.authenticate(user);
-        String jwt = authBiblioService.parseJwt(jwtBrut);
 
+        String jwt = authBiblioService.authenticate(user);
 
         model.addAttribute("jwt",jwt);
-        model.addAttribute("user", user);
+        model.addAttribute("user", authBiblioService.testConnection());
 
         List<LivreDTO> list = livreService.getAll();
         model.addAttribute("liste", list);

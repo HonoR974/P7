@@ -15,6 +15,8 @@ public class ExamplaireController {
     @Autowired
     private ExamplaireService examplaireService;
 
+
+
     /**
      * Recois l'id de l'examplaire
      * return l'examplaire,son livre
@@ -28,7 +30,11 @@ public class ExamplaireController {
 
         model.addAttribute("examplaire", examplaireService.getExamplaire(id));
         model.addAttribute("livre", examplaireService.getLivreByIdExamplaire(id));
-      //  model.addAttribute("jwt", examplaireService.getJwt());
+
+        //fonction test
+        // si un user est connecté
+
+
         return "examplaire/Detail";
     }
 }

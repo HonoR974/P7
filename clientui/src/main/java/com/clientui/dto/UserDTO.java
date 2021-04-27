@@ -13,4 +13,5 @@ public class UserDTO {
     private String matchingPassword;
     private String email;
     private boolean enabled;
+    private boolean connected;
 }

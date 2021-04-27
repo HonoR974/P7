@@ -111,6 +111,8 @@ public class LivreServiceImpl implements LivreService{
         }
         livreDTO.setExamplaires(count);
 
+        livreDTO.setTitreImage(livre.getImage().getName());
+
         return livreDTO;
     }
 }
