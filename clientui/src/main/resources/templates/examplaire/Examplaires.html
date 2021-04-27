@@ -9,6 +9,46 @@
 </head>
 <body>
 
+<!-- Menu -->
+<header>
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <a class="navbar-brand" href="" >Bibliotheque </a>
+
+        <!-- btn toggle -->
+        <div>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarContent">
+                <span class="navbar-toggler-icon" ></span>
+            </button>
+        </div>
+
+        <div  class="collapse navbar-collapse" id="navbarContent" >
+            <ul class="navbar-nav  mr-auto mt-2 mt-lg-0  ">
+
+                <!-- Livres -->
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/livres/all}">Livres</a>
+                </li>
+
+                <!-- Login -->
+                <li class="nav-item active" >
+                    <a class="nav-link" th:href="@{/login}">Sign in</a>
+                </li>
+
+                <!-- Inscription -->
+                <li class="nav-item active" >
+                    <a class="nav-link" th:href="@{/register}">Sign up</a>
+                </li>
+
+
+
+            </ul>
+
+        </div>
+    </nav>
+</header>
+
 <div class="row">
     <h1>Le livre </h1>
         <h1 th:utext="${livre.titre}"></h1>
@@ -16,7 +56,7 @@
 </div>
 
 <div class="row">
-    <h1>Les examplaires </h1>
+    <h1>La liste des examplaires  </h1>
     <div th:each="examplaire : ${list}" class="col-md-4 my-1">
         <p th:text= "${examplaire.id}">Titre </p>
         <a th:text= "${examplaire.edition}" th:href="@{/examplaire(id=${examplaire.id})}">Titre </a>

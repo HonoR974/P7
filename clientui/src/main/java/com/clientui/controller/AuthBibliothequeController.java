@@ -1,7 +1,10 @@
 package com.clientui.controller;
 
+import com.clientui.dto.LivreDTO;
 import com.clientui.dto.UserDTO;
 import com.clientui.service.AuthBiblioService;
+import com.clientui.service.BibliothequeService;
+import com.clientui.service.LivreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 
 @Controller
@@ -21,6 +25,13 @@ public class AuthBibliothequeController {
 
     @Autowired
     ApplicationEventPublisher eventPublisher;
+
+    @Autowired
+    private BibliothequeService bibliothequeService;
+
+    @Autowired
+    private LivreService livreService;
+
 
     @GetMapping("/login")
     public String loggin(Model model)
@@ -56,10 +67,17 @@ public class AuthBibliothequeController {
 
         UserDTO user = authBiblioService.getUserDTOByJwt(jwt);
 
+
+
         model.addAttribute("username", username);
         model.addAttribute("jwt", jwt);
         model.addAttribute("user",user);
-        return "log/presentation";
+
+
+        List<LivreDTO> list = livreService.getAll();
+        model.addAttribute("liste", list);
+
+        return  "livres/Livres";
     }
 
 
@@ -96,12 +114,15 @@ public class AuthBibliothequeController {
         String jwtBrut = authBiblioService.authenticate(user);
         String jwt = authBiblioService.parseJwt(jwtBrut);
 
+
         model.addAttribute("jwt",jwt);
         model.addAttribute("user", user);
 
+        List<LivreDTO> list = livreService.getAll();
+        model.addAttribute("liste", list);
 
 
-        return "log/presentation";
+        return  "livres/Livres";
     }
 
 

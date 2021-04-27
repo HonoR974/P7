@@ -3,6 +3,7 @@ package com.bibliotheque.service;
 import com.bibliotheque.model.Bibliotheque;
 import com.bibliotheque.model.Livre;
 import com.bibliotheque.repository.BibliothequeRepository;
+import com.bibliotheque.repository.LivreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ public class BibliothequeServiceImpl implements BibliothequeService {
 
     @Autowired
     private BibliothequeRepository bibliothequeRepository;
+
+    @Autowired
+    private LivreRepository livreRepository;
 
     @Override
     public List<Bibliotheque> getAllBibliotheque() {
@@ -51,5 +55,10 @@ public class BibliothequeServiceImpl implements BibliothequeService {
         return bibliotheque.getLivres();
     }
 
+    @Override
+    public List<Livre> getAllLivre() {
 
+
+        return livreRepository.findAll();
+    }
 }

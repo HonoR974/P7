@@ -18,4 +18,6 @@ public interface BibliothequeService {
     Bibliotheque getBibliothequeById(long id);
 
     List<Livre> getAllLibreByIdBiblio(long id);
+
+    List<Livre> getAllLivre();
 }

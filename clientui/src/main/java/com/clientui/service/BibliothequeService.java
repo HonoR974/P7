@@ -16,4 +16,6 @@ public interface BibliothequeService {
     List<LivreDTO> getAllLivreByIdBiblio(Long id) throws IOException, InterruptedException;
 
     String getJwt();
+
+    List<LivreDTO> getAllLivre(String jwt) throws IOException, InterruptedException;
 }

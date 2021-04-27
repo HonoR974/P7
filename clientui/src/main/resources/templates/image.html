@@ -12,11 +12,19 @@
 
 <img th:src="@{'resources/static/image/' +  ${img.name}}" alt="test1"/>
 
-<img th:src="@{'/image/' + ${img.name}}" alt="test2"/>
+<img th:src="@{'/static/image/' + ${img.name}}" alt="test2"/>
 
-<img th:src="@{/image/${img.name}}" alt="test3"/>
+<img th:src="@{/static/image/${img.name}}" alt="test3"/>
 
-<img src="/image/batman.png" />
+
+<img th:src="@{'image/' + ${img.name}}" alt="test4"/>
+
+<img th:src="@{image/${img.name}}" alt="test5"/>
+
+
+<img th:src="@{'/image/' + ${img.name}}" alt="test6"/>
+
+<img th:src="@{/image/${img.name}}" alt="test7"/>
 
 
 

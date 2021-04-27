@@ -51,14 +51,13 @@ public class LivreServiceImpl implements  LivreService{
 
     @Override
     public List<ExamplaireDTO> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException {
-        this.jwt = bibliothequeService.getJwt();
+
 
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:9001/api/livre/examplaires?id=" + id))
                 .GET()
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .build();
 
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
@@ -75,14 +74,10 @@ public class LivreServiceImpl implements  LivreService{
     @Override
     public LivreDTO getLivreByIdLivre(Long id) throws IOException, InterruptedException {
 
-        this.jwt = bibliothequeService.getJwt();
-
-
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:9001/api/livre/detail/" + id))
                 .GET()
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .build();
 
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());

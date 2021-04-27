@@ -28,8 +28,8 @@ public class LivreController {
     @GetMapping
     public List<LivreDTO> getAllLivres()
     {
-        List<LivreDTO> livreDTOList = livreService.getAllLivres().stream().map(livre -> modelMapper.map(livre,LivreDTO.class))
-                .collect(Collectors.toList());
+
+        List<LivreDTO> livreDTOList = livreService.convertListLivre(livreService.getAllLivres());
 
         if(livreDTOList.size() == 0 ) throw new LivreIntrouvableException( "il n' y a pas de livre ");
         return livreDTOList;
@@ -87,13 +87,14 @@ public class LivreController {
     }
 
     @GetMapping("/examplaires")
-    public List<ExamplaireDTO>  getAllExamplaireByIdLivre(@RequestParam(name = "id")long id)
+    public ResponseEntity<?>  getAllExamplaireByIdLivre(@RequestParam(name = "id")long id)
     {
         List<Examplaire> examplaires = livreService.getAllExamplaireByIdLivre(id);
 
         List<ExamplaireDTO> examplaireDTOS = examplaires.stream().map(examplaire -> modelMapper.map(examplaire, ExamplaireDTO.class))
                                             .collect(Collectors.toList());
-        return examplaireDTOS;
+
+        return new ResponseEntity<List<ExamplaireDTO>>(examplaireDTOS, HttpStatus.ACCEPTED);
     }
 
 

@@ -21,7 +21,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<bootstrap.version>4.6.0-1</bootstrap.version>
+		<bootstrap.version>4.2.1</bootstrap.version>
 		<spring-cloud.version>2020.0.1</spring-cloud.version>
 	</properties>
 	<dependencies>

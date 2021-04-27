@@ -47,12 +47,13 @@ public class ClientController {
         return "index";
     }
 
+
+
     @PostMapping("/image/saveImageDetails")
     public RedirectView createProduct(Model model,
                                      @RequestParam("image") MultipartFile file)
             throws IOException, InterruptedException {
 
-        System.out.println("\n createProduct ");
 
         if (file.isEmpty())
         {
@@ -60,20 +61,19 @@ public class ClientController {
         }
 
 
-
             ImageGallery imageGallery = new ImageGallery();
             imageGallery.setName(file.getOriginalFilename());
             imageGallery.setImage(file.getBytes());
 
-            ImageGallery imgLast  = imageGalleryService.saveImage(imageGallery);
 
-
-        String uploadDir = "image/" + imageGallery.getId();
+        String uploadDir = "image/" + imageGallery.getName();
 
         System.out.println("\n uploadDir " + uploadDir );
 
         //le telechargement
         FileUploadUtil.saveFile(uploadDir, imageGallery.getName(), imageGallery.getImage());
+
+        ImageGallery imgLast  = imageGalleryService.saveImage(imageGallery);
 
         return new RedirectView("/image/get/" + imgLast.getId() , true);
     }
@@ -82,18 +82,11 @@ public class ClientController {
     @GetMapping("/image/get/{id}")
     public String imageGetById(@PathVariable(name = "id")Long id,
                                Model model) throws IOException, InterruptedException {
-        //je dois telecharger l'image dans un fichier
-        //si il le fichier existe ne pas faire de telechargement
-        //la page thymeleaf utilise le fichier telecharge
-        //<img th:src="@{'/uploads/' + ${someobject.someAttribute}}"/>
 
         //l'ajoute de la classe
         ImageGallery imageGallery = imageGalleryService.getImageByID(id);
 
-      // String uploadDir = "image/" + imageGallery.getId();
-
-       // System.out.println("\n uploadDir " + uploadDir );
-
+        String uploadDir = "image/" + imageGallery.getName();
 
         //conversion
         BASE64DecodedMultipartFile decode = new BASE64DecodedMultipartFile();
@@ -101,7 +94,7 @@ public class ClientController {
         decode.setFileName(imageGallery.getName());
 
         //le telechargement
-      // FileUploadUtil.saveFile(uploadDir, imageGallery.getName(), imageGallery.getImage());
+         FileUploadUtil.saveFile(uploadDir, imageGallery.getName(), imageGallery.getImage());
 
 
         model.addAttribute("img", imageGallery);

@@ -88,4 +88,14 @@ public class BibliothequeController {
 
         return list;
     }
+
+    @GetMapping("/Livres/all")
+    public List<LivreDTO> getAllLivres()
+    {
+        List<Livre> livreList= bibliothequeService.getAllLivre();
+
+        List<LivreDTO> list = livreService.convertListLivre(livreList);
+
+        return list;
+    }
 }

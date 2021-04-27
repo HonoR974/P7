@@ -70,7 +70,7 @@ public class ImageGaleryServiceImpl implements ImageGalleryService {
 
         String reponse = response.body();
 
-        System.out.println("\n response " + response + "\n reponse " + reponse);
+        System.out.println("\n response " + response );
 
         ObjectMapper mapper= new ObjectMapper();
 

@@ -20,6 +20,7 @@ public class Examplaire {
     @OneToMany(mappedBy = "examplaire")
     private List<Pret> listeDePret;
 
+    @Column(name = "emprunt", nullable = true)
     private Boolean emprunt;
 
     public Long getId() {
@@ -61,4 +62,6 @@ public class Examplaire {
     public void setEmprunt(boolean emprunt) {
         this.emprunt = emprunt;
     }
+
+
 }
