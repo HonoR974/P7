@@ -9,8 +9,6 @@ import javax.persistence.*;
 import java.util.List;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 
 public class Statut
@@ -47,4 +45,7 @@ public class Statut
     public void setListeDePret(List<Pret> listeDePret) {
         this.listeDePret = listeDePret;
     }
+
+
+
 }

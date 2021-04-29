@@ -44,6 +44,7 @@ public class PretController
         PretBean pretBean = pretService.givePretBean(pretDTO);
 
         model.addAttribute("pret", pretBean);
+        model.addAttribute("user", authBiblioService.testConnection());
 
         return "pret/Creation";
     }
@@ -64,7 +65,8 @@ public class PretController
         model.addAttribute("pret", pretBean);
 
         UserDTO userDTO = authBiblioService.getUserDTOByJwt(authBiblioService.getJwt());
-       model.addAttribute("user", userDTO);
+       model.addAttribute("utilisateur", userDTO);
+       model.addAttribute("user", authBiblioService.testConnection());
 
         return "pret/Validate";
     }

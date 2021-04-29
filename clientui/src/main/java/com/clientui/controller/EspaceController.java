@@ -36,13 +36,18 @@ public class EspaceController
                                 Model model) throws IOException, InterruptedException
     {
         UserDTO user = authBiblioService.getUserDTOByJwt(jwt);
-        model.addAttribute("user", espaceService.getUserDTOByID(user.getId()));
+        model.addAttribute("user", authBiblioService.testConnection());
+        model.addAttribute("utilisateur", espaceService.getUserDTOByID(user.getId()));
+        model.addAttribute("liste", espaceService.getListePretByIdUser(user.getId()));
+
+
         return "espace/Accueil";
     }
 
 
 
 
+    //plus besoins
     @GetMapping("/prets")
     public String espacePrets(@RequestParam(value = "id")Long id,
                               Model model) throws IOException, InterruptedException
@@ -64,7 +69,7 @@ public class EspaceController
         PretDTO pretDTO = espaceService.getPretDTOByIdPret(id);
 
         model.addAttribute("pret", pretDTO);
-
+        model.addAttribute("user", authBiblioService.testConnection());
 
         return "pret/Detail";
     }

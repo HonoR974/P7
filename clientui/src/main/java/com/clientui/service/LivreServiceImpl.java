@@ -64,6 +64,9 @@ public class LivreServiceImpl implements  LivreService{
 
         String reponse = response.body();
 
+        System.out.println("\n response " + response + "\n reponse " + reponse);
+
+
         ObjectMapper mapper= new ObjectMapper();
 
         List<ExamplaireDTO> list = mapper.readValue(response.body().toString(),

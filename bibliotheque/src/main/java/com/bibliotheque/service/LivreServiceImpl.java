@@ -56,7 +56,19 @@ public class LivreServiceImpl implements LivreService{
     @Override
     public List<Examplaire> getAllExamplaireByIdLivre(long id) {
         Livre livre = livreRepository.findById(id);
-        return livre.getExamplaires();
+
+        List<Examplaire> list = livre.getExamplaires();
+        List<Examplaire> listFinal = new ArrayList<>();
+
+        for (Examplaire examplaire : list)
+        {
+            if (!examplaire.isEmprunt())
+            {
+                listFinal.add(examplaire);
+            }
+        }
+
+        return listFinal;
     }
 
     @Override

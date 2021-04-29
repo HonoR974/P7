@@ -19,6 +19,8 @@ public class Livre {
 
     private String auteur;
 
+    private String description;
+
     @Column(name = "titre")
     private String titre;
 
@@ -78,5 +80,13 @@ public class Livre {
 
     public void setImage(ImageGallery image) {
         this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

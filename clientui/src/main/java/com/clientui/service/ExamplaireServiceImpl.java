@@ -4,6 +4,7 @@ import com.clientui.dto.ExamplaireDTO;
 import com.clientui.dto.LivreDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,12 @@ public class ExamplaireServiceImpl implements ExamplaireService
             .version(HttpClient.Version.HTTP_2)
             .build();
 
-    private LivreService livreService;
+
+    @Autowired
+    private AuthBiblioService authBiblioService;
 
     private String jwt;
 
-    public ExamplaireServiceImpl(LivreService livreSer)
-    {
-        this.livreService = livreSer;
-    }
 
     /**
      * return l'examplaire par son id
@@ -36,7 +35,12 @@ public class ExamplaireServiceImpl implements ExamplaireService
      */
     @Override
     public ExamplaireDTO getExamplaire(Long id) throws IOException, InterruptedException {
-        this.jwt = livreService.getJwt();
+
+        System.out.println("\n methode getExamplaire");
+
+        this.jwt = authBiblioService.testConnection().getJwt();
+
+        System.out.println("\n jwt  " + jwt);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:9001/api/examplaire/"+ id))
@@ -62,7 +66,7 @@ public class ExamplaireServiceImpl implements ExamplaireService
 
     @Override
     public LivreDTO getLivreByIdExamplaire(Long id) throws IOException, InterruptedException {
-        this.jwt = livreService.getJwt();
+        this.jwt = authBiblioService.getJwt();
 
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -73,6 +77,10 @@ public class ExamplaireServiceImpl implements ExamplaireService
                 .build();
 
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+
+        String reponse = response.body();
+
+        System.out.println("\n response " + response + "\n reponse " + reponse);
 
         ObjectMapper mapper= new ObjectMapper();
 

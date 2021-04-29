@@ -5,8 +5,8 @@
     <title>Mcommerce</title>
 
     <meta charset="utf-8" />
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet"  th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
 
 
 
@@ -61,15 +61,23 @@
         <div class="container">
 
             <!-- MSG -->
-            <div class="row">
+            <div class="row" th:if="${!user.connected}">
                 <div class="imageTitle">
                     <p>Bienvenue dans votre bibliothèque </p>
                 </div>
             </div>
 
-            <!-- BTNS -->
-            <div class="row" >
+            <div class="row" th:if="${user.connected}">
+                <div class="imageTitle">
+                    <p>Content de vous revoire</p>
+                    <p>Voici nos derniers livres</p>
+                </div>
+            </div>
 
+
+
+            <!-- BTNS -->
+            <div class="row" th:if="${!user.connected}">
                 <div class="cadreButton">
                         <button class="buttonLogAccueil">
                             <a th:href="@{/login}"> login </a>
@@ -80,9 +88,26 @@
                             <a th:href="@{/register}">Inscription </a>
                         </button>
                 </div>
-
-
             </div>
+
+
+            <!-- MSG Pour l'user -->
+
+            <div class="row" th:if="${user.connected}">
+                <div class="cadreRappel">
+
+
+                    <button class="buttonLogAccueil">
+                        <a th:href="@{/login}"> login </a>
+                    </button>
+
+
+                    <button class="buttonLogAccueil">
+                        <a th:href="@{/register}">Inscription </a>
+                    </button>
+                </div>
+            </div>
+
 
 
         </div>

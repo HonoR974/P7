@@ -1,9 +1,11 @@
 package com.bibliotheque.service;
 
 import com.bibliotheque.dto.PretDTO;
+import com.bibliotheque.model.Examplaire;
 import com.bibliotheque.model.Pret;
 import com.bibliotheque.model.Statut;
 import com.bibliotheque.model.User;
+import com.bibliotheque.repository.ExamplaireRepository;
 import com.bibliotheque.repository.PretRepository;
 import com.bibliotheque.repository.StatutRepository;
 import com.bibliotheque.repository.UserRepository;
@@ -31,6 +33,10 @@ public class PretServiceImpl implements PretService
 
     @Autowired
     private ExamplaireService examplaireService;
+
+    @Autowired
+    private ExamplaireRepository examplaireRepository;
+
 
     @Autowired
     private SecurityService securityService;
@@ -72,6 +78,8 @@ public class PretServiceImpl implements PretService
     @Override
     public PretDTO givePretDTO(Pret pret)
     {
+
+        System.out.println("\n give pretDTO " +  pret.toString());
         PretDTO pretDTO = new PretDTO();
 
         String date_debut = pret.getDate_debut().toString();
@@ -104,13 +112,20 @@ public class PretServiceImpl implements PretService
     public Pret validePret(long id_pret)
     {
 
-        Statut statut = statutRepository.findByNom("Valider");
 
+
+        Statut statut = statutRepository.findByNom("Valider");
         Pret pret = pretRepository.findById(id_pret);
 
         pret.setStatut(statut);
 
+        Examplaire examplaire = pret.getExamplaire();
+
+        examplaire.setEmprunt(true);
+
+        examplaireRepository.save(examplaire);
         pretRepository.save(pret);
+
         return pret;
     }
 
@@ -127,6 +142,10 @@ public class PretServiceImpl implements PretService
         Statut statut = statutRepository.findByNom("Fini");
         pret.setStatut(statut);
 
+        Examplaire examplaire = pret.getExamplaire();
+        examplaire.setEmprunt(false);
+
+        examplaireRepository.save(examplaire);
         pretRepository.save(pret);
     }
 

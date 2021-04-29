@@ -1,5 +1,7 @@
 package com.clientui.controller;
 
+import com.clientui.model.TesterUser;
+import com.clientui.service.AuthBiblioService;
 import com.clientui.service.ExamplaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ public class ExamplaireController {
     @Autowired
     private ExamplaireService examplaireService;
 
+    @Autowired
+    private AuthBiblioService authBiblioService;
 
 
     /**
@@ -28,13 +32,25 @@ public class ExamplaireController {
     public String afficheExamplaire(@RequestParam (value = "id")Long id,
                                     Model model) throws IOException, InterruptedException {
 
-        model.addAttribute("examplaire", examplaireService.getExamplaire(id));
-        model.addAttribute("livre", examplaireService.getLivreByIdExamplaire(id));
 
         //fonction test
         // si un user est connecté
+        TesterUser user = authBiblioService.testConnection();
 
+        System.out.println("\n user  " + user);
 
-        return "examplaire/Detail";
+        if (user.isConnected())
+        {
+
+            model.addAttribute("examplaire", examplaireService.getExamplaire(id));
+            model.addAttribute("livre", examplaireService.getLivreByIdExamplaire(id));
+            model.addAttribute("user", user);
+            return "examplaire/Detail";
+        }
+        else
+        {
+            return "redirect:/login";
+        }
+
     }
 }

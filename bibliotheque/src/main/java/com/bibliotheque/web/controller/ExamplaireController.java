@@ -53,7 +53,7 @@ public class ExamplaireController {
     {
         Examplaire  examplaire = examplaireService.getExamplaireById(id);
 
-        ExamplaireDTO examplaireDTO = modelMapper.map(examplaire,ExamplaireDTO.class);
+        ExamplaireDTO examplaireDTO = examplaireService.convertExamplaire(examplaire);
 
         return new ResponseEntity<ExamplaireDTO>(examplaireDTO,HttpStatus.ACCEPTED);
     }

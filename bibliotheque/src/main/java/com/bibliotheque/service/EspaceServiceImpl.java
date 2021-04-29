@@ -64,6 +64,7 @@ public class EspaceServiceImpl implements EspaceService
 
         for(Pret pret : list)
         {
+
             pretDTOList.add(givePretDTO(pret));
         }
 
@@ -86,7 +87,8 @@ public class EspaceServiceImpl implements EspaceService
 
         pretDTO.setUsername(pret.getUser().getUsername());
 
-        pretDTO.setStatut(pret.getStatut().getNom());
+         pretDTO.setStatut(pret.getStatut().getNom());
+
         pretDTO.setEnabled(pret.getProlonger());
         pretDTO.setTitre(titre);
 

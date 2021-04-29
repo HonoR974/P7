@@ -21,7 +21,6 @@ public class Pret
 
     private Boolean prolonger;
 
-
     @ManyToOne
     private Statut statut;
 
@@ -97,5 +96,20 @@ public class Pret
 
     public void setEmail(Boolean email) {
         this.email = email;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Pret{" +
+                "id=" + id +
+                ", date_debut=" + date_debut +
+                ", date_fin=" + date_fin +
+                ", prolonger=" + prolonger +
+                ", statut=" + statut +
+                ", user=" + user +
+                ", examplaire=" + examplaire +
+                ", email=" + email +
+                '}';
     }
 }

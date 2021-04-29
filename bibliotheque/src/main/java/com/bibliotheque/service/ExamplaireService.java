@@ -1,5 +1,6 @@
 package com.bibliotheque.service;
 
+import com.bibliotheque.dto.ExamplaireDTO;
 import com.bibliotheque.model.Examplaire;
 import com.bibliotheque.model.Livre;
 
@@ -18,4 +19,7 @@ public interface ExamplaireService {
     Examplaire getExamplaireById(long id);
 
     Livre getLivreById(long id);
+
+
+    ExamplaireDTO convertExamplaire(Examplaire examplaire);
 }

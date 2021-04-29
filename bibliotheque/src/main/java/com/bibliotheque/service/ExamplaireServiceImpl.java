@@ -1,5 +1,6 @@
 package com.bibliotheque.service;
 
+import com.bibliotheque.dto.ExamplaireDTO;
 import com.bibliotheque.model.Examplaire;
 import com.bibliotheque.model.Livre;
 import com.bibliotheque.repository.ExamplaireRepository;
@@ -48,5 +49,17 @@ public class ExamplaireServiceImpl implements ExamplaireService{
         Examplaire examplaire = examplaireRepository.findById(id);
 
         return examplaire.getLivre();
+    }
+
+    @Override
+    public ExamplaireDTO convertExamplaire(Examplaire examplaire) {
+
+        ExamplaireDTO examplaireDTO = new ExamplaireDTO();
+
+        examplaireDTO.setId(examplaire.getId());
+        examplaireDTO.setEdition(examplaire.getEdition());
+
+
+        return examplaireDTO;
     }
 }

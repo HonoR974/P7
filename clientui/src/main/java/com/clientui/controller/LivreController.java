@@ -1,6 +1,7 @@
 package com.clientui.controller;
 
 import com.clientui.dto.LivreDTO;
+import com.clientui.model.TesterUser;
 import com.clientui.service.AuthBiblioService;
 import com.clientui.service.LivreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,11 @@ public class LivreController {
     @GetMapping("/livres/all")
     public String getAllLivre(Model model) throws IOException, InterruptedException {
         List<LivreDTO> list = livreService.getAll();
+        TesterUser user = authBiblioService.testConnection();
 
         model.addAttribute("liste", list);
-        model.addAttribute("user", authBiblioService.testConnection());
+        model.addAttribute("user", user);
+        System.out.println("\n user " + user.toString());
 
         return "livres/Livres";
     }
@@ -40,6 +43,7 @@ public class LivreController {
         //le livre
         model.addAttribute("livre", livreService.getLivreByIdLivre(id));
         model.addAttribute("list", livreService.getAllExamplaireByIdLivre(id));
+        model.addAttribute("user", authBiblioService.testConnection());
 
         return "examplaire/Examplaires";
     }
