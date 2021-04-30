@@ -6,7 +6,7 @@
 
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
-    <link rel="stylesheet"  th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet"  th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}"/>
 
 
 
@@ -48,6 +48,14 @@
                  <!-- Inscription  -->
                  <li class="nav-item " th:if="${!user.connected}">
                      <a class="nav-link" th:href="@{/register}">Sign up</a>
+                 </li>
+
+
+                 <!-- btn logout -->
+                 <li class="nav-item"  th:if="${user.connected}" >
+                     <form  class="nav-link" th:action="@{/logout}" method="post">
+                         <input type="submit" value="Logout"/>
+                     </form>
                  </li>
 
              </ul>

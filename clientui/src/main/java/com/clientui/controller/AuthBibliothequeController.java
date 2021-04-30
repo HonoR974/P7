@@ -37,7 +37,8 @@ public class AuthBibliothequeController {
     public String loggin(Model model)
     {
         UserDTO userDTO = new UserDTO();
-        model.addAttribute("user", userDTO);
+        model.addAttribute("utilisateur", userDTO);
+        model.addAttribute("user", authBiblioService.testConnection());
         return "log/logging";
     }
 

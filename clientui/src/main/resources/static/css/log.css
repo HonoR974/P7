@@ -1,0 +1,135 @@
+a
+{
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+nav
+{
+    background-color: rgb(203, 153, 126) ;
+}
+
+
+.nav-item
+{
+    margin-left: 20px;
+}
+
+#bodyLog
+{
+    background-color: rgba(141,250,227,0.3);
+}
+
+.cadre
+{
+    margin-top: 50px;
+    padding: 20px;
+    height: 400px;
+    background-color: rgba(132,179,245,0.3);
+    border-radius: 15%;
+}
+
+.titleLogin
+{
+    text-align: center;
+    margin: 20px;
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+
+.attLog
+{
+    background-color: rgba(93,192,245,0.5);
+    border-radius: 10% 10% 10% 10%;
+
+}
+
+.attLog input
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.attLog input:hover
+{
+    background-color: black;
+}
+
+.cadreFormulaire
+{
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    border-radius: 15%;
+}
+
+.formulaire
+{
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(89,199,219,0.8);
+    border-radius: 10%;
+}
+
+.btnLog
+{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.btnLog button
+{
+    color: white;
+    background-color: rgba(107,138,237,1);
+    border-color: rgba(107,138,237,1);
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+
+}
+
+.btnLog button:hover
+{
+    color: white;
+    background-color: rgba(113,198,224,1);
+    border-color: rgba(113,198,224,1);
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.cadrebuttonRetour
+{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttonRetour
+{
+
+    background-color: rgba(107,138,237,1);
+    font-size: 15px;
+    border-color: rgba(107,138,237,1);
+    width: 120px;
+    height: 40px;
+    border-radius: 10%;
+}
+
+.buttonRetour a
+{
+    color: white;
+}
+
+.buttonRetour:hover
+{
+    background-color: rgba(113,198,224,1);
+    border-color: rgba(113,198,224,1);
+}
+
+
