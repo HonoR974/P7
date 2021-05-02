@@ -55,23 +55,41 @@
         </nav>
     </header>
 
-    <div class="cadreListe">
+    <div class="fondListe">
 
-        <h1>La liste des livres </h1>
 
-        <div class="container" >
 
-            <div class="row">
-                <div class="cardLivre" th:each="livre : ${liste}" >
-                    <img th:src="@{'/image/' + ${livre.titreImage}}" th:alt="${livre.titreImage}"/>
-                    <p class="cardTitle" th:text="${livre.titre}"></p>
-                    <p th:text="${livre.auteur}"></p>
-                    <p>Nombre d'exemplaire <i th:text="${livre.examplaires}"></i></p>
-                        <button class="btn btn-light">
-                            <a th:href="@{/livre/Examplaires(id=${livre.id})}">Selectionner</a>
-                        </button>
-                </div>
+        <div class="containerListe" >
+
+            <div class="cadreTitle">
+                <h1 class="Title">La liste des livres </h1>
             </div>
+
+            <div class="cadreListe">
+                <div class="liste">
+                    <div class="cardLivre" th:each="livre : ${liste}" >
+                        <img th:src="@{'/image/' + ${livre.titreImage}}" th:alt="${livre.titreImage}"/>
+
+                        <div class="infoCardLivre">
+
+                            <p class="cardTitle" th:text="${livre.titre}"></p>
+                            <p th:text="${livre.auteur}"></p>
+                            <p>Nombre d'exemplaire <i th:text="${livre.examplaires}"></i></p>
+
+                        </div>
+
+                        <div class="cadreButtonLivre">
+                            <button class="btn btn-primary btn-outline-success">
+                                <a th:href="@{/livre/Examplaires(id=${livre.id})}">Selectionner</a>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
         </div>
 
     </div>
