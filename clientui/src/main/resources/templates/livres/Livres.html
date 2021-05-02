@@ -72,14 +72,14 @@
 
                         <div class="infoCardLivre">
 
-                            <p class="cardTitle" th:text="${livre.titre}"></p>
-                            <p th:text="${livre.auteur}"></p>
-                            <p>Nombre d'exemplaire <i th:text="${livre.examplaires}"></i></p>
+                            <h5 class="cardTitle" th:text="${livre.titre}"></h5>
+                            <h5 th:text="${livre.auteur}"></h5>
+                            <h5>Nombre d'exemplaire <i th:text="${livre.examplaires}"></i></h5>
 
                         </div>
 
                         <div class="cadreButtonLivre">
-                            <button class="btn btn-primary btn-outline-success">
+                            <button>
                                 <a th:href="@{/livre/Examplaires(id=${livre.id})}">Selectionner</a>
                             </button>
                         </div>

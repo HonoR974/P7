@@ -159,6 +159,7 @@ button:hover, a:hover
 {
     display: flex;
     flex-wrap: wrap;
+    font-family: Georgia, serif;
 }
 .cardLivre
 {
@@ -184,6 +185,8 @@ button:hover, a:hover
     color: grey;
     font-size: 25px;
     text-decoration: underline;
+    padding-top: 5px;
+    padding-bottom: 10px;
 }
 
 
@@ -200,6 +203,7 @@ button:hover, a:hover
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-top: 10px;
 }
 
 
@@ -209,7 +213,27 @@ button:hover, a:hover
     background-color: rgba(152,163,245,0.5);
 }
 
+.cadreButtonLivre button
+{
+    background-color: white;
+    background-color: rgba(41,202,250,0.5);
+    border-radius: 10px;
+}
 
+.cadreButtonLivre a
+{
+    font-size: 25px;
+
+}
+
+.cadreButtonLivre a:hover
+{
+    background-color: rgba(41,202,250,1);
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: red;
+
+}
 
 
 /**----Liste  Examplaire -----**/
