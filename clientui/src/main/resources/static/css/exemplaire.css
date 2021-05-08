@@ -1,0 +1,164 @@
+
+
+nav
+{
+    background-color: rgb(203, 153, 126) ;
+}
+
+
+.nav-item
+{
+    margin-left: 20px;
+}
+
+
+a
+{
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+
+
+
+/**----Liste  Examplaire -----**/
+
+.fondListe
+{
+    width: 100%;
+
+    height: 1000px;
+    background-color: rgba(5,210,248,0.1);
+}
+
+.containerExamplaire
+{
+    margin-right: 15%;
+    margin-left: 15%;
+    background-color: rgba(68,98,242,0.1);
+}
+
+
+.cadreListe
+{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.cadreLivre
+{
+    width: 450px;
+    text-align: center;
+}
+
+.cadreLivre img
+{
+    width: 350px;
+    height: 500px;
+}
+
+.titleExamplaire
+{
+    font-size: 25px;
+    font-family: Georgia, serif;
+    text-decoration: underline;
+    text-decoration-color: white;
+    margin: 5px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.contenuLivre
+{
+    margin: 5px;
+
+}
+
+.imageLivre
+{
+    margin: 5px;
+}
+.imageLivre img
+{
+    height: 600px;
+    width: 400px;
+}
+.infoLivre
+{
+    padding-left: 10px;
+    padding-top: 5px;
+    font-size: 20px;
+}
+
+
+.cadreListeExemplaire
+{
+    min-width: 800px;
+
+}
+
+.listeExamplaire
+{
+    width: 100%;
+    background-color: rgba(75,183,230,0.8);
+    margin-top: 50px;
+}
+
+.listeExamplaireTable
+{
+    padding-top: 50px;
+    width: 100%;
+}
+
+
+.listeExamplaire tbody
+{
+    background-color: rgba(140,202,235,0.8);
+}
+
+.trTitle
+{
+    background-color: rgba(96,255,229,0.5);
+}
+
+.tdTitle
+{
+    text-align: center;
+    font-size: 25px;
+    text-decoration: underline;
+    padding: 20px;
+
+}
+
+
+.listeExamplaireTr
+{
+    text-align: center;
+}
+
+.tdList
+{
+    width: 100%;
+    border:1px solid white;
+}
+
+.tdList a
+{
+    display: block;
+    position: relative;
+    padding: 10px;
+    color: black;
+    font-size: 25px;
+    font-family: Georgia, serif;
+}
+
+.tdList a:hover
+{
+    background-color: rgba(96,255,229,0.5);
+    color:#fff;
+}
+

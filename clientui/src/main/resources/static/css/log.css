@@ -133,3 +133,56 @@ nav
 }
 
 
+
+
+/**Inscription **/
+.cadreInscription
+{
+
+}
+
+
+.titleInscription
+{
+    margin: 20px;
+    text-align: center;
+}
+
+.infoInscription
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.infoInscription input
+{
+    margin: 10px;
+    height: 50px;
+    width: 500px;
+}
+
+.infoInscription button
+{
+
+}
+
+.btnInscription
+{
+
+}
+
+.btnFinInscription
+{
+
+}
+
+.rowButton
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+

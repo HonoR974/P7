@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Creation d'un Pret </title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/pretCreation.css}"/>
 </head>
 <body>
 
@@ -54,46 +54,67 @@
 </header>
 
 
-    <h1> Voulez vous valider ce pret ? </h1>
+    <div class="container">
+        <div class="row mt-5">
 
-    <div style="height: 200px; width: 100%">
+            <!-- Image -->
+            <div class="cadreImage">
+                <div class="containerImage">
+                    <img th:src="@{'/image/' + ${livre.titreImage}}"  th:alt="${livre.titreImage}" />
+                </div>
+            </div>
+
+            <div class="col col-lg-4 col-md-4">
+                <div class="containerInfo">
+                    <table>
+                        <tbody>
+
+                        <tr>
+                            <th>Titre</th>
+                            <td th:utext="${livre.titre}"></td>
+                        </tr>
+
+                        <tr>
+                            <th>Auteur</th>
+                            <td th:utext="${livre.auteur}"></td>
+                        </tr>
+
+                        <tr>
+                            <th>Edition</th>
+                            <td th:utext="${exemplaire.edition}"></td>
+                        </tr>
+
+
+                        <tr>
+                            <th>Description</th>
+                            <td th:utext="${livre.description}"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="buttonCreation">
+
+
+                    <button class="btn btn-outline-primary">
+                        <a  th:href="@{/validate(id=${pret.id})}">Oui</a>
+                    </button>
+
+                    <button>
+                        <a>Non</a>
+                    </button>
+
+                    <button>
+                        <a>Non</a>
+                    </button>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-    <table>
-        <thead>
-        <tr style="width: 100%">
-            <th>id</th>
-            <th>date_debut</th>
-            <th>A rendre  </th>
-            <th>utilisateur</th>
-            <th>titre</th>
-            <th>statut</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr style="width: 100%">
-            <td th:utext="${pret.id}"></td>
-            <td th:utext="${pret.date_debut}"></td>
-            <td th:utext="${pret.date_fin}"></td>
-            <td th:utext="${pret.username}"></td>
-            <td th:utext="${pret.titre}"></td>
-            <td th:utext="${pret.statut}"></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-outline-primary">
-                <a  th:href="@{/validate(id=${pret.id})}">Oui</a>
-            </button>
-        </div>
-        <div>
-            <button>
-                <a>Non</a>
-            </button>
-        </div>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

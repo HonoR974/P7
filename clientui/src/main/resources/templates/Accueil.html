@@ -37,7 +37,7 @@
 
                  <!-- Espace Perso-->
                  <li class="nav-item" th:if="${user.connected}">
-                   <a th:href="@{/espace(jwt=${user.jwt})}">Espace</a>
+                   <a class="nav-link" th:href="@{/espace(jwt=${user.jwt})}">Espace</a>
                  </li>
 
                  <!-- Login -->
@@ -54,7 +54,7 @@
                  <!-- btn logout -->
                  <li class="nav-item"  th:if="${user.connected}" >
                      <form  class="nav-link" th:action="@{/logout}" method="post">
-                         <input type="submit" value="Logout"/>
+                         <a class="nav-link" type="submit" value="Logout" >Logout</a>
                      </form>
                  </li>
 
@@ -85,7 +85,10 @@
 
             <!-- BTNS -->
             <div class="row" th:if="${!user.connected}">
+
                 <div class="cadreButton">
+
+                    <div>
                         <button class="buttonLogAccueil">
                             <a th:href="@{/login}"> login </a>
                         </button>
@@ -94,6 +97,8 @@
                         <button class="buttonLogAccueil">
                             <a th:href="@{/register}">Inscription </a>
                         </button>
+                    </div>
+
                 </div>
             </div>
 

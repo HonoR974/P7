@@ -97,6 +97,8 @@ public class LivreServiceImpl implements LivreService{
             livreDTO.setExamplaires(countExamplaire);
 
             livreDTO.setTitreImage(livre.getImage().getName());
+            livreDTO.setDescription(livre.getDescription());
+
             listFinal.add(livreDTO);
         }
 
@@ -124,6 +126,8 @@ public class LivreServiceImpl implements LivreService{
         livreDTO.setExamplaires(count);
 
         livreDTO.setTitreImage(livre.getImage().getName());
+        livreDTO.setDescription(livre.getDescription());
+
 
         return livreDTO;
     }

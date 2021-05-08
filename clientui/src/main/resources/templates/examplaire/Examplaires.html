@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <title>Examplaires </title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/exemplaire.css}"/>
     <link rel="stylesheet"  th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}"/>
 
 </head>
@@ -56,36 +56,73 @@
 </header>
 
 
-<div class="row">
-    <div class="cadreLivre">
+<div class="fondListe">
 
-       <img th:src="@{'/image/' + ${livre.titreImage}}"  th:alt="${livre.titreImage}" />
-
-        <p>Titre : <i th:utext="${livre.titre}"></i></p>
-        <p>Auteur : <i th:utext="${livre.auteur}"></i></p>
-    </div>
-</div>
+    <div class="containerExamplaire">
 
 
-<div class="row">
+        <div class="cadreListe">
 
-    <h1>La liste des examplaires  </h1>
-</div>
 
-    <div class="rowExamplaire">
-        <div  th:each="examplaire : ${list}" class="cardExamplaire" >
-            <div class="card-body">
+            <div class="cadreLivre">
 
-                <h5 class="card-title " th:utext="${examplaire.edition}"></h5>
-                <img class="card-img cardExamplaireimg " th:src="@{'/image/' + ${livre.titreImage}}"  th:alt="${livre.titreImage}" />
+                <div class="titleExamplaire">
+                    <h1>Le Livre</h1>
+                </div>
 
-                <button class="btn btn-outline-dark">
-                    <a th:href="@{/examplaire(id=${examplaire.id})}">Voir</a>
-                </button>
+                <div class="contenuLivre">
 
-            </div>
+                    <div class="imageLivre">
+                        <img th:src="@{'/image/' + ${livre.titreImage}}"  th:alt="${livre.titreImage}" />
+                    </div>
+
+                  <div class="infoLivre">
+                      <p>Titre : <i th:utext="${livre.titre}"></i></p>
+                      <p>Auteur : <i th:utext="${livre.auteur}"></i></p>
+                  </div>
+
+                </div>
+
+            </div >
+
+            <div class="cadreListeExemplaire">
+
+                <div class="titleExamplaire">
+                    <h1>Les Exemplaires Disponible</h1>
+                </div>
+
+                <div class="listeExamplaire" >
+
+                        <table class="listeExamplaireTable">
+
+                            <thead>
+
+                            <tr class="trTitle">
+                                <td class="tdTitle">Les Differentes Editions</td>
+
+                            </tr>
+                            </thead>
+
+
+                            <tr class="listeExamplaireTr" th:each="examplaire : ${list}" >
+
+
+                                <td class="tdList" >
+                                    <a th:href="@{/pret(id=${examplaire.id})}" th:utext="${examplaire.edition}"></a>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+
+                </div>
         </div>
-    </div>
+
+   </div>
+
+</div>
+
 
 
 

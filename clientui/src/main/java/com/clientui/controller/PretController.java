@@ -5,6 +5,7 @@ import com.clientui.dto.PretDTO;
 import com.clientui.dto.UserDTO;
 import com.clientui.service.AuthBiblioService;
 import com.clientui.service.EspaceService;
+import com.clientui.service.ExamplaireService;
 import com.clientui.service.PretService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class PretController
 
     @Autowired
     private PretService pretService;
+
+    @Autowired
+    private ExamplaireService examplaireService;
 
     @Autowired
     private AuthBiblioService authBiblioService;
@@ -39,12 +43,16 @@ public class PretController
     public String createPret(@RequestParam(value = "id")Long id_examplaire,
                              Model model) throws IOException, InterruptedException
     {
+
         PretDTO pretDTO = pretService.createPret(id_examplaire);
 
         PretBean pretBean = pretService.givePretBean(pretDTO);
 
         model.addAttribute("pret", pretBean);
         model.addAttribute("user", authBiblioService.testConnection());
+        model.addAttribute("exemplaire", examplaireService.getExamplaire(id_examplaire));
+        model.addAttribute("livre", examplaireService.getLivreByIdExamplaire(id_examplaire));
+
 
         return "pret/Creation";
     }
