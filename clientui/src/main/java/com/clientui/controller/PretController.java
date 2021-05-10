@@ -121,12 +121,38 @@ public class PretController
     @GetMapping("/prolong")
     public String prolongPret(@RequestParam(value = "id")Long id,
                               Model model) throws IOException, InterruptedException {
-        PretDTO pretDTO= pretService.prolongPret(id);
 
+       PretDTO pretDTO2 = pretService.getPretDTOById(id);
+       boolean prolongable=false;
         UserDTO userDTO = authBiblioService.getUserDTOByJwt(authBiblioService.getJwt());
 
-        model.addAttribute("pret",pretDTO);
-        model.addAttribute("user", userDTO);
-        return "pret/Prolonger";
+
+        //si il n'a pas été prolongé
+       if (! pretDTO2.isEnabled())
+       {
+
+           PretDTO pretDTO= pretService.prolongPret(id);
+
+           prolongable = true;
+
+           model.addAttribute("user", authBiblioService.testConnection());
+           model.addAttribute("utilisateur", userDTO);
+           model.addAttribute("liste", espaceService.getListePretByIdUser(userDTO.getId()));
+            model.addAttribute("prolongable", prolongable);
+       }
+       //on peut le prolonger qu'une fois
+       else
+       {
+
+            prolongable = false;
+
+           model.addAttribute("user", authBiblioService.testConnection());
+           model.addAttribute("utilisateur", userDTO);
+           model.addAttribute("liste", espaceService.getListePretByIdUser(userDTO.getId()));
+           model.addAttribute("prolongable", prolongable);
+       }
+
+
+        return "espace/Accueil";
     }
 }

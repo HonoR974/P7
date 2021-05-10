@@ -155,15 +155,22 @@ public class PretServiceImpl implements PretService
     @Override
     public Pret prolongPret(long id_pret)
     {
+
         Pret pret = pretRepository.findById(id_pret);
-        pret.setProlonger(true);
 
-        LocalDate lastDate = pret.getDate_fin().plusDays(30);
-        pret.setDate_fin(lastDate);
+        if (!pret.getProlonger())
+        {
+            pret.setProlonger(true);
 
-        pret.setEmail(false);
+            LocalDate lastDate = pret.getDate_fin().plusDays(30);
+            pret.setDate_fin(lastDate);
 
-        pretRepository.save(pret);
+            pret.setEmail(false);
+
+            pretRepository.save(pret);
+        }
+
+
         return pret;
     }
 }

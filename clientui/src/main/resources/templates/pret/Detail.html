@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/detail.css}"/>
 
     <meta charset="UTF-8">
     <title>Detail </title>
@@ -53,62 +53,62 @@
     </nav>
 </header>
 
+<div class="container mt-5">
+    <div class="row">
+        <div class="cadreLivre">
+            <img th:src="@{'/image/' + ${pret.titreImage}}" th:alt="${pret.titreImage}"/>
+        </div>
 
-<!-- le pret -->
-<div class="row">
-    <table  border="1">
-        <tr>
-            <th>Id</th>
-            <th>Statut</th>
-            <th>Username</th>
-            <th>Livre</th>
-            <th>Date debut </th>
-            <th>Date fin </th>
-        </tr>
+        <div class="cadreInfo">
+            <div class="info">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Titre</th>
+                            <td th:utext="${pret.titre}"></td>
+                        </tr>
 
-        <tr>
-            <td>
-                <p th:utext="${pret.id}"></p>
-            </td>
+                        <tr>
+                            <th>Date Debut</th>
+                            <td th:utext="${pret.date_debut}"></td>
+                        </tr>
 
-            <td>
-                <a th:utext="${pret.statut}" ></a>
-            </td>
-            <td>
-                <a th:utext="${pret.username}"></a>
-            </td>
+                        <tr>
+                            <th>Date fin</th>
+                            <td th:utext="${pret.date_fin}"></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <td>
-                <p th:utext="${pret.titre}"></p>
-            </td>
+                <div class="btnProlong">
+                    <button>
+                        <a th:href="@{/prolong(id=${pret.id})}">Prolonger le pret </a>
+                    </button>
+                </div>
 
-            <td>
-                <p th:utext="${pret.date_debut}"></p>
-            </td>
+             </div>
 
-            <td>
-                <p th:utext="${pret.date_fin}"></p>
-            </td>
+            <div class="btnRetour">
+                <div class="btn btn-outline-primary">
+                    <a th:href="@{/espace(jwt=${user.jwt})}">Retour</a>
+                </div>
+            </div>
 
-        </tr>
-    </table>
+        </div>
+
+
+   </div>
 </div>
 
-<div class="row">
-    <!-- btn rendre pret -->
+
+
+    <!-- btn rendre pret
     <div class="col">
         <button class="btn btn-outline-primary">
             <a th:href="@{/finish(id=${pret.id})}">Rendre le livre </a>
         </button>
     </div>
-
-    <!--btn renouveller pret  -->
-    <div class="col" th:if="${!pret.enabled}">
-        <button class="btn btn-outline-primary">
-            <a th:href="@{/prolong(id=${pret.id})}">Prolonger le pret </a>
-        </button>
-    </div>
-</div>
+    -->
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

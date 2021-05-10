@@ -36,10 +36,12 @@ public class EspaceController
                                 Model model) throws IOException, InterruptedException
     {
         UserDTO user = authBiblioService.getUserDTOByJwt(jwt);
+        boolean prolongable=true;
+
         model.addAttribute("user", authBiblioService.testConnection());
         model.addAttribute("utilisateur", espaceService.getUserDTOByID(user.getId()));
         model.addAttribute("liste", espaceService.getListePretByIdUser(user.getId()));
-
+        model.addAttribute("prolongable", prolongable);
 
         return "espace/Accueil";
     }

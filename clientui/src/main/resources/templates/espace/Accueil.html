@@ -55,6 +55,13 @@
         </nav>
     </header>
 
+    <div class="alert" th:if="${!prolongable || prolongable==null}">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Les prets peuvent renouveller qu'une seul fois
+    </div>
+
+
+
     <!-- Les cartes pret de l'user -->
     <div class="containerEspace">
 
@@ -86,6 +93,7 @@
         </div>
 
     </div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
