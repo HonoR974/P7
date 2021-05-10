@@ -47,6 +47,8 @@ public class PretController {
 
         PretDTO pretDTO = pretService.givePretDTO(pret);
 
+        System.out.println("\n apres la validation " + pretDTO.toString());
+
         return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.CREATED);
     }
 

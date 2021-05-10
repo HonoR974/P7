@@ -17,4 +17,5 @@ public class PretDTO {
     private String  username;
     private String  titre;
     private boolean enabled;
+    private String titreImage;
 }

@@ -92,6 +92,12 @@ public class EspaceServiceImpl implements EspaceService
         pretDTO.setEnabled(pret.getProlonger());
         pretDTO.setTitre(titre);
 
+        if (pret.getImage() != null)
+        {
+            System.out.println("\n pret.getImage est different de null ");
+            pretDTO.setTitreImage(pret.getImage().getName());
+        }
+
         System.out.println("\n pretDTO : " + pretDTO.toString());
 
         return pretDTO;

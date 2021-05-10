@@ -1,6 +1,7 @@
 package com.bibliotheque.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,10 @@ public class Pret
 
     @ManyToOne
     private Examplaire examplaire;
+
+    @JsonIgnore
+    @ManyToOne
+    private ImageGallery image;
 
     private Boolean email;
 
@@ -98,6 +103,13 @@ public class Pret
         this.email = email;
     }
 
+    public ImageGallery getImage() {
+        return image;
+    }
+
+    public void setImage(ImageGallery image) {
+        this.image = image;
+    }
 
     @Override
     public String toString() {
@@ -109,6 +121,7 @@ public class Pret
                 ", statut=" + statut +
                 ", user=" + user +
                 ", examplaire=" + examplaire +
+                ", image=" + image +
                 ", email=" + email +
                 '}';
     }

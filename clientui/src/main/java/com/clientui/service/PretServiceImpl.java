@@ -56,6 +56,10 @@ public class PretServiceImpl implements PretService
     @Override
     public PretBean givePretBean(PretDTO pretDTO)
     {
+
+        System.out.println("\n givePretBean " + pretDTO.toString() );
+
+
         LocalDate date_debut = LocalDate.parse(pretDTO.getDate_debut());
         LocalDate date_fin = LocalDate.parse(pretDTO.getDate_fin());
 
@@ -67,6 +71,7 @@ public class PretServiceImpl implements PretService
         pretBean.setUsername(pretDTO.getUsername());
         pretBean.setTitre(pretDTO.getTitre());
         pretBean.setStatut(pretDTO.getStatut());
+        pretBean.setTitreImage(pretDTO.getTitreImage());
 
         return pretBean;
     }

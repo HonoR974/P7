@@ -90,7 +90,7 @@ public class LivreServiceImpl implements LivreService{
             long countExamplaire = 0 ;
             for (Examplaire examplaire : listExamplaire)
             {
-                if (! examplaire.isEmprunt())
+                if (! examplaire.isEmprunt() )
                     countExamplaire++;
             }
 

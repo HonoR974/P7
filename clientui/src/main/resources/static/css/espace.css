@@ -1,0 +1,132 @@
+body
+{
+    background-color: rgba(155,224,138,0.1);
+}
+
+
+nav
+{
+    background-color: rgb(203, 153, 126) ;
+}
+
+
+.nav-item
+{
+    margin-left: 20px;
+}
+
+
+
+a
+{
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+button:hover, a:hover
+{
+    opacity: 0.7;
+}
+
+
+.containerEspace
+{
+    margin-top: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.row
+{
+    margin: 10px;
+}
+
+
+
+
+.title
+{
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    font-family: Georgia, serif;
+}
+
+.cadreListe
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(199,247,141,0.3);
+}
+
+.cardPret
+{
+    height: 550px;
+    margin: 10px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 5px solid;
+    border-radius: 10px;
+    background-color: rgba(227,237,135,0.4);
+
+}
+
+.cardPret img
+{
+    height: 350px;
+    width: 250px;
+}
+
+.infoCard
+{
+
+}
+
+.titleCard
+{
+    font-size: 25px;
+    font-family: Georgia, serif;
+    margin-bottom: 20px;
+    text-decoration: underline;
+}
+
+.dateCard
+{
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttonCard
+{
+
+}
+
+.buttonCard button
+{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.buttonCard button:hover
+{
+    background-color: green;
+}
+
+.buttonCard a
+{
+
+}
+
+.buttonCard a:hover
+{
+    color: red;
+}
+
+

@@ -5,9 +5,9 @@
 
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/espace.css}"/>
     <meta charset="UTF-8">
-    <title>Accueil Espace </title>
+    <title>Mes Prets </title>
 </head>
 <body>
 
@@ -55,57 +55,38 @@
         </nav>
     </header>
 
+    <!-- Les cartes pret de l'user -->
+    <div class="containerEspace">
 
+        <div class="row">
+            <div class="title">
+                Mes Livres
+            </div>
+        </div>
 
-<h1 th:utext="${utilisateur.id}"></h1>
-<h1 th:utext="${utilisateur.username}"></h1>
-<h1 th:utext="${utilisateur.password}"></h1>
+        <div class="row">
+            <div class="cadreListe">
+                    <div class="cardPret" th:each="pret : ${liste}">
+                        <img th:src="@{'/image/' + ${pret.titreImage}}" th:alt="${pret.titreImage}"/>
 
+                        <div class="infoCard">
+                            <div class="titleCard" th:utext="${pret.titre}"></div>
+                            <div class="dateCard">Date Début <strong th:utext="${pret.date_debut}"></strong></div>
+                            <div class="dateCard">Date Fin <strong th:utext="${pret.date_fin}"></strong></div>
+                        </div>
 
-    <!-- Les topos de l'utilisateur -->
-    <div class="row">
-        <table  border="1">
-            <tr>
-                <th>Id</th>
-                <th>Statut</th>
-                <th>Username</th>
-                <th>Livre</th>
-                <th>Date debut </th>
-                <th>Date fin </th>
-            </tr>
+                        <div class="buttonCard">
+                            <button >
+                                <a th:href="@{/espace/pret(id=${pret.id})}">Sélectionner</a>
+                            </button>
+                        </div>
 
-            <!-- pour chaque pret   -->
-            <tr th:each ="pret : ${liste}">
+                    </div>
+             </div>
+        </div>
 
-
-
-                <td>
-                    <p th:utext="${pret.id}"></p>
-                </td>
-
-                <td>
-                    <a th:utext="${pret.statut}" ></a>
-                </td>
-                <td>
-                    <a th:utext="${pret.username}" th:href="@{/espace/pret(id=${pret.id})}"></a>
-                </td>
-
-                <td>
-                    <p th:utext="${pret.titre}"></p>
-                </td>
-
-                <td>
-                    <p th:utext="${pret.date_debut}"></p>
-                </td>
-
-                <td>
-                    <p th:utext="${pret.date_fin}"></p>
-                </td>
-
-
-            </tr>
-        </table>
     </div>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

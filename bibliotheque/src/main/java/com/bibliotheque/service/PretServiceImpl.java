@@ -1,10 +1,7 @@
 package com.bibliotheque.service;
 
 import com.bibliotheque.dto.PretDTO;
-import com.bibliotheque.model.Examplaire;
-import com.bibliotheque.model.Pret;
-import com.bibliotheque.model.Statut;
-import com.bibliotheque.model.User;
+import com.bibliotheque.model.*;
 import com.bibliotheque.repository.ExamplaireRepository;
 import com.bibliotheque.repository.PretRepository;
 import com.bibliotheque.repository.StatutRepository;
@@ -98,6 +95,13 @@ public class PretServiceImpl implements PretService
         pretDTO.setEnabled(pret.getProlonger());
         pretDTO.setTitre(titre);
 
+        if (pret.getImage() != null)
+        {
+            System.out.println("\n pret.getImage est different de null ");
+            pretDTO.setTitreImage(pret.getImage().getName());
+        }
+
+
         System.out.println("\n pretDTO : " + pretDTO.toString());
 
         return pretDTO;
@@ -111,19 +115,18 @@ public class PretServiceImpl implements PretService
     @Override
     public Pret validePret(long id_pret)
     {
-
-
-
-        Statut statut = statutRepository.findByNom("Valider");
         Pret pret = pretRepository.findById(id_pret);
 
+        Statut statut = statutRepository.findByNom("Valider");
         pret.setStatut(statut);
 
         Examplaire examplaire = pret.getExamplaire();
-
         examplaire.setEmprunt(true);
-
         examplaireRepository.save(examplaire);
+
+        Livre livre = examplaire.getLivre();
+        pret.setImage(livre.getImage());
+
         pretRepository.save(pret);
 
         return pret;

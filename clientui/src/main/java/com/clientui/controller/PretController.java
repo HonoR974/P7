@@ -3,6 +3,7 @@ package com.clientui.controller;
 import com.clientui.model.PretBean;
 import com.clientui.dto.PretDTO;
 import com.clientui.dto.UserDTO;
+import com.clientui.model.TesterUser;
 import com.clientui.service.AuthBiblioService;
 import com.clientui.service.EspaceService;
 import com.clientui.service.ExamplaireService;
@@ -44,17 +45,29 @@ public class PretController
                              Model model) throws IOException, InterruptedException
     {
 
-        PretDTO pretDTO = pretService.createPret(id_examplaire);
+        TesterUser user = authBiblioService.testConnection();
 
-        PretBean pretBean = pretService.givePretBean(pretDTO);
+        System.out.println("\n user  " + user);
 
-        model.addAttribute("pret", pretBean);
-        model.addAttribute("user", authBiblioService.testConnection());
-        model.addAttribute("exemplaire", examplaireService.getExamplaire(id_examplaire));
-        model.addAttribute("livre", examplaireService.getLivreByIdExamplaire(id_examplaire));
+        if (user.isConnected())
+        {
 
+            PretDTO pretDTO = pretService.createPret(id_examplaire);
 
-        return "pret/Creation";
+            PretBean pretBean = pretService.givePretBean(pretDTO);
+
+            model.addAttribute("pret", pretBean);
+            model.addAttribute("user", authBiblioService.testConnection());
+            model.addAttribute("exemplaire", examplaireService.getExamplaire(id_examplaire));
+            model.addAttribute("livre", examplaireService.getLivreByIdExamplaire(id_examplaire));
+
+            return "pret/Creation";
+        }
+        else
+        {
+            return "redirect:/login";
+        }
+
     }
 
     /**
@@ -91,6 +104,7 @@ public class PretController
         return "pret/Finish";
     }
 
+    //seul l'admin peut valider un rendu de pret donc finish pret
     @GetMapping("/validate/finish")
     public String finishPret(@RequestParam(value = "id")Long id,
                              Model model) throws IOException, InterruptedException {
@@ -100,7 +114,7 @@ public class PretController
         UserDTO userDTO = authBiblioService.getUserDTOByJwt(authBiblioService.getJwt());
         model.addAttribute("liste",espaceService.getListePretByIdUser(userDTO.getId()));
 
-        return "espace/ListePret";
+        return "redirect:/espace";
     }
 
 

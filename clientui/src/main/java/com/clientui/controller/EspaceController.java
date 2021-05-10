@@ -47,16 +47,6 @@ public class EspaceController
 
 
 
-    //plus besoins
-    @GetMapping("/prets")
-    public String espacePrets(@RequestParam(value = "id")Long id,
-                              Model model) throws IOException, InterruptedException
-    {
-        model.addAttribute("liste", espaceService.getListePretByIdUser(id));
-
-        return "espace/ListePret";
-    }
-
     /**
      *
      * @param id

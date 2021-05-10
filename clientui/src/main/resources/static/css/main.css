@@ -220,7 +220,7 @@ button:hover, a:hover
 {
     background-color: white;
     background-color: rgba(41,202,250,0.5);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .cadreButtonLivre a
@@ -231,7 +231,6 @@ button:hover, a:hover
 
 .cadreButtonLivre a:hover
 {
-    background-color: rgba(41,202,250,1);
     color: white;
     text-decoration: underline;
     text-decoration-color: red;

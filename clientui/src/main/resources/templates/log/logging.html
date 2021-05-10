@@ -63,27 +63,28 @@
 
             <h2 class="form-heading titleLogin">Log in</h2>
 
-            <div class="form-group attLog">
+                <div class="form-group attLog">
 
-                <div class="cadreFormulaire">
-                    <label class="formulaire">
-                        Username :
-                        <input name="username" type="text" class="form-control" placeholder="Username"
-                               autofocus="true" th:field="${utilisateur.username}"/>
-                    </label>
+                    <div class="cadreFormulaire">
+                        <label class="formulaire">
+                            Username :
+                            <input name="username" type="text" class="form-control" placeholder="Username"
+                                   autofocus="true" th:field="${utilisateur.username}"/>
+                        </label>
 
-                    <label class="formulaire">
-                        Password :
-                        <input name="password" type="password" class="form-control" placeholder="Password"
-                               th:field="${utilisateur.password}"/>
-                    </label>
+                        <label class="formulaire">
+                            Password :
+                            <input name="password" type="password" class="form-control" placeholder="Password"
+                                   th:field="${utilisateur.password}"/>
+                        </label>
+                    </div>
+                    <div class="btnLog">
+                        <button class="btn" type="submit">Log In</button>
+                    </div>
+
+
                 </div>
-                <div class="btnLog">
-                    <button class="btn" type="submit">Log In</button>
-                </div>
 
-
-            </div>
         </form>
 
 

@@ -12,6 +12,7 @@ public class PretBean
     private String username;
     private String  titre;
     private String statut;
+    private String titreImage;
 
     public PretBean()
     {}
@@ -62,5 +63,13 @@ public class PretBean
 
     public void setStatut(String statut) {
         this.statut = statut;
+    }
+
+    public String getTitreImage() {
+        return titreImage;
+    }
+
+    public void setTitreImage(String titreImage) {
+        this.titreImage = titreImage;
     }
 }

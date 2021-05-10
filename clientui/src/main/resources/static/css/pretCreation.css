@@ -1,3 +1,9 @@
+body
+{
+    background-color: rgba(76,235,234,0.1);
+}
+
+
 
 nav
 {
@@ -18,68 +24,97 @@ a
     color: black;
 }
 
-.container
-{
 
-}
 
 .row
 {
-
-}
-
-.col
-{
-
-}
-.cadreImage
-{
-
+    justify-content: space-evenly;
 }
 
 
-.containerImage
-{
-
-}
 
 .containerImage img
 {
 
+    height: 650px;
+    width: 400px;
 }
 
 .containerInfo
 {
+}
+
+table
+{
+    border-collapse: separate;
+    border-spacing: 20px 2.5em;
+    border-style: groove;
+    background-color: rgba(57,171,212,0.1);
+    border-radius: 5px;
+}
+
+
+th
+{
+    font-size: 17px;
+    font-family: Georgia, serif;
+    text-decoration: underline;
 
 }
 
-tr
+td
 {
+    font-size: 17px;
+    background-color: rgba(189,229,240,0.3);
+}
 
+.linkEmprunt
+{
+    text-align: center;
+    font-size: 20px;
+    font-family: Georgia, serif;
 }
 
 .buttonCreation
 {
 
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.buttonCreation button
+.rowButton
 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 
 }
 
-.buttonCreation button:hover
+.rowButton button
 {
+    margin-top: 50px;
+    height: 50px;
+    background-color: white;
+    text-align: center;
+    color: black;
+    border-radius: 5px;
+}
+.rowButton button:hover
+{
+    background-color: black;
 
 }
 
-.buttonCreation a
+.rowButton a
 {
-
+    margin: 3px;
 }
 
-.buttonCreation a:hover
+.rowButton a:hover
 {
-
+    color: white;
 }
 

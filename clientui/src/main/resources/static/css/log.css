@@ -18,16 +18,16 @@ nav
 
 #bodyLog
 {
-    background-color: rgba(141,250,227,0.3);
+    background-color: rgba(141,250,227,0.1);
 }
 
 .cadre
 {
     margin-top: 50px;
     padding: 20px;
-    height: 400px;
-    background-color: rgba(132,179,245,0.3);
-    border-radius: 15%;
+    height: 600px;
+    background-color: rgba(132,179,245,0.1);
+    border-radius: 5%;
 }
 
 .titleLogin
@@ -40,8 +40,14 @@ nav
 
 .attLog
 {
-    background-color: rgba(93,192,245,0.5);
-    border-radius: 10% 10% 10% 10%;
+    background-color: rgba(93,192,245,0.3);
+    border-radius: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
 }
 
@@ -59,17 +65,21 @@ nav
 .cadreFormulaire
 {
     display: flex;
-    justify-content: space-around;
-    align-content: space-around;
+    flex-direction: column;
     border-radius: 15%;
+    margin-left: 10%;
+    margin-right: 20%;
 }
 
 .formulaire
 {
-    margin-top: 20px;
+    margin-top: 40px;
     padding: 20px;
-    background-color: rgba(89,199,219,0.8);
-    border-radius: 10%;
+    background-color: rgba(89,199,219,0.3);
+    border-radius: 5%;
+    font-size: 20px;
+    font-family: Georgia, serif;
+
 }
 
 .btnLog
