@@ -12,6 +12,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class LivreServiceImpl implements  LivreService{
@@ -100,5 +101,41 @@ public class LivreServiceImpl implements  LivreService{
     @Override
     public String getJwt() {
         return jwt;
+    }
+
+    @Override
+    public List<LivreDTO> getLivreToAccueil() throws IOException, InterruptedException {
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:9001/api/livre/accueil"))
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .build();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String reponse = httpResponse.body();
+
+        System.out.println("\n response " + httpResponse + "\n reponse " + reponse);
+
+
+        List<LivreDTO> list = mapper.readValue(httpResponse.body().toString(), new TypeReference<List<LivreDTO>>(){});
+
+        return list;
+    }
+
+    @Override
+    public List<LivreDTO> getLivreToAccueil(List<LivreDTO> list) {
+
+        List<LivreDTO> listeDTO = new ArrayList<>();
+
+        for (int i = 0; i<5; i++)
+        {
+            listeDTO.add(list.get(i));
+        }
+        System.out.println("\n la longueur de liste pour accueil " + listeDTO.size());
+        return listeDTO;
     }
 }

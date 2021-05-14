@@ -65,4 +65,6 @@ public class EspaceController
 
         return "pret/Detail";
     }
+
+
 }

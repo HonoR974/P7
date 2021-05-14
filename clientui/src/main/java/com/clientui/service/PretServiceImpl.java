@@ -13,6 +13,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class PretServiceImpl implements PretService
@@ -170,5 +171,27 @@ public class PretServiceImpl implements PretService
 
     }
 
+    @Override
+    public List<PretDTO> getPretEmprunter() throws IOException, InterruptedException {
 
+        this.jwt = authBiblioService.getJwt();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/api/pret/admin/prets"))
+                .GET()
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String reponse = response.body();
+
+        System.out.println("\n response : " + response + "\n reponse : " + reponse);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        return  mapper.readValue(response.body().toString(), new TypeReference<List<PretDTO>>() {});
+
+    }
 }

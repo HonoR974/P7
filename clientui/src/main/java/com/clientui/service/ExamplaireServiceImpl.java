@@ -66,8 +66,8 @@ public class ExamplaireServiceImpl implements ExamplaireService
 
     @Override
     public LivreDTO getLivreByIdExamplaire(Long id) throws IOException, InterruptedException {
-        this.jwt = authBiblioService.getJwt();
 
+        this.jwt = authBiblioService.getJwt();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:9001/api/examplaire/livre/" + id))

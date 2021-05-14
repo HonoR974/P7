@@ -131,4 +131,10 @@ public class LivreServiceImpl implements LivreService{
 
         return livreDTO;
     }
+
+
+    @Override
+    public List<Livre> getAllLivre() {
+        return livreRepository.findAll();
+    }
 }

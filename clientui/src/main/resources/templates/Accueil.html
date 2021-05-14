@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Mcommerce</title>
+    <title>Accueil</title>
 
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
@@ -53,12 +52,9 @@
 
                  <!-- btn logout -->
                  <li class="nav-item"  th:if="${user.connected}" >
-                     <form  class="nav-link" th:action="@{/logout}" method="post">
 
-                         <input type="submit" value="Logout"/>
-                      <!--   <a class="nav-link" type="submit" value="Logout" >Logout</a>
-                    -->
-                     </form>
+                   <!--  <a th:url="/logout">">Logout</a> -->
+                     <a class="nav-link" th:href="@{/logout}">Logout</a>
                  </li>
 
              </ul>
@@ -105,45 +101,205 @@
                 </div>
             </div>
 
-
-            <!-- MSG Pour l'user
-
             <div class="row" th:if="${user.connected}">
-                <div class="cadreRappel">
 
 
-                    <button class="buttonLogAccueil">
-                        <a th:href="@{/login}"> login </a>
-                    </button>
+                <div class="cadreCarousel">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                        </ol>
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+
+                                <div class="itemCarousel">
+
+                                    <div class="infoCarousel">
+
+                                        <div class="info">
+                                            <table>
+                                                <tbody>
+
+                                                <tr>
+                                                    <th>Titre  </th>
+                                                    <td th:utext="${listeCarousel.get(0).titre}"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>Auteur  </th>
+                                                    <td th:utext="${listeCarousel.get(0).auteur}"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>Résumé </th>
+                                                    <td th:utext="${listeCarousel.get(0).description}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="btnLivre">
+                                            <button>
+                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(0).id})}">Voir le livre</a>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="imageCarousel">
+                                        <img th:src="@{'/image/' + ${listeCarousel.get(0).titreImage}}" th:alt="${listeCarousel.get(0).titreImage}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item"  >
+                                <div class="itemCarousel">
+
+                                    <div class="infoCarousel">
+
+                                        <div class="info">
+                                            <table>
+                                                <tbody>
+
+                                                <tr>
+                                                    <th>Titre  </th>
+                                                    <td th:utext="${listeCarousel.get(1).titre}"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>Auteur  </th>
+                                                    <td th:utext="${listeCarousel.get(1).auteur}"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>Résumé </th>
+                                                    <td th:utext="${listeCarousel.get(1).description}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="btnLivre">
+                                            <button>
+                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(1).id})}">Voir le livre</a>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="imageCarousel">
+                                        <img th:src="@{'/image/' + ${listeCarousel.get(1).titreImage}}" th:alt="${listeCarousel.get(1).titreImage}"/>
+                                    </div>
 
 
-                    <button class="buttonLogAccueil">
-                        <a th:href="@{/register}">Inscription </a>
-                    </button>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item"  >
+                                <div class="itemCarousel">
+
+                                    <div class="infoCarousel">
+
+                                        <div class="info">
+                                            <table>
+                                                <tbody>
+
+                                                <tr>
+                                                    <th>Titre  </th>
+                                                    <td th:utext="${listeCarousel.get(1).titre}"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>Auteur  </th>
+                                                    <td th:utext="${listeCarousel.get(1).auteur}"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>Résumé </th>
+                                                    <td th:utext="${listeCarousel.get(1).description}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="btnLivre">
+                                            <button>
+                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(1).id})}">Voir le livre</a>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="imageCarousel">
+                                        <img th:src="@{'/image/' + ${listeCarousel.get(1).titreImage}}" th:alt="${listeCarousel.get(1).titreImage}"/>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="carousel-item"  >
+                                <div class="itemCarousel">
+
+                                    <div class="infoCarousel">
+
+                                        <div class="info">
+                                            <table>
+                                                <tbody>
+
+                                                <tr>
+                                                    <th>Titre  </th>
+                                                    <td th:utext="${listeCarousel.get(1).titre}"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>Auteur  </th>
+                                                    <td th:utext="${listeCarousel.get(1).auteur}"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>Résumé </th>
+                                                    <td th:utext="${listeCarousel.get(1).description}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="btnLivre">
+                                            <button>
+                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(1).id})}">Voir le livre</a>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="imageCarousel">
+                                        <img th:src="@{'/image/' + ${listeCarousel.get(1).titreImage}}" th:alt="${listeCarousel.get(1).titreImage}"/>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
                 </div>
             </div>
-
-            -->
-
-
-
         </div>
     </div>
 
 
-    <!-- Partie Affichage Livre -->
-    <div class="affichage">
 
-        <div class="container">
-
-            <div style="height: 600px;width: 100%">
-
-            </div>
-
-        </div>
+    <div class="Footer">
+        Copyright © 2021, All Right Reserved
     </div>
-
-
 
 
 

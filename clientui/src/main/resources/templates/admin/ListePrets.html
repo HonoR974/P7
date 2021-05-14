@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div th:each="pret :${liste}" style="margin: 50px">
+                <div th:utext="${pret.id}"></div>
+                <div th:utext="${pret.titre}"></div>
+                <div th:utext="${pret.username}"></div>
+                <div th:utext="${pret.date_debut}"></div>
+                <div th:utext="${pret.date_fin}"></div>
+                <img th:src="@{'/image/' + ${pret.titreImage}}" th:alt="${pret.titreImage}"
+                      style="width: 200px; height: 400px"  />
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

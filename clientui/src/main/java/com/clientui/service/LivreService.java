@@ -12,7 +12,12 @@ public interface LivreService {
 
     List<ExamplaireDTO> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException;
 
+    List<LivreDTO> getLivreToAccueil() throws IOException, InterruptedException;
+
     LivreDTO getLivreByIdLivre(Long id) throws IOException, InterruptedException;
 
     String getJwt();
+
+    List<LivreDTO> getLivreToAccueil(List<LivreDTO> list);
+
 }

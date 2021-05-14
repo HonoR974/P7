@@ -4,6 +4,7 @@ import com.clientui.model.PretBean;
 import com.clientui.dto.PretDTO;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface PretService
 {
@@ -20,5 +21,5 @@ public interface PretService
 
     PretDTO prolongPret(Long id_pret) throws IOException, InterruptedException;
 
-
+    List<PretDTO> getPretEmprunter() throws IOException, InterruptedException;
 }

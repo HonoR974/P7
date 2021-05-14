@@ -155,4 +155,12 @@ public class PretController
 
         return "espace/Accueil";
     }
+
+
+    @GetMapping("/admin/prets")
+    public String getPretEmprunter(Model model) throws IOException, InterruptedException {
+
+        model.addAttribute("liste", pretService.getPretEmprunter());
+        return "admin/ListePrets";
+    }
 }

@@ -97,5 +97,16 @@ public class LivreController {
         return new ResponseEntity<List<ExamplaireDTO>>(examplaireDTOS, HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/accueil")
+    public ResponseEntity<?> getLivreToAccueil()
+    {
+        List<Livre> list = livreService.getAllLivre();
+
+        List<LivreDTO> livreDTO = livreService.convertListLivre(list);
+
+        return new ResponseEntity<List<LivreDTO>>(livreDTO, HttpStatus.ACCEPTED);
+
+    }
+
 
 }

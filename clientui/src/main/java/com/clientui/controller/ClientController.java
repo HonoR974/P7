@@ -1,11 +1,13 @@
 package com.clientui.controller;
 
 import com.clientui.convert.BASE64DecodedMultipartFile;
+import com.clientui.dto.LivreDTO;
 import com.clientui.dto.UserDTO;
 import com.clientui.model.ImageGallery;
 import com.clientui.service.AuthBiblioService;
 import com.clientui.service.FileUploadUtil;
 import com.clientui.service.ImageGalleryService;
+import com.clientui.service.LivreService;
 import jdk.jfr.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,11 +39,21 @@ public class ClientController {
     @Autowired
     private AuthBiblioService authBiblioService;
 
+    @Autowired
+    private LivreService livreService;
+
 
     @GetMapping("/")
-    public String accueil(Model model)
-    {
+    public String accueil(Model model) throws IOException, InterruptedException {
+
+        List<LivreDTO> listAPI = livreService.getLivreToAccueil();
+
+        List<LivreDTO> listCarousel = livreService.getLivreToAccueil(listAPI);
+
+
+        model.addAttribute("listeCarousel", listCarousel);
         model.addAttribute("user", authBiblioService.testConnection());
+
         return "Accueil";
     }
 

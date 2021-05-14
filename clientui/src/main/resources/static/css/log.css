@@ -57,10 +57,6 @@ nav
     flex-direction: column;
 }
 
-.attLog input:hover
-{
-    background-color: black;
-}
 
 .cadreFormulaire
 {

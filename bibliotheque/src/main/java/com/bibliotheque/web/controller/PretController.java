@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/pret")
 public class PretController {
@@ -77,5 +79,15 @@ public class PretController {
         PretDTO pretDTO = pretService.givePretDTO(pret);
 
         return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/admin/prets")
+    public ResponseEntity<?> getPretEmprunter()
+    {
+        List<Pret> list1 = pretService.getPretEmprunter();
+
+        List<PretDTO> pretDTOList = pretService.giveListPretDTO(list1);
+
+        return new ResponseEntity<List<PretDTO>>(pretDTOList, HttpStatus.ACCEPTED);
     }
 }

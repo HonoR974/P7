@@ -58,10 +58,12 @@
 
 <div class="fondListe">
 
-    <div class="containerExamplaire">
+    <div class="containerExamplaire ">
 
 
-        <div class="cadreListe">
+        <div class="cadreListe ">
+
+        <div class="fondCadre">
 
 
             <div class="cadreLivre">
@@ -76,10 +78,10 @@
                         <img th:src="@{'/image/' + ${livre.titreImage}}"  th:alt="${livre.titreImage}" />
                     </div>
 
-                  <div class="infoLivre">
-                      <p>Titre : <i th:utext="${livre.titre}"></i></p>
-                      <p>Auteur : <i th:utext="${livre.auteur}"></i></p>
-                  </div>
+                    <div class="infoLivre">
+                        <p><strong>Titre :</strong> <i th:utext="${livre.titre}"></i></p>
+                        <p><strong>Auteur :</strong> <i th:utext="${livre.auteur}"></i></p>
+                    </div>
 
                 </div>
 
@@ -93,35 +95,46 @@
 
                 <div class="listeExamplaire" >
 
-                        <table class="listeExamplaireTable">
+                    <table class="listeExamplaireTable">
 
-                            <thead>
+                        <thead>
 
-                            <tr class="trTitle">
-                                <td class="tdTitle">Les Differentes Editions</td>
+                        <tr class="trTitle">
+                            <td class="tdTitle">Les Differentes Editions</td>
 
-                            </tr>
-                            </thead>
-
-
-                            <tr class="listeExamplaireTr" th:each="examplaire : ${list}" >
+                        </tr>
+                        </thead>
 
 
-                                <td class="tdList" >
-                                    <a th:href="@{/pret(id=${examplaire.id})}" th:utext="${examplaire.edition}"></a>
-                                </td>
-
-                            </tr>
-                        </table>
-                    </div>
+                        <tr class="listeExamplaireTr" th:each="examplaire : ${list}" >
 
 
+                            <td class="tdList" >
+                                <a th:href="@{/pret(id=${examplaire.id})}" th:utext="${examplaire.edition}"></a>
+                            </td>
+
+                        </tr>
+                    </table>
                 </div>
+
+
+            </div>
+        </div>
+
+
+
         </div>
 
    </div>
 
+    <div class="Footer">
+        Copyright © 2021, All Right Reserved
+    </div>
+
 </div>
+
+
+
 
 
 

@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PretServiceImpl implements PretService
@@ -107,6 +104,18 @@ public class PretServiceImpl implements PretService
         return pretDTO;
     }
 
+
+    @Override
+    public List<PretDTO> giveListPretDTO(List<Pret> list) {
+        List<PretDTO> pretDTOList = new ArrayList<>();
+
+        for (Pret pret : list)
+        {
+            pretDTOList.add(givePretDTO(pret));
+        }
+        return pretDTOList;
+    }
+
     /**
      * Valide le pret
      * @param id_pret
@@ -172,5 +181,13 @@ public class PretServiceImpl implements PretService
 
 
         return pret;
+    }
+
+    @Override
+    public List<Pret> getPretEmprunter() {
+        Statut statut = statutRepository.findByNom("Valider");
+        List<Pret> list = pretRepository.findByStatut(statut);
+
+        return list;
     }
 }

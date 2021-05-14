@@ -24,4 +24,6 @@ public interface LivreService {
 
     LivreDTO convertLivre(Livre livre);
 
+    List<Livre> getAllLivre();
+
 }

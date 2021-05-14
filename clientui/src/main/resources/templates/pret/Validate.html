@@ -29,7 +29,7 @@
             <ul class="navbar-nav  mr-auto mt-2 mt-lg-0  ">
 
                 <!-- Livres -->
-                <li class="nav-item active ">
+                <li class="nav-item ">
                     <a class="nav-link" th:href="@{/livres/all}">Livres</a>
                 </li>
 
@@ -48,11 +48,20 @@
                     <a class="nav-link" th:href="@{/register}">Sign up</a>
                 </li>
 
+
+                <!-- btn logout -->
+                <li class="nav-item"  th:if="${user.connected}" >
+
+                    <!--  <a th:url="/logout">">Logout</a> -->
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+
             </ul>
 
         </div>
     </nav>
 </header>
+
 
 <div class="container mt-5">
     <div class="row">

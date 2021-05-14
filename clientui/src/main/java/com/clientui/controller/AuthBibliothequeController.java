@@ -33,6 +33,7 @@ public class AuthBibliothequeController {
     private LivreService livreService;
 
 
+
     @GetMapping("/login")
     public String loggin(Model model)
     {
@@ -71,11 +72,12 @@ public class AuthBibliothequeController {
         model.addAttribute("jwt", jwt);
         model.addAttribute("user",authBiblioService.testConnection());
 
-
+        /**
         List<LivreDTO> list = livreService.getAll();
         model.addAttribute("liste", list);
+        */
 
-        return  "livres/Livres";
+        return  "redirect:/";
     }
 
 
