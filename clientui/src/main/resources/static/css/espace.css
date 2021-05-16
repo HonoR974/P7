@@ -24,10 +24,6 @@ a
     color: black;
 }
 
-button:hover, a:hover
-{
-    opacity: 0.7;
-}
 
 
 .containerEspace
@@ -35,6 +31,7 @@ button:hover, a:hover
     margin-top: 50px;
     margin-left: 10%;
     margin-right: 10%;
+    min-height: 900px;
 }
 
 .row
@@ -70,7 +67,7 @@ button:hover, a:hover
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    border: 5px solid;
+    border: 3px solid;
     border-radius: 10px;
     background-color: rgba(227,237,135,0.4);
 
@@ -103,6 +100,16 @@ button:hover, a:hover
     justify-content: space-between;
 }
 
+.titreDate
+{
+    text-decoration: underline;
+}
+
+.date
+{
+    background-color: rgba(227,237,135,0.5);
+}
+
 .buttonCard
 {
 
@@ -116,17 +123,17 @@ button:hover, a:hover
 
 .buttonCard button:hover
 {
-    background-color: green;
+    background-color: black;
 }
 
 .buttonCard a
 {
-
+    color: black;
 }
 
 .buttonCard a:hover
 {
-    color: red;
+    color: white;
 }
 
 /* The alert message box */

@@ -51,9 +51,10 @@ table
 {
     border-collapse: separate;
     border-spacing: 40px 4em;
-    border-style: groove;
+    border-style: outset;
     background-color: rgba(57,171,212,0.1);
     border-radius: 5px;
+    border-color: rgb(152,167,230);
 }
 
 thead
@@ -90,10 +91,29 @@ td
     margin-right: 20%;
     margin-left: 20%;
     padding: 20px;
-    background-color: rgba(5,245,229,0.2);
-    border-radius: 10px;
-    border: 2px solid blue;
 }
+
+.cadreButton button
+{
+    background-color: #bcfdff;
+    border-radius: 5px;
+}
+
+.cadreButton button:hover
+{
+    background-color: #30494f;
+}
+
+.cadreButton a
+{
+    color: black;
+}
+
+.cadreButton a:hover
+{
+    color: white;
+}
+
 
 .Footer
 {

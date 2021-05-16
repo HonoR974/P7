@@ -92,17 +92,7 @@ public class PretController
         return "pret/Validate";
     }
 
-    @GetMapping("/finish")
-    public String rendreProjet (@RequestParam(value = "id")Long id_pret,
-                                Model model) throws IOException, InterruptedException {
 
-        PretDTO pretDTO = pretService.getPretDTOById(id_pret);
-
-
-        model.addAttribute("pret", pretService.givePretBean(pretDTO));
-
-        return "pret/Finish";
-    }
 
     //seul l'admin peut valider un rendu de pret donc finish pret
     @GetMapping("/validate/finish")
@@ -114,7 +104,7 @@ public class PretController
         UserDTO userDTO = authBiblioService.getUserDTOByJwt(authBiblioService.getJwt());
         model.addAttribute("liste",espaceService.getListePretByIdUser(userDTO.getId()));
 
-        return "redirect:/espace";
+        return "redirect:/espace/admin/prets";
     }
 
 
@@ -157,10 +147,5 @@ public class PretController
     }
 
 
-    @GetMapping("/admin/prets")
-    public String getPretEmprunter(Model model) throws IOException, InterruptedException {
 
-        model.addAttribute("liste", pretService.getPretEmprunter());
-        return "admin/ListePrets";
-    }
 }

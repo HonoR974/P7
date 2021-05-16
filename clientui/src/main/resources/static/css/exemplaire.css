@@ -120,14 +120,12 @@ i
 
 .cadreListeExemplaire
 {
-    min-width: 700px;
 
 }
 
 .listeExamplaire
 {
     width: 100%;
-    background-color: rgba(75,183,230,0.8);
     margin-top: 50px;
 }
 
@@ -141,6 +139,11 @@ i
 .listeExamplaire tbody
 {
     background-color: rgba(140,202,235,0.8);
+}
+
+thead
+{
+    border-radius: 10px;
 }
 
 .trTitle

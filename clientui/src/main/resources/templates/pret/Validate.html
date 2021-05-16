@@ -122,12 +122,12 @@
     <div class="row">
         <div class="cadreButton">
 
-            <button class="btn btn-outline-primary">
-                <a>Retour a la liste de livre (pas fini) </a>
+            <button>
+                <a th:href="@{/livres/all}">Liste de livre </a>
             </button>
 
 
-            <button class="btn btn-outline-primary">
+            <button>
                 <a  th:href="@{/espace(jwt=${user.jwt})}" >Ma liste de Pret </a>
             </button>
 

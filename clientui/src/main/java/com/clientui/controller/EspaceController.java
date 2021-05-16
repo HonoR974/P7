@@ -4,6 +4,7 @@ import com.clientui.dto.PretDTO;
 import com.clientui.dto.UserDTO;
 import com.clientui.service.AuthBiblioService;
 import com.clientui.service.EspaceService;
+import com.clientui.service.PretService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,8 @@ public class EspaceController
     @Autowired
     private AuthBiblioService authBiblioService;
 
-
+    @Autowired
+    private PretService pretService;
 
 
     /**
@@ -66,5 +68,13 @@ public class EspaceController
         return "pret/Detail";
     }
 
+
+    @GetMapping("/admin/prets")
+    public String getPretEmprunter(Model model) throws IOException, InterruptedException {
+
+        model.addAttribute("liste", pretService.getPretEmprunter());
+        model.addAttribute("user", authBiblioService.testConnection());
+        return "admin/ListePrets";
+    }
 
 }

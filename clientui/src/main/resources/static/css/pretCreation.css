@@ -48,9 +48,10 @@ table
 {
     border-collapse: separate;
     border-spacing: 20px 2.5em;
-    border-style: groove;
+    border-style: outset;
     background-color: rgba(57,171,212,0.1);
     border-radius: 5px;
+    border-color: rgb(152,167,230);
 }
 
 
@@ -75,6 +76,25 @@ td
     font-family: Georgia, serif;
 }
 
+.btnEmprunt
+{
+    background-color: #bcfdff;
+    border-radius: 5px;
+}
+.btnEmprunt:hover
+{
+    background-color: #30494f;
+}
+.btnEmprunt a
+{
+    color: black;
+}
+.btnEmprunt a:hover
+{
+    color: white;
+}
+
+
 .buttonCreation
 {
 
@@ -90,6 +110,7 @@ td
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    margin-bottom: 40px;
 
 }
 
