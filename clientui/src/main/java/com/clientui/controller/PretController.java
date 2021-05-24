@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 
+
+/**
+ * Controller PretController
+ */
 @Controller
 public class PretController
 {
@@ -36,7 +40,7 @@ public class PretController
      * Creer le pret
      * @param id_examplaire
      * @param model
-     * @return
+     * @return pret creation
      * @throws IOException
      * @throws InterruptedException
      */
@@ -74,7 +78,7 @@ public class PretController
      * Valide le pret
      * @param id_pret
      * @param model
-     * @return
+     * @return pret validate
      */
     @GetMapping("/validate")
     public String validePret(@RequestParam(value = "id")Long id_pret,
@@ -93,8 +97,14 @@ public class PretController
     }
 
 
-
-    //seul l'admin peut valider un rendu de pret donc finish pret
+    /**
+     * Finalise le pret
+     * @param id
+     * @param model
+     * @return pret finish
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @GetMapping("/validate/finish")
     public String finishPret(@RequestParam(value = "id")Long id,
                              Model model) throws IOException, InterruptedException {
@@ -108,6 +118,14 @@ public class PretController
     }
 
 
+    /**
+     * Prolonge le pret
+     * @param id
+     * @param model
+     * @return espace accueil
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @GetMapping("/prolong")
     public String prolongPret(@RequestParam(value = "id")Long id,
                               Model model) throws IOException, InterruptedException {

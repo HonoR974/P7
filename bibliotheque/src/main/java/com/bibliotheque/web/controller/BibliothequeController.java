@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * RestController BibliothequeController
+ * Chaque methode retourne un Object DTO
+ */
 @RestController
 @RequestMapping("/api/bibliotheque")
 public class BibliothequeController {
@@ -28,6 +32,10 @@ public class BibliothequeController {
     @Autowired
     private LivreService livreService;
 
+    /**
+     * Recupere toutes les bibliothèques
+     * @return liste Bibliotheques
+     */
     @GetMapping
     public List<BibliothequeDTO> getAllBiblio()
     {
@@ -36,6 +44,11 @@ public class BibliothequeController {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Créer une bibliothèque
+     * @param bibliothequeDTO
+     * @return Bibliotheque
+     */
     @PostMapping
     public ResponseEntity<BibliothequeDTO> createBibliotheque(@RequestBody BibliothequeDTO bibliothequeDTO)
     {
@@ -48,6 +61,11 @@ public class BibliothequeController {
         return new ResponseEntity<BibliothequeDTO>(bibliothequeResponse, HttpStatus.CREATED);
     }
 
+    /**
+     * Recupere une Bibliotheques selon l'id
+     * @param id id-biblio
+     * @return Bibliotheque
+     */
     @GetMapping("/detail")
     public ResponseEntity<BibliothequeDTO> getBiBliothequeById(@RequestParam(name = "id")Long id)
     {
@@ -59,6 +77,12 @@ public class BibliothequeController {
         return new ResponseEntity<BibliothequeDTO>(bibliothequeResponse, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Modifie une bibliothèque
+     * @param id id-biblio
+     * @param bibliothequeDTO BibliothequeNouvelle
+     * @return Bibliotheque
+     */
     @PutMapping("/{id}")
     public ResponseEntity<BibliothequeDTO> updateBibliotheque(@PathVariable(name = "id")Long id,
                                             @RequestBody BibliothequeDTO bibliothequeDTO )
@@ -72,6 +96,11 @@ public class BibliothequeController {
         return new ResponseEntity<BibliothequeDTO>(bibliothequeResponse, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Supprime une Bibliotheque
+     * @param id id-biblio
+     * @return Bibliotheque
+     */
     @DeleteMapping("/{id}")
     public HttpStatus deleteBibliotheque(@PathVariable(name = "id")Long id)
     {
@@ -79,6 +108,11 @@ public class BibliothequeController {
         return HttpStatus.ACCEPTED;
     }
 
+    /**
+     * Recupere tout les livres d'une bibliothèque
+     * @param id id-biblio
+     * @return Liste livres
+     */
     @GetMapping("/Livres")
     public List<LivreDTO> getAllLivresByIdBiblio(@RequestParam(name = "id")Long id)
     {
@@ -89,6 +123,10 @@ public class BibliothequeController {
         return list;
     }
 
+    /**
+     * Recupere touts les livres
+     * @return liste livres
+     */
     @GetMapping("/Livres/all")
     public List<LivreDTO> getAllLivres()
     {

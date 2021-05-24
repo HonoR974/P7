@@ -9,6 +9,9 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service UserServiceImpl
+ */
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -23,7 +26,11 @@ public class UserServiceImpl implements UserService{
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-
+    /**
+     * Inscription de l'user
+     * @param userDTO
+     * @return user
+     */
     public User save(UserDTO userDTO) {
         User user = new User();
         user.setUsername(userDTO.getUsername());
@@ -32,6 +39,11 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(user);
     }
 
+    /**
+     * Recupere un user par son username
+     * @param username
+     * @return user
+     */
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);

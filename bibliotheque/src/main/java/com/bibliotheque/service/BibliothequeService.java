@@ -5,19 +5,56 @@ import com.bibliotheque.model.Livre;
 
 import java.util.List;
 
+/**
+ * Interface BibliothequeService
+ */
 public interface BibliothequeService {
 
+    /**
+     * Recupère toutes bibliothèques
+     * @return liste Bibliotheque
+     */
     List<Bibliotheque> getAllBibliotheque();
 
+    /**
+     * Creer une bibliothèque
+     * @param bibliotheque
+     * @return bibliotheque
+     */
     Bibliotheque createBibliotheque(Bibliotheque bibliotheque);
 
+    /**
+     * Modifie une bibliotheque
+     * @param id
+     * @param bibliotheque
+     * @return bibliotheque
+     */
     Bibliotheque updateBibliotheque(long id, Bibliotheque bibliotheque);
 
+    /**
+     * Supprime une bibliotheque
+     * @param id
+     */
     void deleteBibliotheque(long id);
 
+    /**
+     * Recupere une bibliotheque selon l'id
+     * @param id
+     * @return bibliotheque
+     */
     Bibliotheque getBibliothequeById(long id);
 
+
+    /**
+     * Recupere tout les livres d'une bibliothèque
+     * @param id
+     * @return Liste livres
+     */
     List<Livre> getAllLibreByIdBiblio(long id);
 
+    /**
+     * Recupere touts les livres
+     * @return Liste de Livres
+     */
     List<Livre> getAllLivre();
 }

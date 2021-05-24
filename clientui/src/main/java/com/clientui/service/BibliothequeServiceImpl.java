@@ -26,6 +26,13 @@ public class BibliothequeServiceImpl implements BibliothequeService{
             .version(HttpClient.Version.HTTP_2)
             .build();
 
+    /**
+     * Recupere toutes les bibliotheque
+     * @param jwtSend
+     * @return liste bibliotheque
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public List<BibliothequeDTO> getAllBibliotheque(String jwtSend ) throws IOException, InterruptedException {
         this.jwt = jwtSend;
@@ -50,28 +57,13 @@ public class BibliothequeServiceImpl implements BibliothequeService{
         return list;
     }
 
-    @Override
-    public BibliothequeDTO getBibliothequeById(Long id) throws IOException, InterruptedException {
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:9001/api/bibliotheque/detail?id=" + id))
-                .GET()
-                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
-                .build();
-
-        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString() );
-
-        String reponse = response.body();
-
-        ObjectMapper mapper= new ObjectMapper();
-
-       BibliothequeDTO bibliothequeDTO = mapper.readValue(response.body().toString(),
-                new TypeReference<BibliothequeDTO>(){});
-
-        return bibliothequeDTO;
-    }
-
+    /**
+     * Recupere touts les livres d'une bibliotheque
+     * @param id
+     * @return liste livres
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public List<LivreDTO> getAllLivreByIdBiblio(Long id) throws IOException, InterruptedException {
 
@@ -96,33 +88,15 @@ public class BibliothequeServiceImpl implements BibliothequeService{
         return list;
     }
 
+    /**
+     * Recupere le jwt
+     * @return jwt
+     */
     @Override
     public String getJwt()
     {
         return jwt;
     }
 
-    @Override
-    public List<LivreDTO> getAllLivre(String jwt) throws IOException, InterruptedException {
 
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:9001/api/bibliotheque/Livres/all"))
-                .GET()
-                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString() );
-
-        String reponse = response.body();
-
-        System.out.println("\n response " + response + "\n reponse " + reponse);
-        ObjectMapper mapper= new ObjectMapper();
-
-        List<LivreDTO> list = mapper.readValue(response.body().toString(),
-                new TypeReference<List<LivreDTO>>() {});
-
-        return list;
-    }
 }

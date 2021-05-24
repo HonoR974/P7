@@ -27,7 +27,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * Controller ClientController
+ */
 @Controller
 public class ClientController {
 
@@ -35,21 +37,25 @@ public class ClientController {
     @Autowired
     private ImageGalleryService imageGalleryService;
 
-
     @Autowired
     private AuthBiblioService authBiblioService;
 
     @Autowired
     private LivreService livreService;
 
-
+    /**
+     * Donne la page d'accueil
+     * @param model
+     * @return accueil
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @GetMapping("/")
     public String accueil(Model model) throws IOException, InterruptedException {
 
         List<LivreDTO> listAPI = livreService.getLivreToAccueil();
 
         List<LivreDTO> listCarousel = livreService.getLivreToAccueil(listAPI);
-
 
         model.addAttribute("listeCarousel", listCarousel);
         model.addAttribute("user", authBiblioService.testConnection());

@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-
+/**
+ * RestController JwtAuthenticationController
+ */
 @RestController
 public class JwtAuthenticationController {
 
@@ -43,6 +45,12 @@ public class JwtAuthenticationController {
     ApplicationEventPublisher eventPublisher;
 
 
+    /**
+     * Authentifie l'user
+     * @param authenticationRequest
+     * @return jwt
+     * @throws Exception
+     */
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception
     {
@@ -59,6 +67,12 @@ public class JwtAuthenticationController {
     }
 
 
+    /**
+     * Verfie l'authentification
+     * @param username
+     * @param password
+     * @throws Exception
+     */
     private void authenticate(String username, String password) throws Exception {
         System.out.println("\n \n "+ username+ " \n "  + password );
         try {
@@ -70,6 +84,14 @@ public class JwtAuthenticationController {
         }
     }
 
+    /**
+     * Inscription de l'user
+     * @param user
+     * @param request
+     * @param errors
+     * @return user
+     * @throws Exception
+     */
     @PostMapping("/register")
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user,
                                       HttpServletRequest request,
@@ -82,6 +104,11 @@ public class JwtAuthenticationController {
     }
 
 
+    /**
+     * Recupere un username par le jwt
+     * @param jwt
+     * @return string
+     */
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public ResponseEntity<?> getUserNameByToken(@RequestBody Map<String,String> jwt)
     {
@@ -101,6 +128,11 @@ public class JwtAuthenticationController {
     }
 
 
+    /**
+     * Recupere un user par le jwt
+     * @param jwt
+     * @return user
+     */
     @RequestMapping(value = "/token/{jwt}", method = RequestMethod.GET)
     public ResponseEntity<?> getUserByToken( @PathVariable String jwt)
     {

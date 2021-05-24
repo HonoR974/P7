@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * RestController EspaceController
+ */
 @RestController
 @RequestMapping("/api/espace")
 public class EspaceController
@@ -26,6 +29,11 @@ public class EspaceController
     @Autowired
     private EspaceService espaceService;
 
+    /**
+     * Recupere un user par son id
+     * @param id id-user
+     * @return user
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable(name = "id")Long id)
     {
@@ -33,6 +41,11 @@ public class EspaceController
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Recupere les prets de l'user
+     * @param id id-user
+     * @return liste pret DTO
+     */
     @GetMapping("/prets/{id}")
     public  ResponseEntity<?> getListePretById(@PathVariable(name = "id")Long id)
     {
@@ -44,6 +57,11 @@ public class EspaceController
         return new ResponseEntity<>(pretDTOList, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Recupere un pret par l'id
+     * @param id id-pret
+     * @return pret DTO
+     */
     @GetMapping("/pret/{id}")
     public ResponseEntity<?> getPretById(@PathVariable(name = "id")Long id)
     {

@@ -22,7 +22,9 @@ import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Service AuthBiblioServiceImpl
+ */
 @Service
 public class AuthBiblioServiceImpl implements AuthBiblioService{
 
@@ -37,6 +39,13 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
             .build();
 
 
+    /**
+     * Authentification de l'user
+     * @param user
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public String authenticate(UserDTO user) throws IOException, InterruptedException
     {
@@ -47,12 +56,9 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
             put ("password", user.getPassword());
         }};
 
-
         var objectMapper = new ObjectMapper();
         String requestBody = objectMapper
                 .writeValueAsString(values);
-
-
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:9001/authenticate"))
@@ -76,7 +82,12 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
     }
 
 
-
+    /**
+     * Parsing du jwt
+     * @param jwtBrut
+     * @return jwt
+     * @throws JsonProcessingException
+     */
     @Override
     public String parseJwt(String jwtBrut ) throws JsonProcessingException
     {
@@ -92,9 +103,9 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
 
 
     /**
-     * Récupere un User par son token
+     * Récupere un Username par son token
      * @param jwt jwt
-     * @return
+     * @return username
      * @throws IOException
      * @throws InterruptedException
      */
@@ -129,7 +140,13 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
     }
 
 
-
+    /**
+     * Inscription de l'user
+     * @param userDTO
+     * @return user
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public UserDTO save(UserDTO userDTO) throws IOException, InterruptedException {
 
@@ -173,7 +190,13 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
         return user;
     }
 
-
+    /**
+     * Recupere un user dto par le jwt
+     * @param jwt
+     * @return userdto
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public UserDTO getUserDTOByJwt(String jwt) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
@@ -195,13 +218,20 @@ public class AuthBiblioServiceImpl implements AuthBiblioService{
 
     }
 
+    /**
+     * Recupere le jwt
+     * @return jwt
+     */
     @Override
     public String getJwt()
     {
         return jwt;
     }
 
-
+    /**
+     * Verification de la connection de l'user
+     * @return
+     */
     @Override
     public TesterUser testConnection() {
 

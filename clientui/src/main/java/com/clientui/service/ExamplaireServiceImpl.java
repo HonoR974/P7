@@ -14,6 +14,10 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+
+/**
+ * Service ExamplaireServiceImpl
+ */
 @Service
 public class ExamplaireServiceImpl implements ExamplaireService
 {
@@ -29,9 +33,11 @@ public class ExamplaireServiceImpl implements ExamplaireService
 
 
     /**
-     * return l'examplaire par son id
+     * Recupere un exemplaire par l'id
      * @param id
-     * @return
+     * @return exemplaire
+     * @throws IOException
+     * @throws InterruptedException
      */
     @Override
     public ExamplaireDTO getExamplaire(Long id) throws IOException, InterruptedException {
@@ -64,6 +70,13 @@ public class ExamplaireServiceImpl implements ExamplaireService
         return examplaireDTO;
     }
 
+    /**
+     * Recupere un livre par l'id exemplaire
+     * @param id id-exemplaire
+     * @return livre
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public LivreDTO getLivreByIdExamplaire(Long id) throws IOException, InterruptedException {
 
@@ -90,6 +103,10 @@ public class ExamplaireServiceImpl implements ExamplaireService
         return livreDTO;
     }
 
+    /**
+     * Retourne le jwt
+     * @return
+     */
     @Override
     public String getJwt()
     {

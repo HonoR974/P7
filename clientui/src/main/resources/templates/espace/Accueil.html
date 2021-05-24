@@ -54,6 +54,13 @@
                         <a class="nav-link" th:href="@{/espace/admin/prets}">Admin Page</a>
                     </li>
 
+                    <!-- btn logout -->
+                    <li class="nav-item"  th:if="${user.connected}" >
+
+                        <!--  <a th:url="/logout">">Logout</a> -->
+                        <a class="nav-link" th:href="@{/logout}">Logout</a>
+                    </li>
+
                 </ul>
 
             </div>
@@ -83,8 +90,8 @@
 
                         <div class="infoCard">
                             <div class="titleCard" th:utext="${pret.titre}"></div>
-                            <div class="dateCard"> <div class="titreDate">Date Début</div> <div class="date" th:utext="${pret.date_debut}"></div></div>
-                            <div class="dateCard"> <div class="titreDate">Date Fin</div> <div class="date" th:utext="${pret.date_fin}"></div></div>
+                            <div class="dateCard"> <div class="titreDate">Date Début</div> <div class="date" th:utext="${#dates.format(pret.date_debut, 'dd-MM-yyyy')}"></div></div>
+                            <div class="dateCard"> <div class="titreDate">Date Fin</div> <div class="date" th:utext="${#dates.format(pret.date_fin, 'dd-MM-yyyy')}"></div></div>
                         </div>
 
                         <div class="buttonCard">

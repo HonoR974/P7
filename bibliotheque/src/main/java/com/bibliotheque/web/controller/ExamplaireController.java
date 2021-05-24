@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * RestController ExemplaireController
+ * Chaque methode renvoie un objet DTO
+ */
+
 @RestController
 @RequestMapping("/api/examplaire")
 public class ExamplaireController {
@@ -28,6 +33,10 @@ public class ExamplaireController {
     @Autowired
     private LivreService livreService;
 
+    /**
+     * Recupere touts les exemplaires
+     * @return liste exemplaires
+     */
     @GetMapping
     public List<ExamplaireDTO> getAllExamplaire()
     {
@@ -36,6 +45,11 @@ public class ExamplaireController {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Créer un exemplaire
+     * @param examplaireDTO
+     * @return exemplaire
+     */
     @PostMapping
     public ResponseEntity<ExamplaireDTO> createExamplaire(@RequestBody ExamplaireDTO examplaireDTO)
     {
@@ -48,6 +62,11 @@ public class ExamplaireController {
         return new ResponseEntity<ExamplaireDTO>(HttpStatus.CREATED);
     }
 
+    /**
+     * Recupere un exemplaire par l'id
+     * @param id id-exemplaire
+     * @return exemplaire
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ExamplaireDTO> getExamplaireById(@PathVariable(name = "id")Long id)
     {
@@ -58,6 +77,12 @@ public class ExamplaireController {
         return new ResponseEntity<ExamplaireDTO>(examplaireDTO,HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Modifie un exemplaire
+     * @param id id-exemplaire
+     * @param examplaireDTO
+     * @return exemplaire
+     */
     @PutMapping("/{id}")
     public ResponseEntity<ExamplaireDTO> updateExamplaire(@PathVariable(name = "id") Long id,
                                                        @RequestBody ExamplaireDTO examplaireDTO)
@@ -71,6 +96,11 @@ public class ExamplaireController {
         return new ResponseEntity<ExamplaireDTO>(examplaireResponse,HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Supprime un exemplaire
+     * @param id
+     * @return Statut Http
+     */
     @DeleteMapping("/{id}")
     public HttpStatus deleteExamplaire(@PathVariable(name = "id")Long id)
     {
@@ -78,6 +108,11 @@ public class ExamplaireController {
         return HttpStatus.ACCEPTED;
     }
 
+    /**
+     * Recupere le livre par l'id
+     * @param id id-livre
+     * @return livre
+     */
     @GetMapping("/livre/{id}")
     public ResponseEntity<LivreDTO> getLivreByIdExamplaire(@PathVariable(name = "id")Long id)
     {

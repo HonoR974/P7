@@ -16,9 +16,6 @@ public class FileUploadUtil {
 
     private static String FILE_NAME = "clientui/src/main/resources/static/image/";
 
-
-
-
     public static void saveFile(String uploadDir, String fileName,
                                 byte[] file) throws IOException {
 

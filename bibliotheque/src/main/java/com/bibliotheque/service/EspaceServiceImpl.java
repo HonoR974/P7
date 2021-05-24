@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service EspaceServiceImpl
+ */
 @Service
 public class EspaceServiceImpl implements EspaceService
 {
@@ -26,6 +29,11 @@ public class EspaceServiceImpl implements EspaceService
     @Autowired
     private StatutRepository statutRepository;
 
+    /**
+     * Recupere l'user par son id
+     * @param id id-user
+     * @return user
+     */
     @Override
     public User getUserById(long id)
     {
@@ -57,6 +65,11 @@ public class EspaceServiceImpl implements EspaceService
 
     }
 
+    /**
+     * Conversion pour une liste DTO
+     * @param list list prets
+     * @return liste pret DTO
+     */
     @Override
     public List<PretDTO> giveListDTO(List<Pret> list)
     {
@@ -71,6 +84,11 @@ public class EspaceServiceImpl implements EspaceService
         return pretDTOList;
     }
 
+    /**
+     * Conversion DTO
+     * @param pret
+     * @return pret DTO
+     */
     @Override
     public PretDTO givePretDTO(Pret pret)
     {
@@ -103,10 +121,14 @@ public class EspaceServiceImpl implements EspaceService
         return pretDTO;
     }
 
+    /**
+     * Recupere un pret par l'id
+     * @param id id-pret
+     * @return pret
+     */
     @Override
     public Pret getPretById(long id)
     {
-
         return pretRepository.findById(id);
     }
 }

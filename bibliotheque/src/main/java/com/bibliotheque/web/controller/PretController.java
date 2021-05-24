@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * RestController PretController
+ */
 @RestController
 @RequestMapping("/api/pret")
 public class PretController {
@@ -28,7 +31,7 @@ public class PretController {
      * Recois l'id de l'examplaire
      * return un pret
      * @param id_examplaire
-     * @return
+     * @return pret dto
      */
     @GetMapping("/create/{id}")
     public ResponseEntity<PretDTO> createPret(@PathVariable(name = "id")Long id_examplaire)
@@ -42,6 +45,11 @@ public class PretController {
 
     }
 
+    /**
+     * Valide un pret
+     * @param id_pret
+     * @return pret dto
+     */
     @PostMapping("/validate/{id}")
     public ResponseEntity<PretDTO> validePret(@PathVariable(name = "id")Long id_pret)
     {
@@ -54,6 +62,12 @@ public class PretController {
         return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.CREATED);
     }
 
+
+    /**
+     * Recupere un pret par l'id
+     * @param id
+     * @return pret
+     */
     @GetMapping("/{id}")
     public ResponseEntity<PretDTO> getPretById(@PathVariable(name = "id")Long id)
     {
@@ -64,6 +78,11 @@ public class PretController {
         return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Finalise un pret
+     * @param id id-pret
+     * @return statut Http
+     */
     @GetMapping ("/finish/{id}")
     public HttpStatus finishProjet(@PathVariable(value = "id")Long id)
     {
@@ -71,6 +90,11 @@ public class PretController {
         return HttpStatus.ACCEPTED;
     }
 
+    /**
+     * Prolonge un pret
+     * @param id id-pret
+     * @return  pret dto
+     */
     @GetMapping("/prolong/{id}")
     public ResponseEntity<PretDTO> prolongPret(@PathVariable (value = "id")Long id)
     {
@@ -81,6 +105,10 @@ public class PretController {
         return new ResponseEntity<PretDTO>(pretDTO, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Recupere les prets en cours
+     * @return
+     */
     @GetMapping("/admin/prets")
     public ResponseEntity<?> getPretEmprunter()
     {

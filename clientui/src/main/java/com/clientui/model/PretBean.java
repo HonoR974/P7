@@ -1,13 +1,19 @@
 package com.clientui.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
+import java.util.Date;
 
 public class PretBean
 {
     private Long id;
 
-    private LocalDate date_debut;
-    private LocalDate date_fin;
+  //  @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date date_debut;
+
+  //  @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date date_fin;
 
     private String username;
     private String  titre;
@@ -25,21 +31,6 @@ public class PretBean
         this.id = id;
     }
 
-    public LocalDate getDate_debut() {
-        return date_debut;
-    }
-
-    public void setDate_debut(LocalDate date_debut) {
-        this.date_debut = date_debut;
-    }
-
-    public LocalDate getDate_fin() {
-        return date_fin;
-    }
-
-    public void setDate_fin(LocalDate date_fin) {
-        this.date_fin = date_fin;
-    }
 
     public String getUsername() {
         return username;
@@ -71,5 +62,21 @@ public class PretBean
 
     public void setTitreImage(String titreImage) {
         this.titreImage = titreImage;
+    }
+
+    public Date getDate_debut() {
+        return date_debut;
+    }
+
+    public void setDate_debut(Date date_debut) {
+        this.date_debut = date_debut;
+    }
+
+    public Date getDate_fin() {
+        return date_fin;
+    }
+
+    public void setDate_fin(Date date_fin) {
+        this.date_fin = date_fin;
     }
 }

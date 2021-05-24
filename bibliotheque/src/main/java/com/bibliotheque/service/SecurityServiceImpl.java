@@ -12,6 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service SecurityServiceimpl
+ */
 @Service
 public class SecurityServiceImpl implements SecurityService{
 
@@ -23,6 +26,10 @@ public class SecurityServiceImpl implements SecurityService{
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
+    /**
+     * Verification de l'authentification
+     * @return boolean
+     */
     @Override
     public boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -33,6 +40,10 @@ public class SecurityServiceImpl implements SecurityService{
         return authentication.isAuthenticated();
     }
 
+    /**
+     * Recupere l'user
+     * @return user
+     */
     @Override
     public User getUser()
     {
@@ -45,6 +56,10 @@ public class SecurityServiceImpl implements SecurityService{
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * Recupere l'username
+     * @return string
+     */
     @Override
     public String getUsername()
     {

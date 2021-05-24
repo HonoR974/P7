@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * RestController LivreController
+ */
 @RestController
 @RequestMapping("/api/livre")
 public class LivreController {
@@ -25,6 +28,10 @@ public class LivreController {
     @Autowired
     private LivreService livreService;
 
+    /**
+     * Recupere touts les livres
+     * @return liste DTO
+     */
     @GetMapping
     public List<LivreDTO> getAllLivres()
     {
@@ -35,6 +42,11 @@ public class LivreController {
         return livreDTOList;
     }
 
+    /**
+     * Creer un livre
+     * @param livreDTO
+     * @return livre dto
+     */
     @PostMapping
     public ResponseEntity<LivreDTO> createLivre(@RequestBody LivreDTO livreDTO)
     {
@@ -49,6 +61,11 @@ public class LivreController {
         return new ResponseEntity<LivreDTO>(livreResponse, HttpStatus.CREATED);
     }
 
+    /**
+     * Recupere un livre par son id
+     * @param id
+     * @return livre dto
+     */
     @GetMapping("/detail/{id}")
     public ResponseEntity<LivreDTO> getLivreById(@PathVariable(name = "id") Long id)
     {
@@ -62,6 +79,12 @@ public class LivreController {
         return new ResponseEntity<LivreDTO>(livreResponse, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Modifie un livre
+     * @param id id-livre
+     * @param livreDTO
+     * @return livre dto
+     */
     @PutMapping("/{id}")
     public ResponseEntity<LivreDTO> updateLivre(@PathVariable(name = "id")Long id,
                                                 @RequestBody LivreDTO livreDTO)
@@ -79,6 +102,11 @@ public class LivreController {
         return ResponseEntity.ok().body(livreResponse);
     }
 
+    /**
+     * Supprime un livre
+     * @param id id-livre
+     * @return Statut Http
+     */
     @DeleteMapping("/{id}")
     public HttpStatus deleteLivre(@PathVariable(name = "id")Long id)
     {
@@ -86,6 +114,11 @@ public class LivreController {
         return HttpStatus.ACCEPTED;
     }
 
+    /**
+     * Recupere touts les exemplaires d'un livre
+     * @param id id-livre
+     * @return liste exemplaire dto
+     */
     @GetMapping("/examplaires")
     public ResponseEntity<?>  getAllExamplaireByIdLivre(@RequestParam(name = "id")long id)
     {
@@ -97,6 +130,10 @@ public class LivreController {
         return new ResponseEntity<List<ExamplaireDTO>>(examplaireDTOS, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Recupere des livres pour l'accueil
+     * @return liste dto
+     */
     @GetMapping("/accueil")
     public ResponseEntity<?> getLivreToAccueil()
     {

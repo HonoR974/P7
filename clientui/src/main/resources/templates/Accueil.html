@@ -155,7 +155,7 @@
                                 </div>
                             </div>
 
-                            <div class="carousel-item"  >
+                        <!--    <div class="carousel-item"  >
                                 <div class="itemCarousel">
 
                                     <div class="infoCarousel">
@@ -166,24 +166,24 @@
 
                                                 <tr>
                                                     <th>Titre  </th>
-                                                    <td th:utext="${listeCarousel.get(1).titre}"></td>
+                                                    <td th:utext="${listeCarousel.get(5).titre}"></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th>Auteur  </th>
-                                                    <td th:utext="${listeCarousel.get(1).auteur}"></td>
+                                                    <td th:utext="${listeCarousel.get(5).auteur}"></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th>Résumé </th>
-                                                    <td th:utext="${listeCarousel.get(1).description}"></td>
+                                                    <td th:utext="${listeCarousel.get(5).description}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="btnLivre">
                                             <button>
-                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(1).id})}">Voir le livre</a>
+                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(5).id})}">Voir le livre</a>
                                             </button>
                                         </div>
 
@@ -195,8 +195,9 @@
 
                                 </div>
                             </div>
+                            -->
 
-                            <div class="carousel-item"  >
+                       <!--    <div class="carousel-item"  >
                                 <div class="itemCarousel">
 
                                     <div class="infoCarousel">
@@ -207,35 +208,35 @@
 
                                                 <tr>
                                                     <th>Titre  </th>
-                                                    <td th:utext="${listeCarousel.get(1).titre}"></td>
+                                                    <td th:utext="${listeCarousel.get(8).titre}"></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th>Auteur  </th>
-                                                    <td th:utext="${listeCarousel.get(1).auteur}"></td>
+                                                    <td th:utext="${listeCarousel.get(8).auteur}"></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th>Résumé </th>
-                                                    <td th:utext="${listeCarousel.get(1).description}"></td>
+                                                    <td th:utext="${listeCarousel.get(8).description}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="btnLivre">
                                             <button>
-                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(1).id})}">Voir le livre</a>
+                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(8).id})}">Voir le livre</a>
                                             </button>
                                         </div>
 
                                     </div>
                                     <div class="imageCarousel">
-                                        <img th:src="@{'/image/' + ${listeCarousel.get(1).titreImage}}" th:alt="${listeCarousel.get(1).titreImage}"/>
+                                        <img th:src="@{'/image/' + ${listeCarousel.get(8).titreImage}}" th:alt="${listeCarousel.get(8).titreImage}"/>
                                     </div>
 
 
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="carousel-item"  >
                                 <div class="itemCarousel">
@@ -248,30 +249,30 @@
 
                                                 <tr>
                                                     <th>Titre  </th>
-                                                    <td th:utext="${listeCarousel.get(1).titre}"></td>
+                                                    <td th:utext="${listeCarousel.get(4).titre}"></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th>Auteur  </th>
-                                                    <td th:utext="${listeCarousel.get(1).auteur}"></td>
+                                                    <td th:utext="${listeCarousel.get(4).auteur}"></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th>Résumé </th>
-                                                    <td th:utext="${listeCarousel.get(1).description}"></td>
+                                                    <td th:utext="${listeCarousel.get(4).description}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="btnLivre">
                                             <button>
-                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(1).id})}">Voir le livre</a>
+                                                <a th:href="@{/livre/Examplaires(id=${listeCarousel.get(4).id})}">Voir le livre</a>
                                             </button>
                                         </div>
 
                                     </div>
                                     <div class="imageCarousel">
-                                        <img th:src="@{'/image/' + ${listeCarousel.get(1).titreImage}}" th:alt="${listeCarousel.get(1).titreImage}"/>
+                                        <img th:src="@{'/image/' + ${listeCarousel.get(4).titreImage}}" th:alt="${listeCarousel.get(4).titreImage}"/>
                                     </div>
 
 

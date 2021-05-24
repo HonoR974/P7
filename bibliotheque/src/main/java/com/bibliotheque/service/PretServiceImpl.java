@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Service PretServiceImpl
+ */
 @Service
 public class PretServiceImpl implements PretService
 {
@@ -38,9 +41,8 @@ public class PretServiceImpl implements PretService
     /**
      * Creer un pret avec l'id_examplaire et l'id de l'user grave au jwt
      * Recois l'id de l'examplaire
-     * return un pret
      * @param id_examplaire
-     * @return
+     * @return pret
      */
     @Override
     public Pret createPret(Long id_examplaire) {
@@ -69,6 +71,11 @@ public class PretServiceImpl implements PretService
         return pret;
     }
 
+    /**
+     * Conversion DTO
+     * @param pret
+     * @return pret DTO
+     */
     @Override
     public PretDTO givePretDTO(Pret pret)
     {
@@ -104,7 +111,11 @@ public class PretServiceImpl implements PretService
         return pretDTO;
     }
 
-
+    /**
+     * Conversion liste DTO
+     * @param list
+     * @return
+     */
     @Override
     public List<PretDTO> giveListPretDTO(List<Pret> list) {
         List<PretDTO> pretDTOList = new ArrayList<>();
@@ -119,7 +130,7 @@ public class PretServiceImpl implements PretService
     /**
      * Valide le pret
      * @param id_pret
-     * @return
+     * @return pret
      */
     @Override
     public Pret validePret(long id_pret)
@@ -141,11 +152,20 @@ public class PretServiceImpl implements PretService
         return pret;
     }
 
+    /**
+     * Recupere le pret par l'id
+     * @param id_pret
+     * @return
+     */
     @Override
     public Pret getPretById(long id_pret) {
         return pretRepository.findById(id_pret);
     }
 
+    /**
+     * Finalise le pret
+     * @param id_pret
+     */
     @Override
     public void finishPret(long id_pret)
     {
@@ -161,6 +181,11 @@ public class PretServiceImpl implements PretService
         pretRepository.save(pret);
     }
 
+    /**
+     * Prolonge le prt
+     * @param id_pret
+     * @return pret
+     */
     @Override
     public Pret prolongPret(long id_pret)
     {
@@ -183,6 +208,10 @@ public class PretServiceImpl implements PretService
         return pret;
     }
 
+    /**
+     * Recupere une liste de pret
+     * @return liste pret
+     */
     @Override
     public List<Pret> getPretEmprunter() {
         Statut statut = statutRepository.findByNom("Valider");

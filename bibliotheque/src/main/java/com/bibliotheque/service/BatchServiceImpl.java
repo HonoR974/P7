@@ -106,10 +106,13 @@ public class BatchServiceImpl implements BatchService{
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
     @Override
     public List<PretBatchDTO> getPretEnCours() throws IOException {
-
-
 
         Statut statut = statutRepository.findByNom("Valider");
         Statut statut1 = statutRepository.findByNom("Prolonger");
@@ -124,6 +127,11 @@ public class BatchServiceImpl implements BatchService{
         return convertForBatch(list);
     }
 
+
+    /**
+     * Envoie les Prets en cours dans verfication
+     * @param map
+     */
     @Override
     public void sendPretEnCours(Map<Integer,PretBatchDTO> map)
     {

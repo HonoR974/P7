@@ -60,7 +60,8 @@ public class BatchConfig {
 
     @Bean
     public MethodInvokingTaskletAdapter checkDate()
-    {MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
+    {
+        MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
 
         adapter.setTargetObject(pretService());
         adapter.setTargetMethod("getPretEnCours");

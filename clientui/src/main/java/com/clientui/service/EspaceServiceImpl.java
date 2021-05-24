@@ -14,6 +14,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
+/**
+ * Service EspaceServiceImpl
+ */
 @Service
 public class EspaceServiceImpl implements EspaceService
 {
@@ -33,6 +36,13 @@ public class EspaceServiceImpl implements EspaceService
         this.authBiblioService = authBiblioServiceSend;
     }
 
+    /**
+     * Recupere un userdto par l'id e
+     * @param id_user
+     * @return userdto
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public UserDTO getUserDTOByID(Long id_user) throws IOException, InterruptedException {
         this.jwt = authBiblioService.getJwt();
@@ -57,6 +67,13 @@ public class EspaceServiceImpl implements EspaceService
 
     }
 
+    /**
+     * Recupere un eliste de pret par l'id user
+     * @param id_user
+     * @return liste pret
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public List<PretDTO> getListePretByIdUser(Long id_user) throws IOException, InterruptedException {
         this.jwt = authBiblioService.getJwt();
@@ -80,6 +97,13 @@ public class EspaceServiceImpl implements EspaceService
                 new TypeReference<List<PretDTO>>() {});
     }
 
+    /**
+     * Recupere le pretdto par l'id
+     * @param id_pret
+     * @return pret dto
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public PretDTO getPretDTOByIdPret(Long id_pret) throws IOException, InterruptedException {
 

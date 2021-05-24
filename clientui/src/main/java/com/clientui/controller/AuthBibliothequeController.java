@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-
+/**
+ * Controller AuthBibliothequeController
+ */
 @Controller
 public class AuthBibliothequeController {
 
@@ -33,7 +35,11 @@ public class AuthBibliothequeController {
     private LivreService livreService;
 
 
-
+    /**
+     * Donne la page de login
+     * @param model
+     * @return page de login
+     */
     @GetMapping("/login")
     public String loggin(Model model)
     {
@@ -44,6 +50,14 @@ public class AuthBibliothequeController {
     }
 
 
+    /**
+     * Authentifie l'user
+     * @param userDTO
+     * @param model
+     * @return page d'accueil
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @PostMapping("/authenticate")
     public String authenticate (@ModelAttribute(value = "user")UserDTO userDTO,
                                 Model model) throws IOException, InterruptedException {
@@ -65,17 +79,9 @@ public class AuthBibliothequeController {
             System.out.println("\n Mauvaise URI " );
         }
 
-
-
-
         model.addAttribute("username", username);
         model.addAttribute("jwt", jwt);
         model.addAttribute("user",authBiblioService.testConnection());
-
-        /**
-        List<LivreDTO> list = livreService.getAll();
-        model.addAttribute("liste", list);
-        */
 
         return  "redirect:/";
     }
@@ -83,9 +89,9 @@ public class AuthBibliothequeController {
 
 
     /**
-     * Page Register
+     * Page Inscription
      * @param model
-     * @return
+     * @return page inscription
      */
     @GetMapping("/register")
     public String inscriptionPage(Model model)
@@ -100,7 +106,7 @@ public class AuthBibliothequeController {
      *
      * @param userDTO
      * @param model
-     * @return
+     * @return page liste livres
      * @throws IOException
      * @throws InterruptedException
      */

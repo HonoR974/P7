@@ -56,6 +56,13 @@
                     <a class="nav-link" th:href="@{/logout}">Logout</a>
                 </li>
 
+                <!-- btn logout -->
+                <li class="nav-item"  th:if="${user.connected}" >
+
+                    <!--  <a th:url="/logout">">Logout</a> -->
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+
             </ul>
 
         </div>
@@ -93,12 +100,12 @@
 
                     <tr>
                         <th>Date Debut</th>
-                        <td th:utext="${pret.date_debut}"></td>
+                        <td th:utext="${#dates.format(pret.date_debut, 'dd-MM-yyyy')}"></td>
                     </tr>
 
                     <tr>
                         <th>Date fin</th>
-                        <td th:utext="${pret.date_fin}"></td>
+                        <td th:utext="${#dates.format(pret.date_fin, 'dd-MM-yyyy')}"></td>
                     </tr>
                     <tr>
                         <th>Utilisateur</th>

@@ -49,6 +49,12 @@
                     <a class="nav-link" th:href="@{/register}">Sign up</a>
                 </li>
 
+                <!-- btn logout -->
+                <li class="nav-item"  th:if="${user.connected}" >
+
+                    <!--  <a th:url="/logout">">Logout</a> -->
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
             </ul>
 
         </div>

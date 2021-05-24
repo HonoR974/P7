@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller BibliothequeController
+ */
 
 @Controller
 public class BibliothequeController {
@@ -24,7 +27,7 @@ public class BibliothequeController {
      * return la liste des bibliotheque de la ville
      * @param jwt
      * @param model
-     * @return
+     * @return liste bibliotheque
      * @throws IOException
      * @throws InterruptedException
      */
@@ -36,16 +39,14 @@ public class BibliothequeController {
         return "bibliotheque/Accueil";
     }
 
-    @GetMapping("/bibliotheque/detail")
-    public String getBibliothequeById(@RequestParam(name = "id")Long id,
-                                      Model model) throws IOException, InterruptedException {
-
-        BibliothequeDTO bibliothequeDTO = bibliothequeService.getBibliothequeById(id);
-
-        model.addAttribute("biblio", bibliothequeDTO);
-        return "bibliotheque/Bibliotheque";
-    }
-
+    /**
+     * Donne la page liste livres
+     * @param id
+     * @param model
+     * @return liste livres
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @GetMapping("/bibliotheque/Livres")
     public String getAllLivreByIdBiblio(@RequestParam(value = "id")Long id,
                                         Model model) throws IOException, InterruptedException {

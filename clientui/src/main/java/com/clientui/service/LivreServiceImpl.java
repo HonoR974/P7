@@ -14,6 +14,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Service LivreServiceImpl
+ */
 @Service
 public class LivreServiceImpl implements  LivreService{
 
@@ -29,6 +33,12 @@ public class LivreServiceImpl implements  LivreService{
         this.bibliothequeService = bibliothequeService;
     }
 
+    /**
+     * Recupere touts les livres
+     * @return liste livre
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public List<LivreDTO> getAll() throws IOException, InterruptedException {
 
@@ -50,6 +60,13 @@ public class LivreServiceImpl implements  LivreService{
         return list;
     }
 
+    /**
+     * Recupere touts les exemplaire par l'id livre
+     * @param id id-livre
+     * @return liste exemplaire
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public List<ExamplaireDTO> getAllExamplaireByIdLivre(Long id) throws IOException, InterruptedException {
 
@@ -75,6 +92,14 @@ public class LivreServiceImpl implements  LivreService{
         return list;
     }
 
+
+    /**
+     * Recupere un livre par l'id
+     * @param id
+     * @return livre
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public LivreDTO getLivreByIdLivre(Long id) throws IOException, InterruptedException {
 
@@ -98,11 +123,22 @@ public class LivreServiceImpl implements  LivreService{
         return livreDTO;
     }
 
+    /**
+     * Retourne le jwt
+     * @return jwt
+     */
     @Override
     public String getJwt() {
         return jwt;
     }
 
+
+    /**
+     * Recupere des livres pour l'accueil
+     * @return liste livre
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public List<LivreDTO> getLivreToAccueil() throws IOException, InterruptedException {
 
@@ -126,6 +162,12 @@ public class LivreServiceImpl implements  LivreService{
         return list;
     }
 
+
+    /**
+     * Recupere les livres pour l'accueil
+     * @param list
+     * @return liste livre
+     */
     @Override
     public List<LivreDTO> getLivreToAccueil(List<LivreDTO> list) {
 

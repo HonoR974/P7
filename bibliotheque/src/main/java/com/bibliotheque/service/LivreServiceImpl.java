@@ -11,19 +11,30 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service LivreServiceImpl
+ */
 @Service
 public class LivreServiceImpl implements LivreService{
 
     @Autowired
     private LivreRepository livreRepository;
 
-
+    /**
+     * Recupere touts les livres
+     * @return liste livres
+     */
     @Override
     public List<Livre> getAllLivres()
     {
         return livreRepository.findAll();
     }
 
+    /**
+     * Créer un livre
+     * @param livre
+     * @return livre
+     */
     @Override
     public Livre createLivre(Livre livre)
     {
@@ -31,6 +42,12 @@ public class LivreServiceImpl implements LivreService{
         return livre;
     }
 
+
+    /**
+     * Recupere un livre selon l'id
+     * @param id id-livre
+     * @return l'id
+     */
     @Override
     public Livre getLivreById(long id) {
         Livre livre=  livreRepository.findById(id);
@@ -38,6 +55,12 @@ public class LivreServiceImpl implements LivreService{
         return livre;
     }
 
+    /**
+     * Modifie un livre
+     * @param id id-livre
+     * @param livreRequest
+     * @return livre
+     */
     @Override
     public Livre updateLivre(long id, Livre livreRequest)
     {
@@ -48,11 +71,21 @@ public class LivreServiceImpl implements LivreService{
         return livre;
     }
 
+
+    /**
+     * Supprime un livre
+     * @param id id-livre
+     */
     @Override
     public void deleteLivre(long id) {
         livreRepository.deleteById(id);
     }
 
+    /**
+     * Recupere touts les exemplaires d'un livre
+     * @param id id-livre
+     * @return liste exemplaire
+     */
     @Override
     public List<Examplaire> getAllExamplaireByIdLivre(long id) {
         Livre livre = livreRepository.findById(id);
@@ -71,6 +104,11 @@ public class LivreServiceImpl implements LivreService{
         return listFinal;
     }
 
+    /**
+     * Conversion Liste DTO
+     * @param list
+     * @return liste DTO
+     */
     @Override
     public List<LivreDTO> convertListLivre(List<Livre> list)
     {
@@ -105,6 +143,11 @@ public class LivreServiceImpl implements LivreService{
         return listFinal;
     }
 
+    /**
+     * Conversion DTO
+     * @param livre
+     * @return livreDTO
+     */
     @Override
     public LivreDTO convertLivre(Livre livre) {
 
@@ -133,6 +176,10 @@ public class LivreServiceImpl implements LivreService{
     }
 
 
+    /**
+     * Recupere touts les livres
+     * @return
+     */
     @Override
     public List<Livre> getAllLivre() {
         return livreRepository.findAll();
