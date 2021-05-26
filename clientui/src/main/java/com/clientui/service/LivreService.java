@@ -58,4 +58,6 @@ public interface LivreService {
      */
     List<LivreDTO> getLivreToAccueil(List<LivreDTO> list);
 
+    List<LivreDTO> recherche(String search) throws IOException, InterruptedException;
+
 }

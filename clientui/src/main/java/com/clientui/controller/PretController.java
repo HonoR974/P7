@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.util.List;
 
 
 /**
@@ -133,7 +134,11 @@ public class PretController
        PretDTO pretDTO2 = pretService.getPretDTOById(id);
        boolean prolongable=false;
         UserDTO userDTO = authBiblioService.getUserDTOByJwt(authBiblioService.getJwt());
+        model.addAttribute("user", authBiblioService.testConnection());
+        model.addAttribute("utilisateur", userDTO);
 
+        List<PretDTO> list =  espaceService.getListePretByIdUser(userDTO.getId());
+       model.addAttribute("liste", pretService.convertList(list));
 
         //si il n'a pas été prolongé
        if (! pretDTO2.isEnabled())
@@ -143,24 +148,15 @@ public class PretController
 
            prolongable = true;
 
-           model.addAttribute("user", authBiblioService.testConnection());
-           model.addAttribute("utilisateur", userDTO);
-           model.addAttribute("liste", espaceService.getListePretByIdUser(userDTO.getId()));
-            model.addAttribute("prolongable", prolongable);
        }
        //on peut le prolonger qu'une fois
        else
        {
 
             prolongable = false;
-
-           model.addAttribute("user", authBiblioService.testConnection());
-           model.addAttribute("utilisateur", userDTO);
-           model.addAttribute("liste", espaceService.getListePretByIdUser(userDTO.getId()));
-           model.addAttribute("prolongable", prolongable);
        }
 
-
+        model.addAttribute("prolongable", prolongable);
         return "espace/Accueil";
     }
 

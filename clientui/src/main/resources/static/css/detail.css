@@ -27,6 +27,7 @@ a
 .row
 {
     justify-content: space-around;
+    min-height: 850px;
 }
 
 

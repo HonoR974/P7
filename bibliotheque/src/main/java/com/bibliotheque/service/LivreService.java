@@ -72,4 +72,6 @@ public interface LivreService {
      */
     List<Livre> getAllLivre();
 
+    List<Livre> searchLivre(String recherche);
+
 }

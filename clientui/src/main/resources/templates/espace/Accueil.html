@@ -69,7 +69,10 @@
 
     <div class="alert" th:if="${!prolongable || prolongable==null}">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        Les prets peuvent renouveller qu'une seul fois
+        <div class="textAlert">
+            Les prets peuvent être renouveller  qu'une seul fois
+        </div>
+
     </div>
 
 

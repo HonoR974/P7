@@ -4,6 +4,7 @@ import com.clientui.convert.BASE64DecodedMultipartFile;
 import com.clientui.dto.LivreDTO;
 import com.clientui.dto.UserDTO;
 import com.clientui.model.ImageGallery;
+import com.clientui.model.TesterUser;
 import com.clientui.service.AuthBiblioService;
 import com.clientui.service.FileUploadUtil;
 import com.clientui.service.ImageGalleryService;
@@ -57,7 +58,7 @@ public class ClientController {
 
         List<LivreDTO> listCarousel = livreService.getLivreToAccueil(listAPI);
 
-        model.addAttribute("listeCarousel", listCarousel);
+       // model.addAttribute("listeCarousel", listCarousel);
         model.addAttribute("user", authBiblioService.testConnection());
 
         return "Accueil";
@@ -70,7 +71,6 @@ public class ClientController {
         model.addAttribute("img", img);
         return "index";
     }
-
 
 
     @PostMapping("/image/saveImageDetails")
@@ -126,7 +126,6 @@ public class ClientController {
 
     }
 
-
     @GetMapping("/images")
     public String getAllImage(Model model) throws IOException, InterruptedException {
 
@@ -137,4 +136,16 @@ public class ClientController {
 
     }
 
+
+    @GetMapping("/search")
+    public String search(@RequestParam("search")String recherche,Model model) throws IOException, InterruptedException {
+
+
+        List<LivreDTO> list = livreService.recherche(recherche);
+        TesterUser user = authBiblioService.testConnection();
+
+        model.addAttribute("liste", list);
+        model.addAttribute("user", user);
+        return "livres/Recherche";
+    }
 }

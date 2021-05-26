@@ -180,4 +180,30 @@ public class LivreServiceImpl implements  LivreService{
         System.out.println("\n la longueur de liste pour accueil " + listeDTO.size());
         return listeDTO;
     }
+
+
+    @Override
+    public List<LivreDTO> recherche(String search) throws IOException, InterruptedException {
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://localhost:9001/api/search/"+search))
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .build();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String reponse = httpResponse.body();
+
+        System.out.println("\n response " + httpResponse + "\n reponse " + reponse);
+
+
+        List<LivreDTO> list = mapper.readValue(httpResponse.body().toString(), new TypeReference<List<LivreDTO>>(){});
+
+        return list;
+
+
+    }
 }

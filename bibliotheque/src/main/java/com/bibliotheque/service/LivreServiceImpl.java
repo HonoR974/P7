@@ -184,4 +184,17 @@ public class LivreServiceImpl implements LivreService{
     public List<Livre> getAllLivre() {
         return livreRepository.findAll();
     }
+
+
+    @Override
+    public List<Livre> searchLivre(String recherche) {
+
+        List<Livre> list = livreRepository.findByTitreIgnoreCaseOrAuteurIgnoreCase(recherche, recherche);
+
+        System.out.println("\n Recherche " + list);
+
+        List<Livre> list2 = livreRepository.findByTitreOrAuteur(recherche,recherche);
+
+        return list;
+    }
 }
