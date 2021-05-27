@@ -58,7 +58,7 @@ public class ClientController {
 
         List<LivreDTO> listCarousel = livreService.getLivreToAccueil(listAPI);
 
-       // model.addAttribute("listeCarousel", listCarousel);
+        model.addAttribute("listeCarousel", listCarousel);
         model.addAttribute("user", authBiblioService.testConnection());
 
         return "Accueil";

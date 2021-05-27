@@ -72,6 +72,12 @@ public interface LivreService {
      */
     List<Livre> getAllLivre();
 
+
+    /**
+     * Recherche des ouvrages par titre et auteur
+     * @param recherche
+     * @return liste livre
+     */
     List<Livre> searchLivre(String recherche);
 
 }

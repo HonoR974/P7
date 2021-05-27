@@ -187,7 +187,7 @@ public class LivreServiceImpl implements  LivreService{
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:9001/api/search/"+search))
+                .uri(URI.create("http://localhost:9001/api/search/" +search))
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .build();
 

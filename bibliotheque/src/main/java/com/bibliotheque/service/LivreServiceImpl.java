@@ -186,15 +186,28 @@ public class LivreServiceImpl implements LivreService{
     }
 
 
+    /**
+     * Recherche des ouvrages par titre et auteur
+     * @param recherche
+     * @return liste livre
+     */
     @Override
     public List<Livre> searchLivre(String recherche) {
 
-        List<Livre> list = livreRepository.findByTitreIgnoreCaseOrAuteurIgnoreCase(recherche, recherche);
 
-        System.out.println("\n Recherche " + list);
+       // List<Livre> list3 = livreRepository.findByTitreContainingOrAuteurContaining(recherche,recherche);
 
-        List<Livre> list2 = livreRepository.findByTitreOrAuteur(recherche,recherche);
+      //  System.out.println("\n list 3  " + list3);
 
-        return list;
+        List<Livre> list4 = livreRepository.findByTitreContainsOrAuteurContains(recherche,recherche);
+
+        System.out.println("\n list 4  " + list4);
+
+        //List<Livre> list5 = livreRepository.findByTitreIsContainingOrAuteurIsContaining(recherche,recherche);
+
+        //System.out.println("\n list   " + list5);
+
+
+        return list4;
     }
 }
