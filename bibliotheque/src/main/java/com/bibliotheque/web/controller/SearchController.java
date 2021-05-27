@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * RestController SearchController
+ */
 @RestController
 @RequestMapping("/api/search")
 public class SearchController {
@@ -17,6 +20,11 @@ public class SearchController {
     @Autowired
     private LivreService livreService;
 
+    /**
+     * Recherche d'ouvrage par le titre et l'auteur
+     * @param recherche
+     * @return liste livre dto
+     */
     @GetMapping("/{search}")
     public ResponseEntity<?> searchLivres(@PathVariable(name = "search")String recherche)
     {

@@ -182,6 +182,13 @@ public class LivreServiceImpl implements  LivreService{
     }
 
 
+    /**
+     * Recherche d'ouvrages par le titre et l'auteur
+     * @param search
+     * @return liste livre dto
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public List<LivreDTO> recherche(String search) throws IOException, InterruptedException {
 

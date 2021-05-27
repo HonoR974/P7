@@ -58,6 +58,13 @@ public interface LivreService {
      */
     List<LivreDTO> getLivreToAccueil(List<LivreDTO> list);
 
+    /**
+     * Recherche d'ouvrages
+     * @param search
+     * @return liste livre dto
+     * @throws IOException
+     * @throws InterruptedException
+     */
     List<LivreDTO> recherche(String search) throws IOException, InterruptedException;
 
 }

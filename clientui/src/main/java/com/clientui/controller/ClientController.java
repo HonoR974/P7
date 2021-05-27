@@ -64,6 +64,48 @@ public class ClientController {
         return "Accueil";
     }
 
+
+    /**
+     * Recherche d'ouvrages par le titre ou l'auteur
+     * @param recherche
+     * @param model
+     * @return livres/Recherche
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    @GetMapping("/search")
+    public String search(@RequestParam("search")String recherche,Model model) throws IOException, InterruptedException {
+
+
+        List<LivreDTO> list = livreService.recherche(recherche);
+        TesterUser user = authBiblioService.testConnection();
+
+        model.addAttribute("liste", list);
+        model.addAttribute("user", user);
+        return "livres/Recherche";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @GetMapping("/index")
     public String index(Model model)
     {
@@ -137,15 +179,4 @@ public class ClientController {
     }
 
 
-    @GetMapping("/search")
-    public String search(@RequestParam("search")String recherche,Model model) throws IOException, InterruptedException {
-
-
-        List<LivreDTO> list = livreService.recherche(recherche);
-        TesterUser user = authBiblioService.testConnection();
-
-        model.addAttribute("liste", list);
-        model.addAttribute("user", user);
-        return "livres/Recherche";
-    }
 }
