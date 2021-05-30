@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "templateId",
+      "type": "java.lang.String",
+      "description": "Description for templateId."
+    },
+    {
+      "name": "sendgrid.emailFrom",
+      "type": "java.lang.String",
+      "description": "Description for sendgrid.emailFrom."
+    },
+
+  ] }

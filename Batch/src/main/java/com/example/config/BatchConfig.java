@@ -14,7 +14,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-
+/**
+ * ConfigurationBatch BatchConfig
+ */
 
 @Configuration
 @EnableBatchProcessing
@@ -33,13 +35,13 @@ public class BatchConfig {
 
 
     /**
-     * Execute la step : getPret & senMail
+     * Execute les
      * @return
      */
     @Bean
     public Job rappel() {
         return jobBuilderFactory.get(JOBNAME)
-                .start(checkPretDate())
+                .start(verification())
                 .next(changeStatutByDate())
                 .next(getPret())
                 .next(senMail())
@@ -47,19 +49,25 @@ public class BatchConfig {
     }
 
 
+    /**
+     * Verifie les pret a valider
+     * @return checkDate
+     */
     @Bean
-    public Step checkPretDate()
+    public Step verification()
     {
-
-
-        return stepBuilderFactory.get("CheckDate")
-                .tasklet(checkDate())
+        return stepBuilderFactory.get("verification")
+                .tasklet(verif())
                 .build();
     }
 
 
+    /**
+     * Execute getPretEnCours
+     * @return adapter
+     */
     @Bean
-    public MethodInvokingTaskletAdapter checkDate()
+    public MethodInvokingTaskletAdapter verif()
     {
         MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
 
@@ -69,16 +77,22 @@ public class BatchConfig {
         return adapter;
     }
 
+    /**
+     * Change le statut
+     * @return
+     */
     @Bean
     public Step changeStatutByDate()
     {
-
-
         return stepBuilderFactory.get("ChangeStatut")
                 .tasklet(changeStatut())
                 .build();
     }
 
+    /**
+     * Execute sendPret
+     * @return
+     */
     @Bean
     public MethodInvokingTaskletAdapter changeStatut()
     {
@@ -92,17 +106,21 @@ public class BatchConfig {
         return adapter;
     }
 
+    /**
+     *
+     * @return
+     */
     @Bean
     public Step getPret()
     {
-        return this.stepBuilderFactory.get("step1")
-                .tasklet(getPretService())
+        return this.stepBuilderFactory.get("getPretRetard")
+                .tasklet(getPretRetard())
                 .build();
 
     }
 
     @Bean
-    public MethodInvokingTaskletAdapter getPretService() {
+    public MethodInvokingTaskletAdapter getPretRetard() {
         MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
 
         adapter.setTargetObject(pretService());

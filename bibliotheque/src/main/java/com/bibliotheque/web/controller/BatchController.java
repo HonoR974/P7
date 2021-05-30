@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Recontroller BatchController
+ */
 @RestController
 @RequestMapping("/api/batch")
 public class BatchController {
@@ -20,6 +23,44 @@ public class BatchController {
     @Autowired
     private BatchService batchService;
 
+
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
+    @GetMapping("/encours")
+    public ResponseEntity<List<PretBatchDTO>> getPretEnCours() throws IOException {
+
+        System.out.println("\n methode en cours GET  ");
+
+        List<PretBatchDTO> list = batchService.getPretEnCours();
+
+        System.out.println( "\n en cours  liste dans le controller  " +  list.toString() );
+
+        return new ResponseEntity<List<PretBatchDTO>>(list, HttpStatus.ACCEPTED);
+    }
+
+    /**
+     * Envoie les prets à rendre
+     * @param listeMap
+     * @return
+     */
+    @PostMapping("/encours")
+    public HttpStatus sendPretEnCours(@RequestBody Map<Integer,PretBatchDTO> listeMap)
+    {
+        System.out.println("\n la hasmap recut est " + listeMap);
+
+        batchService.sendPretEnCours(listeMap);
+
+        return  HttpStatus.ACCEPTED;
+
+    }
+
+    /**
+     * Recupere les prets à rendre
+     * @return
+     */
     @GetMapping("/retards")
     public ResponseEntity<List<PretBatchDTO>> getPretRetards()
     {
@@ -30,29 +71,5 @@ public class BatchController {
 
         return new ResponseEntity<List<PretBatchDTO>>(list, HttpStatus.ACCEPTED);
     }
-
-
-    @GetMapping("/encours")
-    public ResponseEntity<List<PretBatchDTO>> getPretEnCours() throws IOException {
-
-        List<PretBatchDTO> list = batchService.getPretEnCours();
-
-        System.out.println( "\n en cours  liste dans le controller  " +  list.toString() );
-
-        return new ResponseEntity<List<PretBatchDTO>>(list, HttpStatus.ACCEPTED);
-    }
-
-    @PostMapping("/encours")
-    public HttpStatus sendPretEnCours(@RequestBody Map<Integer,PretBatchDTO> listeMap)
-    {
-        System.out.println("\n la hasmap recut est " + listeMap);
-
-
-        batchService.sendPretEnCours(listeMap);
-        return  HttpStatus.ACCEPTED;
-
-    }
-
-
 
 }

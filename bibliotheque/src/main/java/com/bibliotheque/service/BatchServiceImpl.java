@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/***
+ * Service BatchServiceImpl
+ */
 @Service
 public class BatchServiceImpl implements BatchService{
 
@@ -30,6 +33,76 @@ public class BatchServiceImpl implements BatchService{
 
     @Autowired
     private ExamplaireRepository examplaireRepository;
+
+
+    /**
+     *  Obtient les pret valider
+     * @return liste pret
+     * @throws IOException
+     */
+    @Override
+    public List<PretBatchDTO> getPretEnCours() throws IOException {
+
+        //doit traiter les statut Valider
+
+        Statut statut = statutRepository.findByNom("Valider");
+
+        List<Pret> list = pretRepository.findByStatut(statut);
+
+
+        return convertForBatch(list);
+    }
+
+
+    /**
+     * Envoie les Prets en cours dans verfication
+     * @param map
+     */
+    @Override
+    public void sendPretEnCours(Map<Integer,PretBatchDTO> map)
+    {
+        List<PretBatchDTO> list = new ArrayList<>();
+
+        for (Map.Entry mapentry : map.entrySet()) {
+            System.out.println("clé: "+mapentry.getKey()
+                    + " | valeur: " + mapentry.getValue());
+
+            list.add((Integer) mapentry.getKey(),(PretBatchDTO) mapentry.getValue());
+        }
+
+        verfication(list);
+
+    }
+
+
+    /**
+     * Verifie le statut avant de le sauvegarder
+     * @param prets
+     * @return
+     */
+    private void verfication(List<PretBatchDTO> prets)
+    {
+        List<Pret> list = new ArrayList<>();
+        Pret pret = new Pret();
+        Statut statut = new Statut();
+
+        for (PretBatchDTO pretBatch : prets)
+        {
+            long id = pretBatch.getId();
+            pret =  pretRepository.findById(id);
+
+            //si ils ont un statut different on le save
+            if (! pret.getStatut().getNom().equals(pretBatch.getStatut()))
+            {
+
+                statut = statutRepository.findByNom(pretBatch.getStatut());
+                pret.setStatut(statut);
+            }
+
+
+            pretRepository.save(pret);
+        }
+    }
 
     /**
      * Return tout les pret a rendre
@@ -77,74 +150,6 @@ public class BatchServiceImpl implements BatchService{
         return list;
     }
 
-    /**
-     * Verifie le statut avant de le sauvegarder
-     * @param prets
-     * @return
-     */
-    private void verfication(List<PretBatchDTO> prets)
-    {
-        List<Pret> list = new ArrayList<>();
-        Pret pret = new Pret();
-        Statut statut = new Statut();
-
-        for (PretBatchDTO pretBatch : prets)
-        {
-            long id = pretBatch.getId();
-            pret =  pretRepository.findById(id);
-
-            //si ils ont un statut different on le save
-            if (! pret.getStatut().getNom().equals(pretBatch.getStatut()))
-            {
-
-                statut = statutRepository.findByNom(pretBatch.getStatut());
-                pret.setStatut(statut);
-            }
 
 
-            pretRepository.save(pret);
-        }
-    }
-
-    /**
-     *
-     * @return
-     * @throws IOException
-     */
-    @Override
-    public List<PretBatchDTO> getPretEnCours() throws IOException {
-
-        Statut statut = statutRepository.findByNom("Valider");
-        Statut statut1 = statutRepository.findByNom("Prolonger");
-        Statut statut2 = statutRepository.findByNom("A Rendre");
-
-
-        List<Pret> list = pretRepository.findByStatut(statut);
-
-        list.addAll(pretRepository.findByStatut(statut1));
-        list.addAll(pretRepository.findByStatut(statut2));
-
-        return convertForBatch(list);
-    }
-
-
-    /**
-     * Envoie les Prets en cours dans verfication
-     * @param map
-     */
-    @Override
-    public void sendPretEnCours(Map<Integer,PretBatchDTO> map)
-    {
-        List<PretBatchDTO> list = new ArrayList<>();
-
-        for (Map.Entry mapentry : map.entrySet()) {
-            System.out.println("clé: "+mapentry.getKey()
-                    + " | valeur: " + mapentry.getValue());
-
-            list.add((Integer) mapentry.getKey(),(PretBatchDTO) mapentry.getValue());
-        }
-
-        verfication(list);
-
-    }
 }
