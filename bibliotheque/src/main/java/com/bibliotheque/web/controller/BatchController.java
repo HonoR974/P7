@@ -72,4 +72,15 @@ public class BatchController {
         return new ResponseEntity<List<PretBatchDTO>>(list, HttpStatus.ACCEPTED);
     }
 
+    @PostMapping("/rappel")
+    public ResponseEntity<List<PretBatchDTO>> sendListPretRappel(@RequestBody Map<Integer, PretBatchDTO> list)
+    {
+
+        List<PretBatchDTO> listBatch = batchService.sendPretRappel(list);
+
+        System.out.println("\n listeBatch " + listBatch);
+
+        return new ResponseEntity<List<PretBatchDTO>>(listBatch, HttpStatus.ACCEPTED);
+    }
+
 }

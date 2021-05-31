@@ -10,7 +10,7 @@ public interface PretService {
 
     List<PretDTO> getPretRetard() throws IOException, InterruptedException;
 
-    void sendMailRetard();
+    void sendMailRetard() throws IOException, InterruptedException;
 
     List<PretDTO> getPretEnCours() throws IOException, InterruptedException;
 

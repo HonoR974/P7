@@ -33,4 +33,12 @@ public interface BatchService {
     void sendPretEnCours(Map<Integer,PretBatchDTO> map);
 
 
+    /**
+     * Envoie les Prets qui
+     * @param map
+     * @return
+     */
+    List<PretBatchDTO> sendPretRappel(Map<Integer, PretBatchDTO> map);
+
+
 }

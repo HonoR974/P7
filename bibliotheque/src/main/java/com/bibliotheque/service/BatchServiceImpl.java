@@ -82,9 +82,9 @@ public class BatchServiceImpl implements BatchService{
      */
     private void verfication(List<PretBatchDTO> prets)
     {
-        List<Pret> list = new ArrayList<>();
-        Pret pret = new Pret();
-        Statut statut = new Statut();
+        List<Pret> list;
+        Pret pret ;
+        Statut statut;
 
         for (PretBatchDTO pretBatch : prets)
         {
@@ -151,5 +151,44 @@ public class BatchServiceImpl implements BatchService{
     }
 
 
+    @Override
+    public List<PretBatchDTO> sendPretRappel(Map<Integer, PretBatchDTO> map) {
 
+        List<PretBatchDTO> pretList = new ArrayList<>();
+
+        for (Map.Entry mapentry : map.entrySet()) {
+            System.out.println("clé: "+mapentry.getKey()
+                    + " | valeur: " + mapentry.getValue());
+
+            pretList.add((Integer) mapentry.getKey(),(PretBatchDTO) mapentry.getValue());
+        }
+
+
+
+        return saveRappel(pretList);
+    }
+
+    private List<PretBatchDTO> saveRappel(List<PretBatchDTO> list)
+    {
+        List<PretBatchDTO> listPret = new ArrayList<>();
+        Pret pret ;
+
+        for (PretBatchDTO pretBatch : list)
+        {
+            long id = pretBatch.getId();
+            pret =  pretRepository.findById(id);
+
+            //si c'est leur premier mail
+            if (! pretBatch.getEnvoieEmail() )
+            {
+               pret.setEmail(true);
+               pretBatch.setEnvoieEmail(true);
+            }
+
+            listPret.add(pretBatch);
+            pretRepository.save(pret);
+        }
+
+        return listPret;
+    }
 }

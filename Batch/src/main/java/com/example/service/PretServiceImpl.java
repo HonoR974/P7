@@ -1,6 +1,8 @@
 package com.example.service;
 
+import com.example.config.DynamicTemplatePersonalization;
 import com.example.model.PretDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -216,11 +218,10 @@ public class PretServiceImpl implements PretService{
      * Envoie les mails pour les pret a rendre
      */
     @Override
-    public void sendMailRetard()
-    {
+    public void sendMailRetard() throws IOException, InterruptedException {
 
         Email from = new Email(fromEmail);
-        String subject = "Rappel de votre Bibliotheque";
+        String subject;
         Email to = null;
 
 
@@ -229,10 +230,13 @@ public class PretServiceImpl implements PretService{
 
             System.out.println("\n le pret avec l'id " + listPretRetard.get(i).getId() );
 
+            subject = "Rappel : ";
             //si le pret n'a pas recu d'email
             if( !listPretRetard.get(i).getEnvoieEmail() )
             {
                 to = new Email(listPretRetard.get(i).getEmail());
+                subject += listPretRetard.get(i).getTitre() ;
+                /*
                 Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>" );
 
                 Content content1 = new Content();
@@ -240,14 +244,26 @@ public class PretServiceImpl implements PretService{
                 Mail mail = new Mail(from,subject,to,content);
 
                 mail.setTemplateId(EMAIL_TEMPLATE_ID);
+*/
+                Mail mail = new Mail();
+                mail.setFrom(from);
+                mail.setSubject(subject);
+                mail.setTemplateId(EMAIL_TEMPLATE_ID);
 
-             //   mail.personalization.get(0).addSubstitution("subject", subject);
 
+                DynamicTemplatePersonalization personalization = new DynamicTemplatePersonalization();
+                personalization.addTo(to);
+                //personalization.setSubject(subject);
+                personalization.addDynamicTemplateData("subject", subject);
+
+
+                mail.addPersonalization(personalization);
 
 
                 System.out.println("\n template id : " + EMAIL_TEMPLATE_ID);
-                System.out.println("email corps (from,subject,to,content) : " + from.getEmail() + "   "
-                                    + subject + "   " + to + "   " + content);
+
+              System.out.println("email corps (from,subject,to) : " + from.getEmail() + "   "
+                                  + subject + "   " + to );
 
                 Request request = new Request();
                 Response response;
@@ -272,6 +288,7 @@ public class PretServiceImpl implements PretService{
                 listPretRetard.get(i).setEnvoieEmail(true);
             }
 
+            sendListPretRappel(listPretRetard);
 
 
         }
@@ -279,6 +296,46 @@ public class PretServiceImpl implements PretService{
 
     //fonction qui envoie les prets de sendMailRetard a l'api
     //ceux qui ont recu un email n'en recevront plus
+
+
+    /**
+     * Renvoie tout les prets, Permet de ne recevoir qu'un mail par pret
+     * @param list
+     */
+    public void sendListPretRappel(List<PretDTO> list) throws IOException, InterruptedException {
+
+        System.out.println("\n on check le jwt " + jwt);
+
+        //params a envoyer
+        Map<Integer,PretDTO> parameters = new HashMap<>();
+
+        int i = 0 ;
+        for (PretDTO pretDTO : list)
+        {
+            parameters.put(i, pretDTO);
+            i++;
+        }
+
+        var objectMapper = new ObjectMapper();
+        String requestBody = objectMapper.writeValueAsString(parameters);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:9001/api/batch/rappel"))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody ))
+                .setHeader(HttpHeaders.CONTENT_TYPE,"application/json")
+                .setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .build();
+
+        HttpResponse<String> response = client.send(request,
+                HttpResponse.BodyHandlers.ofString());
+
+        String reponse = response.body();
+
+        System.out.println("\n response : " +  response + "\n reponse : " + reponse);
+
+
+    }
+
 
 
 
