@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <title>Inscription </title>
 
@@ -60,22 +61,41 @@
 
     <div class="cadreInscription">
         <!-- Inscription-->
-        <form action="#" class="form-signin" method="post" th:action="@{/register}" th:object="${user}">
+        <form action="#" class="form-signin" method="post" th:action="@{/register}" th:object="${utilisateur}">
             <h2 class="form-heading titleInscription">Inscription  </h2>
 
             <div class="form-group infoInscription">
 
-                <input name="username" type="text" class="form-control" placeholder="Username"
-                       autofocus="true" th:field="${user.username}"/>
+                <div class="cadreChamps">
+                    <div class="champs">
+                        <input type="text" th:field="*{username}" class="form-control" placeholder="Username"
+                               autofocus="true">
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                    </div>
 
-                <input name="password" type="password" class="form-control" placeholder="Password"
-                       th:field="${user.password}"/>
 
-                <input name="matchingPassword" type="password" class="form-control" placeholder="Password"
-                       th:field="${user.matchingPassword}"/>
+                    <div class="champs">
+                        <input name="password" type="password" class="form-control"  placeholder="Password"
+                               th:field="*{password}"/>
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                    </div>
 
-                <input name="mail" type="email" class="form-control" placeholder="email"
-                       th:field="${user.email}"/>
+
+
+                    <div class="champs">
+                        <input name="matchingPassword" type="password" class="form-control" placeholder="Password"
+                               th:field="*{matchingPassword}"/>
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}" ></p>
+                    </div>
+
+                    <div class="champs">
+                        <input name="mail" type="email" class="form-control" placeholder="email"
+                               th:field="*{email}"/>
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></p>
+
+                    </div>
+
+                </div>
 
                 <div class="btnInscription">
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Inscription</button>
@@ -106,9 +126,8 @@
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -170,20 +170,31 @@ nav
     width: 500px;
 }
 
-.infoInscription button
+.cadreChamps
 {
-
+    border: solid grey;
+    border-radius: 15px;
+    margin-bottom: 30px;
 }
 
-.btnInscription
-{
 
+.champs
+{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
 }
 
-.btnFinInscription
+.champs p
 {
-
+    width: 80%;
 }
+
+
 
 .rowButton
 {

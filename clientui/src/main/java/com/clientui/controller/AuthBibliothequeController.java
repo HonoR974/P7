@@ -1,5 +1,6 @@
 package com.clientui.controller;
 
+import com.clientui.config.UserValidator;
 import com.clientui.dto.LivreDTO;
 import com.clientui.dto.UserDTO;
 import com.clientui.service.AuthBiblioService;
@@ -9,10 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,6 +41,10 @@ public class AuthBibliothequeController {
 
     @Autowired
     private LivreService livreService;
+
+    @Autowired
+    private UserValidator userValidator;
+
 
 
     /**
@@ -86,8 +98,6 @@ public class AuthBibliothequeController {
         return  "redirect:/";
     }
 
-
-
     /**
      * Page Inscription
      * @param model
@@ -96,7 +106,9 @@ public class AuthBibliothequeController {
     @GetMapping("/register")
     public String inscriptionPage(Model model)
     {
-        model.addAttribute("user", new UserDTO());
+        UserDTO userDTO = new UserDTO();
+        model.addAttribute("utilisateur",userDTO);
+        model.addAttribute("user",authBiblioService.testConnection());
 
         return "log/inscription";
     }
@@ -111,24 +123,45 @@ public class AuthBibliothequeController {
      * @throws InterruptedException
      */
     @PostMapping("/register")
-    public String inscription(@ModelAttribute(value = "user")UserDTO userDTO,
+    public String inscription(@ModelAttribute("utilisateur") @Validated UserDTO userDTO, BindingResult  bindingResult,
                               Model model) throws IOException, InterruptedException {
 
+        System.out.println("\n userDTO " + userDTO.toString());
+
+        String err = userValidator.valid(userDTO,bindingResult);
+       // userValidator.valid(userDTO, bindingResult);
+        //verfication des champs de l'user avant l'inscription
+        System.out.println("\n bindingResult " + bindingResult.toString());
+
+        if (!err.isEmpty())
+        {
+            ObjectError error = new ObjectError("globalError", err);
+            bindingResult.addError(error);
+        }
+        if (bindingResult.hasErrors()  )
+        {
+
+            model.addAttribute("user",authBiblioService.testConnection());
+
+            return "log/inscription";
+        }
+        else
+        {
+
+            UserDTO user =  authBiblioService.save(userDTO);
+            
+            String jwt = authBiblioService.authenticate(user);
+
+            model.addAttribute("jwt",jwt);
+            model.addAttribute("user", authBiblioService.testConnection());
+
+            List<LivreDTO> list = livreService.getAll();
+            model.addAttribute("liste", list);
 
 
-        UserDTO user =  authBiblioService.save(userDTO);
+            return  "livres/Livres";
+        }
 
-
-        String jwt = authBiblioService.authenticate(user);
-
-        model.addAttribute("jwt",jwt);
-        model.addAttribute("user", authBiblioService.testConnection());
-
-        List<LivreDTO> list = livreService.getAll();
-        model.addAttribute("liste", list);
-
-
-        return  "livres/Livres";
     }
 
 
