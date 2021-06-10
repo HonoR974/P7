@@ -25,7 +25,7 @@ public class BatchController {
 
 
     /**
-     *
+     * Recupere les pret valider
      * @return
      * @throws IOException
      */

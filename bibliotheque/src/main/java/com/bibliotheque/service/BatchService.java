@@ -28,15 +28,15 @@ public interface BatchService {
 
     /**
      * Envoie les Prets en cours dans une verification
-     * @param map
+     * @param map Map<Integer,PretBatchDTO>
      */
     void sendPretEnCours(Map<Integer,PretBatchDTO> map);
 
 
     /**
-     * Envoie les Prets qui
-     * @param map
-     * @return
+     * Envoie les Prets qui ont recu leur mail
+     * @param map Map<Integer, PretBatchDTO>
+     * @return liste PretBatchDTO
      */
     List<PretBatchDTO> sendPretRappel(Map<Integer, PretBatchDTO> map);
 

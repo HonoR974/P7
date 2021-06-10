@@ -106,7 +106,7 @@ public class BatchServiceImpl implements BatchService{
 
     /**
      * Return tout les pret a rendre
-     * @return
+     * @return List<PretBatchDTO>
      */
     @Override
     public List<PretBatchDTO> getPretRetard() {
@@ -151,6 +151,11 @@ public class BatchServiceImpl implements BatchService{
     }
 
 
+    /**
+     * Envoie les Prets qui ont recu leur email
+     * @param map Map<Integer, PretBatchDTO>
+     * @return List<PretBatchDTO>
+     */
     @Override
     public List<PretBatchDTO> sendPretRappel(Map<Integer, PretBatchDTO> map) {
 
@@ -168,6 +173,11 @@ public class BatchServiceImpl implements BatchService{
         return saveRappel(pretList);
     }
 
+    /**
+     * Sauvegarde les prets ayant recu leurs rappel
+     * @param list List<PretBatchDTO>
+     * @return List<PretBatchDTO>
+     */
     private List<PretBatchDTO> saveRappel(List<PretBatchDTO> list)
     {
         List<PretBatchDTO> listPret = new ArrayList<>();

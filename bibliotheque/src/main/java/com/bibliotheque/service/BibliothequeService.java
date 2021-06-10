@@ -18,15 +18,15 @@ public interface BibliothequeService {
 
     /**
      * Creer une bibliothèque
-     * @param bibliotheque
+     * @param bibliotheque Bibliotheque
      * @return bibliotheque
      */
     Bibliotheque createBibliotheque(Bibliotheque bibliotheque);
 
     /**
      * Modifie une bibliotheque
-     * @param id
-     * @param bibliotheque
+     * @param id id
+     * @param bibliotheque Bibliotheque
      * @return bibliotheque
      */
     Bibliotheque updateBibliotheque(long id, Bibliotheque bibliotheque);

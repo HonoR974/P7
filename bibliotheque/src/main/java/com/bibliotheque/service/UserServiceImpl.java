@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService{
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
+        user.setMatchingPassword(user.getPassword());
         user.setEnabled(false);
         return userRepository.save(user);
     }

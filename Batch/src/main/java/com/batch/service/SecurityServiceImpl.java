@@ -1,7 +1,8 @@
-package com.example.service;
+package com.batch.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,6 +13,9 @@ import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Service SecurityServiceImpl
+ */
 @Service
 public class SecurityServiceImpl implements SecurityService {
 
@@ -21,9 +25,14 @@ public class SecurityServiceImpl implements SecurityService {
 
     private String jwt;
 
+    @Value("${batch.username}")
+    private String username;
+    @Value("${batch.password}")
+    private String password;
+
     /**
      * Return un jwt avec les id du batch
-     * @return
+     * @return jwt
      * @throws IOException
      * @throws InterruptedException
      */
@@ -31,10 +40,11 @@ public class SecurityServiceImpl implements SecurityService {
     public String authticate() throws IOException, InterruptedException {
 
         var values = new HashMap<String, String>() {{
-            put("username", "batch");
-            put ("password", "batch");
+            put("username", username);
+            put ("password", password);
         }};
 
+        System.out.println("\n username / password " + username + " / " + password);
         var objectMapper = new ObjectMapper();
         String requestBody = objectMapper
                 .writeValueAsString(values);
@@ -62,6 +72,12 @@ public class SecurityServiceImpl implements SecurityService {
         return jwt;
     }
 
+    /**
+     * Parse la jwt
+     * @param jwtBrut
+     * @return jwt
+     * @throws JsonProcessingException
+     */
     public String parseJwt(String jwtBrut ) throws JsonProcessingException
     {
 

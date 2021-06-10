@@ -1,4 +1,4 @@
-package com.example.config;
+package com.batch.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sendgrid.Personalization;
@@ -7,6 +7,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Personalization DynamicTemplatePersonalization
+ */
 public  class DynamicTemplatePersonalization extends Personalization {
 
     @JsonProperty(value = "dynamic_template_data")

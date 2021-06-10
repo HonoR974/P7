@@ -1,8 +1,7 @@
-package com.example.service;
+package com.batch.service;
 
-import com.example.config.DynamicTemplatePersonalization;
-import com.example.model.PretDTO;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.batch.config.DynamicTemplatePersonalization;
+import com.batch.model.PretDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -11,7 +10,6 @@ import com.sendgrid.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -214,8 +212,11 @@ public class PretServiceImpl implements PretService{
     }
 
 
+
     /**
-     * Envoie les mails pour les pret a rendre
+     * Envoie les mails pour les pret à rendre
+     * @throws IOException
+     * @throws InterruptedException
      */
     @Override
     public void sendMailRetard() throws IOException, InterruptedException {
@@ -236,15 +237,7 @@ public class PretServiceImpl implements PretService{
             {
                 to = new Email(listPretRetard.get(i).getEmail());
                 subject += listPretRetard.get(i).getTitre() ;
-                /*
-                Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>" );
 
-                Content content1 = new Content();
-
-                Mail mail = new Mail(from,subject,to,content);
-
-                mail.setTemplateId(EMAIL_TEMPLATE_ID);
-*/
                 Mail mail = new Mail();
                 mail.setFrom(from);
                 mail.setSubject(subject);
@@ -294,12 +287,13 @@ public class PretServiceImpl implements PretService{
         }
     }
 
-    //fonction qui envoie les prets de sendMailRetard a l'api
-    //ceux qui ont recu un email n'en recevront plus
 
 
     /**
      * Renvoie tout les prets, Permet de ne recevoir qu'un mail par pret
+     *
+     *  fonction qui envoie les prets de sendMailRetard a l'api
+     *     ceux qui ont recu un email n'en recevront plus
      * @param list
      */
     public void sendListPretRappel(List<PretDTO> list) throws IOException, InterruptedException {

@@ -1,8 +1,8 @@
-package com.example.config;
+package com.batch.config;
 
 
-import com.example.service.PretService;
-import com.example.service.PretServiceImpl;
+import com.batch.service.PretService;
+import com.batch.service.PretServiceImpl;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -35,8 +35,8 @@ public class BatchConfig {
 
 
     /**
-     * Execute les
-     * @return
+     * Execute les steps pour l'envoie de mail selon la date de fin du pret
+     * @return Execution de mail pour les prets proche de la date de fin
      */
     @Bean
     public Job rappel() {
@@ -50,8 +50,8 @@ public class BatchConfig {
 
 
     /**
-     * Verifie les pret a valider
-     * @return checkDate
+     * Verifie les pret a valider / Call verif()
+     * @return verif()
      */
     @Bean
     public Step verification()
@@ -64,7 +64,7 @@ public class BatchConfig {
 
     /**
      * Execute getPretEnCours
-     * @return adapter
+     * @return PretService.getPretEnCours()
      */
     @Bean
     public MethodInvokingTaskletAdapter verif()
@@ -78,8 +78,8 @@ public class BatchConfig {
     }
 
     /**
-     * Change le statut
-     * @return
+     * Change le statut / Call changeStatut()
+     * @return changeStatut()
      */
     @Bean
     public Step changeStatutByDate()
@@ -91,7 +91,7 @@ public class BatchConfig {
 
     /**
      * Execute sendPret
-     * @return
+     * @return PretService.sendPret()
      */
     @Bean
     public MethodInvokingTaskletAdapter changeStatut()
@@ -107,8 +107,8 @@ public class BatchConfig {
     }
 
     /**
-     *
-     * @return
+     * Recupere les pret en retard / Call getPretRetard()
+     * @return getPretRetard()
      */
     @Bean
     public Step getPret()
@@ -119,6 +119,10 @@ public class BatchConfig {
 
     }
 
+    /**
+     * Executre getPretRetard
+     * @return PretService.getPretRetard()
+     */
     @Bean
     public MethodInvokingTaskletAdapter getPretRetard() {
         MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
@@ -127,17 +131,24 @@ public class BatchConfig {
         adapter.setTargetMethod("getPretRetard");
 
         return adapter;
-
     }
 
+    /**
+     * Envoie les mails / Call sendMailService()
+     * @return sendMailService()
+     */
     @Bean
     public Step senMail()
     {
-        return this.stepBuilderFactory.get("step2")
+        return this.stepBuilderFactory.get("sendMail")
                 .tasklet(sendMailService())
                 .build();
     }
 
+    /**
+     * Execute sendMailRetard()
+     * @return PretService.sendMailService()
+     */
     @Bean
     public MethodInvokingTaskletAdapter sendMailService()
     {
@@ -151,10 +162,16 @@ public class BatchConfig {
     }
 
 
+    /**
+     * Bean PretService
+     * @return PretServiceImpl
+     */
     @Bean
     public PretService pretService()
     {
         return new PretServiceImpl();
     }
+
+
 
 }

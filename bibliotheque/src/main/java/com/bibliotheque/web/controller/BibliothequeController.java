@@ -66,8 +66,8 @@ public class BibliothequeController {
      * @param id id-biblio
      * @return Bibliotheque
      */
-    @GetMapping("/detail")
-    public ResponseEntity<BibliothequeDTO> getBiBliothequeById(@RequestParam(name = "id")Long id)
+    @GetMapping("/{id}")
+    public ResponseEntity<BibliothequeDTO> getBiBliothequeById(@PathVariable(name = "id")Long id)
     {
 
         Bibliotheque bibliotheque = bibliothequeService.getBibliothequeById(id);

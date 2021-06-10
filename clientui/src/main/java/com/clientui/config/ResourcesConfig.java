@@ -7,6 +7,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Config pour les images
+ */
 @Configuration
 public class ResourcesConfig implements WebMvcConfigurer {
 

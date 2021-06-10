@@ -258,7 +258,7 @@ td
 {
     box-shadow: 0 4px 8px 0 rgb(0 0 0);
     width: auto;
-    height: 600px;
+    min-height: 600px;
     background-color: rgba(72,250,229,0.2);
     margin: 10px;
     border-radius: 10px;
@@ -298,6 +298,7 @@ td
     display: flex;
     justify-content: center;
     padding-top: 10px;
+    margin-bottom: 10px;
 }
 
 
