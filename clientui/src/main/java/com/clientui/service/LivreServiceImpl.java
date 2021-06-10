@@ -176,6 +176,8 @@ public class LivreServiceImpl implements  LivreService{
         for (int i = 0; i<5; i++)
         {
             listeDTO.add(list.get(i));
+
+            System.out.println("\n id livre " + list.get(i).getId());
         }
         System.out.println("\n la longueur de liste pour accueil " + listeDTO.size());
         return listeDTO;
