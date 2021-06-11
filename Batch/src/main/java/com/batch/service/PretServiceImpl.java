@@ -278,6 +278,8 @@ public class PretServiceImpl implements PretService{
                     System.out.println("\n l'envoi a fail ");
                 }
 
+
+
                 listPretRetard.get(i).setEnvoieEmail(true);
             }
 

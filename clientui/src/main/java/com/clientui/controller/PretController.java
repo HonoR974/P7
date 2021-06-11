@@ -132,13 +132,14 @@ public class PretController
                               Model model) throws IOException, InterruptedException {
 
        PretDTO pretDTO2 = pretService.getPretDTOById(id);
-       boolean prolongable=false;
+
+       boolean prolongable= pretDTO2.isEnabled();
+
         UserDTO userDTO = authBiblioService.getUserDTOByJwt(authBiblioService.getJwt());
         model.addAttribute("user", authBiblioService.testConnection());
         model.addAttribute("utilisateur", userDTO);
 
-        List<PretDTO> list =  espaceService.getListePretByIdUser(userDTO.getId());
-       model.addAttribute("liste", pretService.convertList(list));
+
 
         //si il n'a pas été prolongé
        if (! pretDTO2.isEnabled())
@@ -155,6 +156,9 @@ public class PretController
 
             prolongable = false;
        }
+
+        List<PretDTO> list =  espaceService.getListePretByIdUser(userDTO.getId());
+        model.addAttribute("liste", pretService.convertList(list));
 
         model.addAttribute("prolongable", prolongable);
         return "espace/Accueil";
