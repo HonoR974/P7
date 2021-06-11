@@ -1,0 +1,6 @@
+SendGrid info  
+
+spring.sendgrid.api-key=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
+templateId=d-98f15ea01f1549ba92d7ec1c0df76165
+sendgrid.emailFrom=honore.guillaudeau1@gmail.com
+
