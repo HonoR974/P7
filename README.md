@@ -22,4 +22,10 @@
   * Collez le contenu dans le fichier properties. 
   * Demarrer le module *API Bibliotheque* puis *Batch*. 
   
+ > Test Batch : 
  
+  * Demarrer les modules *API Bibliotheque* et *ClientUi*. 
+  * Créer un user avec votre adresse mail. 
+  * Créer un pret. 
+  * Changer sa date de fin dans votre base de donnée à celle d'ajourd'hui.
+   * Demarrer le module *Batch*. 
